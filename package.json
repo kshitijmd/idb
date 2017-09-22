@@ -5,18 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "FLASK_APP=app.py flask run",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "echo \"No tests added.\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nginth/SWE-IDB.git"
+    "url": "git+https://github.com/mbowen13/SWE-IDB.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nginth/SWE-IDB/issues"
+    "url": "https://github.com/mbowen13/SWE-IDB/issues"
   },
-  "homepage": "https://github.com/nginth/SWE-IDB#readme",
+  "homepage": "https://github.com/mbowen13/SWE-IDB#readme"
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
