@@ -1,6 +1,6 @@
-<html>
-<body>
-    <div id="reactEntry"></div>
-    <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block body %}
+<div id="reactEntry"></div>
+<script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
+{% endblock %}
+
