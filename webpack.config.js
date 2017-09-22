@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 module.exports = {
   entry: [
-    './js/app.js'
+    './js/app.jsx'
   ],
   output: {
     path: __dirname + '/static',
@@ -10,7 +10,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
           presets: ['env', 'react']
