@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/mbowen13/SWE-IDB/issues"
   },
-  "homepage": "https://github.com/mbowen13/SWE-IDB#readme"
+  "homepage": "https://github.com/mbowen13/SWE-IDB#readme",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
