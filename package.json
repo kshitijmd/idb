@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "FLASK_APP=app.py flask run",
+    "build": "webpack",
     "test": "echo \"No tests added.\""
   },
   "repository": {
@@ -15,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/mbowen13/SWE-IDB/issues"
   },
-  "homepage": "https://github.com/mbowen13/SWE-IDB#readme"
+  "homepage": "https://github.com/mbowen13/SWE-IDB#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.12.12"
+  }
 }
