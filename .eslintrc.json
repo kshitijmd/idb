@@ -3,7 +3,7 @@
         "browser": true,
         "es6": true
     },
-    "extends": ["eslint:recommended", "prettier", "prettier/react"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "prettier/react"],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
