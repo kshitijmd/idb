@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "FLASK_APP=app.py flask run",
+    "start": "python manage.py runserver",
     "build": "webpack",
     "test": "echo \"No tests added.\""
   },
