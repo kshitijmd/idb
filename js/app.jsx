@@ -1,5 +1,5 @@
-import Hello from './Hello.jsx'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import Hello from "./Hello.jsx";
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<Hello />, document.getElementById('reactEntry'))
+ReactDOM.render(<Hello />, document.getElementById("reactEntry"));
