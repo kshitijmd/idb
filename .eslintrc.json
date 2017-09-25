@@ -1,24 +1,28 @@
 {
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
-    "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "prettier/react"],
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": ["react", "prettier"],
-    "rules": {
-        "linebreak-style": ["error", "unix"],
-        "no-var": "error",
-        "prefer-spread": "error",
-        "curly": "error",
-        "prefer-destructuring": "error"
-    }
+	"parserOptions": {
+		"ecmaVersion": 8,
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true,
+			"jsx": true
+		},
+		"sourceType": "module"
+	},
+
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+
+	"extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "prettier/react"],
+
+	"plugins": ["react", "prettier"],
+
+	"rules": {
+		"linebreak-style": ["error", "unix"],
+		"no-var": "error",
+		"prefer-spread": "error",
+		"curly": "error",
+		"prefer-destructuring": "error"
+	}
 }

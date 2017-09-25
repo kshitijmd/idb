@@ -1,30 +1,28 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = {
-  entry: [
-    './src/index.jsx'
-  ],
+	entry: ["./src/index.jsx"],
 
-  output: {
-    path: __dirname + '/static/dist/',
-    filename: 'bundle.js'
-  },
+	output: {
+		path: __dirname + "/static/dist/",
+		filename: "bundle.js",
+	},
 
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
+	resolve: {
+		extensions: ["", ".js", ".jsx"],
+	},
 
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: "babel-loader",
-        query: {
-          presets: ["env", "react"],
-        },
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  plugins: [],
+	module: {
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				loader: "babel-loader",
+				query: {
+					presets: ["env", "react"],
+				},
+				exclude: /node_modules/,
+			},
+		],
+	},
+	plugins: [],
 };
