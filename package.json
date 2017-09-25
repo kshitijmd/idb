@@ -7,7 +7,8 @@
     "start": "FLASK_APP=app.py flask run",
     "build": "webpack",
     "test": "echo \"No tests added.\"",
-    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check"
+    "eslint-check-prettier-config": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "check-style": "eslint --rule 'prettier/prettier: error' 'js/**'"
   },
   "repository": {
     "type": "git",
