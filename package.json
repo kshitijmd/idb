@@ -9,7 +9,7 @@
     "build": "webpack --progress --colors",
     "test": "echo \"No tests added.\"",
     "eslint-check-prettier-config": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "check-style": "eslint --rule 'prettier/prettier: error' 'js/**'"
+    "check-style": "eslint --rule 'prettier/prettier: error' 'src/**'"
   },
   "repository": {
     "type": "git",
