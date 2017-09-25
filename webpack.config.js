@@ -5,7 +5,7 @@ module.exports = {
     './src/index.jsx'
   ],
   output: {
-    path: __dirname + '/static/js',
+    path: __dirname + '/static/dist/',
     filename: 'bundle.js'
   },
   module: {
