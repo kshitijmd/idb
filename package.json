@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "python manage.py runserver",
+    "start": "python3 manage.py runserver",
     "dev": "webpack -d --watch",
     "build": "webpack --progress --colors",
-    "test": "echo \"No tests added.\""
+    "test": "echo \"No tests added.\"",
+    "eslint-check-prettier-config": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "check-style": "eslint --rule 'prettier/prettier: error' 'js/**'"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,11 @@
     "material-ui": "latest",
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.18.2",
+    "eslint": "^4.7.2",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.3.0",
+    "prettier": "^1.7.0",
     "webpack": "^1.12.12"
   }
 }

@@ -1,0 +1,6 @@
+{
+	"printWidth": 100,
+	"useTabs": true,
+	"semicolons": true,
+	"trailingComma": "es5"
+}
