@@ -1,10 +1,12 @@
 {
     "env": {
         "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "prettier/react"],
     "parserOptions": {
+        "ecmaVersion": 6,
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
             "jsx": true
@@ -13,6 +15,9 @@
     },
     "plugins": ["react", "prettier"],
     "rules": {
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "no-var": "error",
+        "prefer-spread": "error",
+        "curly": "error"
     }
 }
