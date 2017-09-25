@@ -18,6 +18,7 @@
         "linebreak-style": ["error", "unix"],
         "no-var": "error",
         "prefer-spread": "error",
-        "curly": "error"
+        "curly": "error",
+        "prefer-destructuring": "error"
     }
 }
