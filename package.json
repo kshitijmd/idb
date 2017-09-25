@@ -21,13 +21,18 @@
   "homepage": "https://github.com/mbowen13/SWE-IDB#readme",
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-responsive-carousel": "^3.1.26"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.3.13",
+    "css-loader": "^0.28.7",
+    "material-ui": "latest",
+    "react-router-dom": "^4.2.2",
+    "style-loader": "^0.18.2",
     "webpack": "^1.12.12"
   }
 }
