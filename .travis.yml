@@ -1,1 +1,5 @@
 language: node_js
+
+script:
+   - npm run eslint-check-prettier-config
+   - npm run check-style

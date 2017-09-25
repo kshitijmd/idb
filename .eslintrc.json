@@ -11,7 +11,7 @@
         },
         "sourceType": "module"
     },
-    "plugins": ["react"],
+    "plugins": ["react", "prettier"],
     "rules": {
         "linebreak-style": ["error", "unix"]
     }
