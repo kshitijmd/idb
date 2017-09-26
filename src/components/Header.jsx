@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Drawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
 import MenuItem from "material-ui/MenuItem";
+
+const linkStyle = {
+	textDecoration: "none",
+	color: "inherit",
+};
 
 export default class Header extends React.Component {
 	constructor(props) {
@@ -17,16 +23,23 @@ export default class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				<AppBar title="Playlistr" onLeftIconButtonTouchTap={this.handleToggle} />
+				<AppBar
+					title={
+						<Link style={linkStyle} to="/">
+							Playlistr
+						</Link>
+					}
+					onLeftIconButtonTouchTap={this.handleToggle}
+				/>
 				<Drawer
 					docked={false}
 					width={200}
 					open={this.state.open}
 					onRequestChange={open => this.setState({ open })}
 				>
-					<MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-					<Divider />
-					<MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
+					<Link style={linkStyle} to="/about">
+						<MenuItem onClick={this.handleClose}>About</MenuItem>
+					</Link>
 					<Divider />
 				</Drawer>
 			</div>
