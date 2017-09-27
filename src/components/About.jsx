@@ -1,10 +1,6 @@
 import React from "react";
 import PageLayout from "./PageLayout";
 
-const styles = {
-	margin: "1em",
-};
-
 export default class About extends React.Component {
 	render() {
 		return (
