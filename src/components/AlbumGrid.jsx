@@ -82,9 +82,8 @@ export default class AlbumGrid extends React.Component {
 					<GridList cellHeight={300} style={styles.gridList}>
 						<Subheader>Albums</Subheader>
 						{albums.map(album => (
-							<Link to={"/albums/" + album.id}>
+							<Link key={album.id} to={"/albums/" + album.id}>
 								<GridTile
-									key={album.id}
 									title={album.name}
 									subtitle={
 										<span>
