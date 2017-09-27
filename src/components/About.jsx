@@ -2,7 +2,6 @@ import React from "react";
 import PageLayout from "./PageLayout";
 import { Card, CardTitle, CardText } from "material-ui/Card";
 import { Tab, Tabs } from "material-ui/Tabs";
-import Divider from "material-ui/Divider";
 
 const memberInfo = {
 	groupName: "Hackapellas",
