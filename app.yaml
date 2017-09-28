@@ -2,3 +2,10 @@ env: flex
 runtime: nodejs
 skip_files:
    - apiary.apib
+   - \.git*
+   - \.eslintrc\.json
+   - node_modules/
+   - build/dist/
+   - \.prettierrc
+   - \.travis.yml
+   - __pycache__
