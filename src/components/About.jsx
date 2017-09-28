@@ -58,10 +58,10 @@ const memberInfo = {
 			photo_url: "https://cs373fall2017davidletourneau.files.wordpress.com/2017/09/cropped-davidletourneau-e1504464848243.jpg"
 			bio: "David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
 			responsibilities: "API design and documentation",
-			commits: 3,
+			commits: 5,
 			issues: 4,
 			unit_tests: 0,
-		}
+		},
 	],
 };
 
