@@ -2,6 +2,7 @@ import React from "react";
 import PageLayout from "./PageLayout";
 import { Card, CardTitle, CardText, CardMedia } from "material-ui/Card";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const albums = [
 	{
@@ -91,7 +92,7 @@ export default class Album extends React.Component {
 					<CardText>
 						<div>Release date: {album.releaseDate}</div>
 						<div>Playcount: {album.playcount}</div>
-						<div>Genres: {album.genres.map(genre => <p>{genre}</p>)}</div>
+						<div>Genres: {album.genres.map(genre => <p key={genre}>{genre}</p>)}</div>
 						<div>Spotify URI: {album.spotifyUri}</div>
 					</CardText>
 				</Card>
@@ -99,3 +100,9 @@ export default class Album extends React.Component {
 		);
 	}
 }
+
+Album.propTypes = {
+	match: PropTypes.object,
+	"match.params": PropTypes.object,
+	"match.params.albumId": PropTypes.number,
+};

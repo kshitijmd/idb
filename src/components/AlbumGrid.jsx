@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from "material-ui/Subheader";
-import Album from "./Album";
 
 const styles = {
 	root: {
