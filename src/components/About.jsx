@@ -46,11 +46,12 @@ const memberInfo = {
 		},
 		{
 			name: "Scott Jackson",
-			photo_url: "",
-			bio: "",
-			responsibilities: "",
-			commits: 0,
-			issues: 0,
+			photo_url: "https://www.gravatar.com/avatar/647c6609b5b111b5bef26dabe6627f77",
+			bio:
+				"Scott is a Senior Computer Science major from Houston, Texas. After graduation he will be joining Amazon as a SDE in Austin. Outside of his passion for programming, he enjoys thinking longingly about the Corgi he will someday own, and playing guitar and video games.",
+			responsibilities: "Fullstack",
+			commits: 13,
+			issues: 9,
 			unit_tests: 0,
 		},
 		{
