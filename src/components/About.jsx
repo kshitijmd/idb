@@ -47,7 +47,7 @@ const memberInfo = {
 		},
 		{
 			name: "Scott Jackson",
-			photo_url: "https://www.gravatar.com/avatar/647c6609b5b111b5bef26dabe6627f77",
+			photo_url: "https://avatars1.githubusercontent.com/u/10877192?v=4&s=460",
 			bio:
 				"Scott is a Senior Computer Science major from Houston, Texas. After graduation he will be joining Amazon as a SDE in Austin. Outside of his passion for programming, he enjoys thinking longingly about the Corgi he will someday own, and playing guitar and video games.",
 			responsibilities: "Fullstack",
