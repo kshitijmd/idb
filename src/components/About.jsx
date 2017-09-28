@@ -41,8 +41,8 @@ const memberInfo = {
 			bio:
 				"Michael is a 3rd year Computer Science at UT Austin specializing in software engineering. He interned at Gulf States Toyota in the summer of 2017 as a full stack .NET developer.",
 			responsibilities: "Group leader, hosting, version control, PM",
-			commits: 0,
-			issues: 0,
+			commits: 15,
+			issues: 8,
 			unit_tests: 0,
 		},
 		{
