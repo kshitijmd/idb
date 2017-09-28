@@ -8,14 +8,8 @@
 		"dev": "webpack -d --watch",
 		"build": "webpack --progress --colors",
 		"test": "echo \"No tests added.\"",
-<<<<<<< HEAD
 		"lint":
 			"eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
-=======
-		"eslint-check-prettier-config": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-		"check-style": "eslint --rule 'prettier/prettier: error' 'src/**'",
-		"lint": "eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
->>>>>>> Add links to header and routes to main module
 	},
 	"repository": {
 		"type": "git",
