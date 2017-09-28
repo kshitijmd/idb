@@ -1,4 +1,5 @@
 venv/
 __pycache__/
 node_modules/
-static/dist/
+build/dist/
+.DS_STORE

@@ -4,9 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "python3 manage.py runserver",
-		"dev": "webpack -d --watch",
-		"build": "webpack --progress --colors",
+		"start": "webpack --progress --colors && node server",
 		"test": "echo \"No tests added.\"",
 		"lint":
 			"eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
@@ -22,6 +20,8 @@
 	},
 	"homepage": "https://github.com/mbowen13/SWE-IDB#readme",
 	"dependencies": {
+		"express": "^4.16.0",
+		"morgan": "^1.9.0",
 		"react": "^15.6.1",
 		"react-dom": "^15.6.1",
 		"react-grid-layout": "^0.15.3",
