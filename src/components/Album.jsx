@@ -1,22 +1,7 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
 import PageLayout from "./PageLayout";
-import { GridList, GridTile } from "material-ui/GridList";
-import Subheader from "material-ui/Subheader";
-import Album from "./Album";
-
-const styles = {
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-	},
-	gridList: {
-		width: 750,
-		height: 750,
-		overflowY: "auto",
-	},
-};
+import { Card, CardTitle, CardText, CardMedia } from "material-ui/Card";
+import { Link } from "react-router-dom";
 
 const albums = [
 	{
@@ -75,32 +60,41 @@ const albums = [
 	},
 ];
 
-export default class AlbumGrid extends React.Component {
+const styles = {
+	card: {
+		height: "500px",
+		width: "500px",
+	},
+};
+
+export default class Album extends React.Component {
 	render() {
+		const album = albums[this.props.match.params.albumId - 1];
 		return (
 			<PageLayout>
-				<div style={styles.root}>
-					<GridList cellHeight={300} style={styles.gridList}>
-						<Subheader>Albums</Subheader>
-						{albums.map(album => (
-							<Link key={album.id} to={"/albums/" + album.id}>
-								<GridTile
-									title={album.name}
-									subtitle={
-										<span>
-											<b>
-												by
-												<Link to={"/artists/" + album.artists[0].id}>{album.artists[0].name}</Link>
-											</b>
-										</span>
-									}
-								>
-									<img src={album.imageUrls.large} />
-								</GridTile>
-							</Link>
-						))}
-					</GridList>
-				</div>
+				<Card style={styles.card}>
+					<CardMedia
+						overlay={
+							<CardTitle
+								title={album.name}
+								subtitle={
+									<Link to={"/artists/" + album.artists[0].id}>
+										{`by ${album.artists[0].name}`}
+									</Link>
+								}
+							/>
+						}
+					>
+						<img src={album.imageUrls.large} alt="" />
+					</CardMedia>
+					<CardTitle> Info </CardTitle>
+					<CardText>
+						<div>Release date: {album.releaseDate}</div>
+						<div>Playcount: {album.playcount}</div>
+						<div>Genres: {album.genres.map(genre => <p>{genre}</p>)}</div>
+						<div>Spotify URI: {album.spotifyUri}</div>
+					</CardText>
+				</Card>
 			</PageLayout>
 		);
 	}
