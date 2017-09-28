@@ -85,7 +85,10 @@ export default class Album extends React.Component {
 								<CardTitle
 									title={album.name}
 									subtitle={
-										<Link to={"/artists/" + album.artists[0].id} style={styles.link}>
+										<Link
+											to={"/artists/" + album.artists[0].id}
+											style={styles.link}
+										>
 											{`by ${album.artists[0].name}`}
 										</Link>
 									}
@@ -98,7 +101,9 @@ export default class Album extends React.Component {
 						<CardText>
 							<div>Release date: {album.releaseDate}</div>
 							<div>Playcount: {album.playcount}</div>
-							<div>Genres: {album.genres.map(genre => <p key={genre}>{genre}</p>)}</div>
+							<div>
+								Genres: {album.genres.map(genre => <p key={genre}>{genre}</p>)}
+							</div>
 							<div>Spotify URI: {album.spotifyUri}</div>
 						</CardText>
 					</Card>

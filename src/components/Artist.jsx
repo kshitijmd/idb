@@ -84,7 +84,9 @@ export default class Artist extends React.Component {
 							<Spacer />
 							<div>Playcount: {artist.playcount}</div>
 							<Spacer />
-							<div>Genres: {artist.genres.map(genre => <p key={genre}>{genre}</p>)}</div>
+							<div>
+								Genres: {artist.genres.map(genre => <p key={genre}>{genre}</p>)}
+							</div>
 							<Spacer />
 							<div>Spotify URI: {artist.spotifyUri}</div>
 							<Spacer />

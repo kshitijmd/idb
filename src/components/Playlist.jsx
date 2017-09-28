@@ -83,7 +83,10 @@ export default class Playlist extends React.Component {
 					<Card>
 						<CardMedia
 							overlay={
-								<CardTitle title={playlist.name} subtitle={<div>{playlist.description}</div>} />
+								<CardTitle
+									title={playlist.name}
+									subtitle={<div>{playlist.description}</div>}
+								/>
 							}
 						>
 							<img src={playlist.imageUrls.large} alt="" />
