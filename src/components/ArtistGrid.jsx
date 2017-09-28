@@ -69,7 +69,7 @@ export default class ArtistGrid extends React.Component {
 			<PageLayout>
 				<div style={styles.root}>
 					<GridList cellHeight={300} style={styles.gridList}>
-						<Subheader>Artist</Subheader>
+						<Subheader>Artists</Subheader>
 						{artists.map(artist => (
 							<Link key={artist.id} to={"/artists/" + artist.id}>
 								<GridTile title={artist.name}>
