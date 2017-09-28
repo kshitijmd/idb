@@ -18,11 +18,12 @@ const memberInfo = {
 		},
 		{
 			name: "Taylor Kline",
-			photo_url: "",
-			bio: "",
-			responsibilities: "",
-			commits: 0,
-			issues: 0,
+			photo_url: "https://avatars2.githubusercontent.com/u/2641739?v=4&s=400",
+			bio:
+				"Taylor is about to graduate in December 2017. He intends to pursue web development in modern technologies and work from his hammock as much as possibe.",
+			responsibilities: "Workflow and documentation",
+			commits: 5,
+			issues: 6,
 			unit_tests: 0,
 		},
 		{
