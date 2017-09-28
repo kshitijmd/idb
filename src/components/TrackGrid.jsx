@@ -63,7 +63,7 @@ const tracks = [
 	},
 ];
 
-export default class ArtistGrid extends React.Component {
+export default class TrackGrid extends React.Component {
 	render() {
 		return (
 			<PageLayout>

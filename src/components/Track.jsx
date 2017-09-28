@@ -66,7 +66,7 @@ const styles = {
 
 const Spacer = () => <div style={{ paddingTop: "8px" }} />;
 
-export default class Album extends React.Component {
+export default class Track extends React.Component {
 	render() {
 		const track = tracks[this.props.match.params.trackId - 1];
 		return (
@@ -114,7 +114,7 @@ export default class Album extends React.Component {
 	}
 }
 
-Album.propTypes = {
+Track.propTypes = {
 	match: PropTypes.object,
 	"match.params": PropTypes.object,
 	"match.params.trackId": PropTypes.number,

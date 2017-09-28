@@ -33,7 +33,7 @@ const artists = [
 		playcount: "66385685",
 		spotifyUri: "spotify:artist:7zui3xf9jZj7X6yWl3nxaa",
 		albums: ["Interstellar"],
-		traks: ["Dust"],
+		tracks: ["Dust"],
 	},
 	{
 		id: 3,
@@ -66,7 +66,7 @@ const styles = {
 
 const Spacer = () => <div style={{ paddingTop: "8px" }} />;
 
-export default class Album extends React.Component {
+export default class Artist extends React.Component {
 	render() {
 		const artist = artists[this.props.match.params.artistId - 1];
 		return (
@@ -105,7 +105,7 @@ export default class Album extends React.Component {
 	}
 }
 
-Album.propTypes = {
+Artist.propTypes = {
 	match: PropTypes.object,
 	"match.params": PropTypes.object,
 	"match.params.artistId": PropTypes.number,
