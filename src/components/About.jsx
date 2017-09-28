@@ -22,7 +22,7 @@ const memberInfo = {
 			bio:
 				"Taylor is about to graduate in December 2017. He intends to pursue web development in modern technologies and work from his hammock as much as possibe.",
 			responsibilities: "Workflow and documentation",
-			commits: 5,
+			commits: 17,
 			issues: 6,
 			unit_tests: 0,
 		},
