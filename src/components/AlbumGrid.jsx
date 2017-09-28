@@ -89,7 +89,9 @@ export default class AlbumGrid extends React.Component {
 										<span>
 											<b>
 												by
-												<Link to={"/artists/" + album.artists[0].id}>{album.artists[0].name}</Link>
+												<Link to={"/artists/" + album.artists[0].id}>
+													{album.artists[0].name}
+												</Link>
 											</b>
 										</span>
 									}
