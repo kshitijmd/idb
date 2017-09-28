@@ -38,7 +38,8 @@ const memberInfo = {
 		{
 			name: "Michael Bowen",
 			photo_url: "https://avatars2.githubusercontent.com/u/5522920?v=4&s=460",
-			bio: "Michael is a 3rd year Computer Science at UT Austin specializing in software engineering. He interned at Gulf States Toyota in the summer of 2017 as a full stack .NET developer.",
+			bio:
+				"Michael is a 3rd year Computer Science at UT Austin specializing in software engineering. He interned at Gulf States Toyota in the summer of 2017 as a full stack .NET developer.",
 			responsibilities: "Group leader, hosting, version control, PM",
 			commits: 0,
 			issues: 0,
@@ -55,9 +56,11 @@ const memberInfo = {
 			unit_tests: 0,
 		},
 		{
-			name: "David Letourneau"
-			photo_url: "https://cs373fall2017davidletourneau.files.wordpress.com/2017/09/cropped-davidletourneau-e1504464848243.jpg"
-			bio: "David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
+			name: "David Letourneau",
+			photo_url:
+				"https://cs373fall2017davidletourneau.files.wordpress.com/2017/09/cropped-davidletourneau-e1504464848243.jpg",
+			bio:
+				"David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
 			responsibilities: "API design and documentation",
 			commits: 5,
 			issues: 4,
