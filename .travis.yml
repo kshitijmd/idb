@@ -3,5 +3,11 @@ language: node_js
 node_js:
    - "node"
 
+ notifications:
+  slack:
+    rooms:
+      - csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh#travis
+
+
 script:
    - npm run lint
