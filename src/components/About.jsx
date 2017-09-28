@@ -141,8 +141,8 @@ const styles = {
 };
 
 // can we pull these from Trello/GitHub/Travis?
-const totalCommits = 0;
-const totalIssues = 0;
+const totalCommits = 104;
+const totalIssues = 40;
 const totalUnitTests = 0;
 
 export default class About extends React.Component {
