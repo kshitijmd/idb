@@ -118,7 +118,7 @@ const tools = [
 
 const links = {
 	github: "https://github.com/mbowen13/idb",
-	apiary: "https://github.com/mbowen13/SWE-IDB/blob/master/apiary.apib",
+	apiary: "http://docs.mbowen13.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
 	report: "https://www.overleaf.com/read/hgzgpdfbchgr",
 };
