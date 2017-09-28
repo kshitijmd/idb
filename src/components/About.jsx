@@ -8,9 +8,9 @@ const memberInfo = {
 	members: [
 		{
 			name: "Nick Ginther",
-			photo_url: "",
-			bio: "",
-			responsibilities: "",
+			photo_url: "https://i.imgur.com/NqVRUoh.jpg",
+			bio: "Nick is a 4th year Computer Science senior from San Antonio, TX. He been interested in computers and programming ever since the 5th grade. His CS interests include operating systems, web development, and video game hacking.",
+			responsibilities: "front-end",
 			commits: 0,
 			issues: 0,
 			unit_tests: 0,
@@ -57,12 +57,12 @@ const memberInfo = {
 const dataSources = [
 	{
 		name: "Spotify",
-		link: "",
+		link: "https://api.spotify.com",
 		scrape_desc: "",
 	},
 	{
 		name: "Last.fm",
-		link: "",
+		link: "http://ws.audioscrobbler.com/2.0/",
 		scrape_desc: "",
 	},
 ];
@@ -70,26 +70,48 @@ const dataSources = [
 const tools = [
 	{
 		name: "React",
-		description: "Front-end framework.",
-		link: "",
+		description: "React is a front-end framework used for client-side page rendering and routing. Anything the user can interact with or see is handled by React. This includes page layouts, styling, navigation, et cetera.",
+	},
+	{
+		name: "Webpack",
+		description: "Webpack is a build and bundling tool for Javascript. In our project, it is used to compile our React components from multiple separate JSX files into one single vanilla JS file (bundle.js). This single file is then included statically in any request to our website.",
+	},
+	{
+		name: "Prettier",
+		description: "Prettier keeps the codebase's formatting consistent among all contributers by forcibly re-formatting all code by reading it into an abstract syntax tree and regurgitating it back into the file with an automated formatting.",
+	},
+	{
+		name: "ESLint",
+		description: "ESLint, a static code analysis tool, is used to catch certain classes of flaws caused by developer error. For example, it enforces that you use all the variables that you declare or import. It is pluggable as well, so it works well with our front-end framework - React. For React, it has its own set of rules. For example, if a component uses any props, these props' types must be declared somewhere in the component definition as PropTypes. ESLint is part of our CI process and gets run every time a new patch is pushed to the central repository.",
+	},
+	{
+		name: "Material UI",
+		description: "Material UI is a library of React components that we used to build our UI. Specifically, we use it for our navigation bar, navigation drawer, About page tabs, and grids on the grid pages.",
 	},
 	{
 		name: "Flask",
-		description: "Back-end framework.",
-		link: "",
+		description: "Flask is a back-end framework for Python. We use it to handle requests to the '/api' route and serve the '/' index into our front-end React application. In the future, Flask's built in server will be replaced with a faster dedicated webserver (gunicorn or nginx).",
+	},
+	{
+		name: "Virtualenv",
+		description: "Virtualenv is a virtual environment tool for Python. We use it to build isolated Python environments for the development of Playlistr. It is mainly used to avoid dependency conflicts between Playlistr's dependencies and the dependencies of any other Python project that may be present on a certain developer's machine.",
 	},
 ];
 
 const links = {
 	github: "https://github.com/mbowen13/SWE-IDB",
-	apiary: "",
-	trello: "",
-	report: "",
+	apiary: "https://github.com/mbowen13/SWE-IDB/blob/master/apiary.apib",
+	trello: "https://trello.com/b/cU5nD0hW/swe",
+	report: "https://www.overleaf.com/read/hgzgpdfbchgr",
 };
 
 const styles = {
 	memberListItem: {
 		margin: "1em",
+	},
+	memberImage: {
+		height: "300px",
+		width: "auto"
 	},
 	cardTitle: {
 		paddingBottom: 0,
@@ -109,7 +131,17 @@ export default class About extends React.Component {
 					<CardTitle title="About" />
 					<Tabs>
 						<Tab label="Description">
-							<CardText>description, purpose, intended users</CardText>
+							<CardText>
+							<p>	
+								We aim to provide trivia on music with an emphasis on broad musical discovery through the power of playlists. Businesses such as 8tracks have built their entire business model around playlist creation, and Spotify has swept them away by offering playlist creation and much more. Our web application allows users to explore the portal of playlists that have been created on Spotify as well as cross-reference facts on any song that catches their eye.
+							</p>
+							<p>
+								Users of Playlistr can reference information about songs, albums, and artists, such as to answer a nagging trivia question of {"\""}On which of Pink Floyds albums did Another Brick in the Wall appear?{"\""}
+							</p>
+							<p>
+								However, more uniquely, we allow users to cross reference the songs, albums, and artists with the playlists on which they might appear. Therefore, our application allows for more broad musical discovery: a fan of Grimes hit single Oblivion might look up this song and discover playlists they enjoy in the relatively niche genres of witch house, synthpop, dream pop, and ambient music and explore these even more into further branching genres.
+							</p>
+							</CardText>
 						</Tab>
 						<Tab label="Group Info">
 							<CardText>Group Name: {memberInfo.groupName}</CardText>
@@ -120,7 +152,7 @@ export default class About extends React.Component {
 										return (
 											<li key={member.name} style={styles.memberListItem}>
 												<div>
-													<img src={member.photo_url} />
+													<img style={styles.memberImage} src={member.photo_url} />
 												</div>
 												<div>Name: {member.name}</div>
 												<div>Bio: {member.bio}</div>
@@ -182,9 +214,9 @@ export default class About extends React.Component {
 										return (
 											<li key={tool.name} style={styles.memberListItem}>
 												<div>
-													Name: <a href={tool.link}>{tool.name}</a>
+													 <b>{tool.name}</b>
 												</div>
-												<div>Description: {tool.description}</div>
+												<div>{tool.description}</div>
 											</li>
 										);
 									})}
