@@ -1,0 +1,70 @@
+Create Initial Project | Estimate: 3
+====================================
+  - Create basic app which displays hello world in a static page
+  - Time estimate: 3 hours
+  - Actual time: 5 hours
+  - Refined estimate: 5
+
+Create Home page | Estimate: 5
+=============================
+  - Make home page with navbar and carousel
+  - Time estimate: 4 hours
+  - Actual time: 2 hours
+  - Refined estimate: 3
+
+Create About page | Estimate: 5
+=====================
+  - Make About page displaying required content from rubric
+  - Time Estimate: 5 hours
+  - Actual time: 2 hours
+  - Refined Estimate: 3
+
+Create Tracks page | Estimate: 5
+======================
+  - Make tracks page displaying data for at least 3 tracks
+  - Time estimate: 3 hours
+  - Actual time: 1 hour
+  - Refined estimate: 1
+
+Create Artists page | 5
+=======================
+  - Make artists page displaying data for at least 3 artists
+  - Time estimate: 3 hours
+  - Actual time: 1 hour
+  - Refined estimate: 1
+
+Create Playlists page | 5
+=========================
+  - Make playlists page displaying data for at least 3 playlists
+  - Time estimate: 3 hours
+  - Actual time: 2 hours
+  - Refined estimate: 3
+
+Create Albums | 5
+=================
+  - Make albums page displaying data for at least 3 albums
+  - Time estimate: 3 hours
+  - Actual time: 1 hour
+  - Refined estimate: 1
+
+Design Models | 3
+=================
+  - Design the models for the project and document them 
+  - Time estimate: 5 hours
+  - Actual time: 4 hours
+  - Refined estimate: 3
+
+Design API | 5
+==============
+  - Design API for the project and document in Apiary
+  - Time estimate: 5
+  - Actual time: 3
+  - Refined estimate: 3
+
+Implement Basic Routing | 5
+===========================
+  - Have links to each page in navbar / menu 
+  - Time estimate: 1 hour
+  - Actual time: 1 hour
+  - Refined estimate: 1
+

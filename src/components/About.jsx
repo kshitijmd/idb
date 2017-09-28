@@ -12,8 +12,8 @@ const memberInfo = {
 			bio:
 				"Nick is a 4th year Computer Science senior from San Antonio, TX. He been interested in computers and programming ever since the 5th grade. His CS interests include operating systems, web development, and video game hacking.",
 			responsibilities: "front-end",
-			commits: 0,
-			issues: 0,
+			commits: 22,
+			issues: 5,
 			unit_tests: 0,
 		},
 		{
