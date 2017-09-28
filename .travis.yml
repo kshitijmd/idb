@@ -3,10 +3,10 @@ language: node_js
 node_js:
    - "node"
 
- notifications:
-  slack:
-    rooms:
-      - csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh#travis
+
+notifications:
+   slack: csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh
+
 
 
 script:
