@@ -44,6 +44,17 @@ export default class Header extends React.Component {
 						<MenuItem onClick={this.handleClose}>Albums</MenuItem>
 					</Link>
 					<Divider />
+					<Link style={linkStyle} to="/artists">
+						<MenuItem onClick={this.handleClose}>Artists</MenuItem>
+					</Link>
+					<Divider />
+					<Link style={linkStyle} to="/tracks">
+						<MenuItem onClick={this.handleClose}>Tracks</MenuItem>
+					</Link>
+					<Divider />
+					<Link style={linkStyle} to="/playlists">
+						<MenuItem onClick={this.handleClose}>Playlists</MenuItem>
+					</Link>
 				</Drawer>
 			</div>
 		);
