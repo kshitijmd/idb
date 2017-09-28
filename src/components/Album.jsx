@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const albums = [
 	{
 		id: 1,
-		name: "Dark Side of the Moon",
+		name: "The Dark Side of the Moon",
 		artists: [
 			{
 				id: 1,
@@ -63,8 +63,13 @@ const albums = [
 
 const styles = {
 	card: {
+		margin: "auto",
 		height: "500px",
 		width: "500px",
+	},
+	link: {
+		textDecoration: "none",
+		color: "rgba(255, 255, 255, 0.87)",
 	},
 };
 
@@ -73,29 +78,31 @@ export default class Album extends React.Component {
 		const album = albums[this.props.match.params.albumId - 1];
 		return (
 			<PageLayout>
-				<Card style={styles.card}>
-					<CardMedia
-						overlay={
-							<CardTitle
-								title={album.name}
-								subtitle={
-									<Link to={"/artists/" + album.artists[0].id}>
-										{`by ${album.artists[0].name}`}
-									</Link>
-								}
-							/>
-						}
-					>
-						<img src={album.imageUrls.large} alt="" />
-					</CardMedia>
-					<CardTitle> Info </CardTitle>
-					<CardText>
-						<div>Release date: {album.releaseDate}</div>
-						<div>Playcount: {album.playcount}</div>
-						<div>Genres: {album.genres.map(genre => <p key={genre}>{genre}</p>)}</div>
-						<div>Spotify URI: {album.spotifyUri}</div>
-					</CardText>
-				</Card>
+				<div style={styles.card}>
+					<Card>
+						<CardMedia
+							overlay={
+								<CardTitle
+									title={album.name}
+									subtitle={
+										<Link to={"/artists/" + album.artists[0].id} style={styles.link}>
+											{`by ${album.artists[0].name}`}
+										</Link>
+									}
+								/>
+							}
+						>
+							<img src={album.imageUrls.large} alt="" />
+						</CardMedia>
+						<CardTitle> Info </CardTitle>
+						<CardText>
+							<div>Release date: {album.releaseDate}</div>
+							<div>Playcount: {album.playcount}</div>
+							<div>Genres: {album.genres.map(genre => <p key={genre}>{genre}</p>)}</div>
+							<div>Spotify URI: {album.spotifyUri}</div>
+						</CardText>
+					</Card>
+				</div>
 			</PageLayout>
 		);
 	}

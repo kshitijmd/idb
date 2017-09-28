@@ -15,12 +15,16 @@ const styles = {
 		height: 750,
 		overflowY: "auto",
 	},
+	link: {
+		textDecoration: "none",
+		color: "rgb(255, 255, 255)",
+	},
 };
 
 const albums = [
 	{
 		id: 1,
-		name: "Dark Side of the Moon",
+		name: "The Dark Side of the Moon",
 		artists: [
 			{
 				id: 1,
@@ -88,9 +92,11 @@ export default class AlbumGrid extends React.Component {
 									subtitle={
 										<span>
 											<b>
-												by
-												<Link to={"/artists/" + album.artists[0].id}>
-													{album.artists[0].name}
+												by<Link
+													to={"/artists/" + album.artists[0].id}
+													style={styles.link}
+												>
+													{" " + album.artists[0].name}
 												</Link>
 											</b>
 										</span>
