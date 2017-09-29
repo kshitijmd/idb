@@ -65,7 +65,7 @@ const playlists = [
 		spotifyUri: "spotify:user:spotify:playlist:81WnhYBAT1ONBA2AzNQopIA",
 		artist: "Coldplay",
 		song: "Hymn for the Weekend",
-		totalDuation: 258000,
+		totalDuration: 258000,
 		numSongs: 1,
 		numArtists: 1,
 	},
