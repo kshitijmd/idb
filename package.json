@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack --progress --colors && node server",
+		"start": "node server",
+		"build": "webpack --progress --colors",
 		"test": "echo \"No tests added.\"",
 		"lint":
 			"eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
