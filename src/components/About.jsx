@@ -128,7 +128,7 @@ const links = {
 	github: "https://github.com/mbowen13/idb",
 	apiary: "http://docs.mbowen13.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
-	report: "https://www.overleaf.com/read/hgzgpdfbchgr",
+	report: "https://utexas.box.com/s/yl4nnesb52uiv5xhuhqlh3j1907ogelg",
 };
 
 const styles = {
