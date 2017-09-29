@@ -19,6 +19,7 @@ const albums = [
 			small: "https://i.scdn.co/image/c4bb8e18b0207c41d9fa1becd4fca1b6f68c06e6",
 			large: "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
 		},
+		tracks: "Breathe (In The Air)",
 		releaseDate: "1973-03-01",
 		playcount: "67392802",
 		spotifyUri: "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
@@ -37,6 +38,7 @@ const albums = [
 			small: "https://i.scdn.co/image/398054462a0f56f58f05482b9beb3ebfb31cda15",
 			large: "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
 		},
+		tracks: "Dust",
 		releaseDate: "2014-11-21",
 		playcount: "35284290",
 		spotifyUri: "spotify:artist:0YC192cP3KPCRWx8zr8MfZ",
@@ -55,6 +57,7 @@ const albums = [
 			small: "https://i.scdn.co/image/8a87ac474db652dd6cd9fb208be0f37a4ea9c36b",
 			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
 		},
+		tracks: "Hymn For the Weekend",
 		releaseDate: "2015-12-04",
 		playcount: "12345678",
 		spotifyUri: "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
@@ -99,6 +102,9 @@ export default class Album extends React.Component {
 						</CardMedia>
 						<CardTitle> Info </CardTitle>
 						<CardText>
+							<div>
+								Tracks: <Link to={"/tracks/" + album.id}>{album.tracks}</Link>
+							</div>
 							<div>Release date: {album.releaseDate}</div>
 							<div>Playcount: {album.playcount}</div>
 							<div>
