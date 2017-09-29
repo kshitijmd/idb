@@ -96,7 +96,13 @@ export default class AlbumGrid extends React.Component {
 													to={"/artists/" + album.artists[0].id}
 													style={styles.link}
 												>
-													{" " + album.artists[0].name}
+													{" " +
+														album.artists[0].name +
+														" on " +
+														album.releaseDate +
+														" played " +
+														album.playcount +
+														" times."}
 												</Link>
 											</b>
 										</span>
