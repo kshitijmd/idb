@@ -65,7 +65,7 @@ const playlists = [
 		spotifyUri: "spotify:user:spotify:playlist:81WnhYBAT1ONBA2AzNQopIA",
 		artist: "Coldplay",
 		song: "Hymn for the Weekend",
-		totalLength: 258000,
+		totalDuation: 258000,
 		numSongs: 1,
 		numArtists: 1,
 	},
@@ -80,7 +80,10 @@ export default class PlaylistGrid extends React.Component {
 						<Subheader>Playlists</Subheader>
 						{playlists.map(playlist => (
 							<Link key={playlist.id} to={"/playlists/" + playlist.id}>
-								<GridTile title={playlist.name}>
+								<GridTile
+									title={playlist.name}
+									subtitle={"Duration: " + playlist.totalDuration}
+								>
 									<img src={playlist.imageUrls.large} />
 								</GridTile>
 							</Link>
