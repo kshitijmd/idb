@@ -75,12 +75,14 @@ const dataSources = [
 	{
 		name: "Spotify",
 		link: "https://api.spotify.com",
-		scrape_desc: "",
+		scrape_desc:
+			"The Spotify API requires OAuth for all requests, which is somewhat annoying but Postman makes OAuth extremely simple; it dynamically adds the header to the request. Since the amount of data we needed is small, we manually scraped the API using Postman. Spotify provides all data for all four of our models, with the exception of play count and artist bio.",
 	},
 	{
 		name: "Last.fm",
 		link: "http://ws.audioscrobbler.com/2.0/",
-		scrape_desc: "",
+		scrape_desc:
+			"The Last.fm API does not require authentication in all cases, but it is less nuanced than Spotify's API. It has the option of returning data formatted as JSON or XML, which can be convenient when working with pre-existing frameworks. Last.fm was also manually scraped using Postman.",
 	},
 ];
 
