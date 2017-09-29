@@ -31,7 +31,7 @@ const memberInfo = {
 			photo_url:
 				"https://raw.githubusercontent.com/kshitijmd/kshitijmd.github.io/master/images/Headshot.png",
 			bio:
-				"K is from India, Kuwait, Midland TX, Dallas TX and Austin TXj. He will join PestRoutes as a software engineer in December 2017. Ask him about his bbq paneer kabobs.",
+				"K is from India, Kuwait, Midland TX, Dallas TX and Austin TX. He will join PestRoutes as a software engineer in December 2017. Ask him about his bbq paneer kabobs.",
 			responsibilities: "Hosting and API",
 			commits: 12,
 			issues: 9,
