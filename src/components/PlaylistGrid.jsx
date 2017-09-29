@@ -82,7 +82,16 @@ export default class PlaylistGrid extends React.Component {
 							<Link key={playlist.id} to={"/playlists/" + playlist.id}>
 								<GridTile
 									title={playlist.name}
-									subtitle={"Duration: " + playlist.totalDuration}
+									subtitle={
+										"Duration: " +
+										playlist.totalDuration +
+										", Followers: " +
+										playlist.followers +
+										", Tracks: " +
+										playlist.numSongs +
+										", Artists: " +
+										playlist.numArtists
+									}
 								>
 									<img src={playlist.imageUrls.large} />
 								</GridTile>
