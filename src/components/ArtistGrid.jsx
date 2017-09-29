@@ -72,7 +72,15 @@ export default class ArtistGrid extends React.Component {
 						<Subheader>Artists</Subheader>
 						{artists.map(artist => (
 							<Link key={artist.id} to={"/artists/" + artist.id}>
-								<GridTile title={artist.name}>
+								<GridTile
+									title={artist.name}
+									subtitle={
+										"Played " +
+										artist.playcount +
+										" times. Genre: " +
+										artist.genres[0]
+									}
+								>
 									<img src={artist.imageUrls.large} />
 								</GridTile>
 							</Link>
