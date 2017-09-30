@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "node server",
+		"start": "npm run build && node server",
 		"build": "webpack --progress --colors",
 		"dev": "webpack --progress --colors --watch",
 		"test": "echo \"No tests added.\"",
