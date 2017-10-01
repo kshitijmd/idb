@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: playlistr
+    image: mbowen13/playlistr
     ports:
       - "9000:9000"
     volumes:
