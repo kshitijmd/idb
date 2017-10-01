@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    image: playlistr
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/app/
+    networks:
+      - frontend
+networks:
+  frontend:
+    driver: bridge

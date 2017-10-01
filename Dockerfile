@@ -1,13 +1,10 @@
 FROM node:8
 
+ADD . /app
 # Create working directory for image
 WORKDIR /app
 
-COPY package.json .
-
 RUN npm install
-
-COPY . .
 
 EXPOSE 9000
 
