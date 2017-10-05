@@ -8,8 +8,7 @@
 		"build": "webpack --progress --colors",
 		"dev": "webpack --progress --colors --watch",
 		"test": "echo \"No tests added.\"",
-		"lint":
-			"eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
+		"lint": "eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +27,7 @@
 		"react": "^15.6.1",
 		"react-dom": "^15.6.1",
 		"react-grid-layout": "^0.15.3",
+		"react-responsive": "^2.0.0",
 		"react-responsive-carousel": "^3.1.26"
 	},
 	"devDependencies": {
