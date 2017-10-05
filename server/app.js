@@ -2,8 +2,12 @@
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
+const favicon = require("serve-favicon");
 
 const app = express();
+
+// Serve favicon
+app.use(favicon(path.resolve(__dirname, "..", "build", "favicon.ico")));
 
 // Setup logger
 app.use(
