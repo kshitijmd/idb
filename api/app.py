@@ -1,5 +1,6 @@
 # Application entry point
 # run with 'python app.py'
+# visit localhost:8000/api/v1/artists
 
 from flask import Flask
 from resources.artists import artists_api
