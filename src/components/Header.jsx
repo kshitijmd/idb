@@ -5,6 +5,7 @@ import Drawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
 import MenuItem from "material-ui/MenuItem";
 import { Tabs, Tab } from "material-ui/Tabs";
+import Radium from "radium";
 
 const styles = {
 	appBar: {
@@ -17,11 +18,19 @@ const styles = {
 	tabsItemContainer: {
 		height: "64px",
 	},
-	navLinkContainer: {
+	navTabsContainer: {
 		position: "absolute",
-		left: "200px",
+		left: "175px",
 		width: "50%",
 		marginTop: "auto",
+		"@media (max-width: 720px)": {
+			display: "none",
+		},
+	},
+	drawer: {
+		"@media (max-width: 719px)": {
+			display: "none",
+		},
 	},
 };
 
@@ -30,9 +39,22 @@ const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { open: false };
+		this.state = { open: false, width: "0", height: "0" };
 		this.routes = ["about", "artists", "albums", "tracks", "playlists"];
 	}
+
+	componentDidMount = () => {
+		this.updateWindowDimensions();
+		window.addEventListener("resize", this.updateWindowDimensions);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener("resize", this.updateWindowDimensions);
+	};
+
+	updateWindowDimensions = () => {
+		this.setState({ width: window.innerWidth, height: window.innerHeight });
+	};
 
 	handleToggle = () => this.setState({ open: !this.state.open });
 
@@ -42,6 +64,7 @@ class Header extends React.Component {
 
 	render() {
 		const basepath = this.props.location.pathname.split("/")[1];
+		const useHamburgerMenu = this.state.width <= 720;
 
 		return (
 			<div>
@@ -53,14 +76,15 @@ class Header extends React.Component {
 					}
 					style={styles.appBar}
 					onLeftIconButtonTouchTap={this.handleToggle}
+					showMenuIconButton={useHamburgerMenu}
 				>
-					<div style={styles.navLinkContainer}>
+					<div style={styles.navTabsContainer}>
 						<Tabs tabItemContainerStyle={styles.tabsItemContainer} value={basepath}>
 							{this.routes.map(route => {
 								return (
 									<Tab
-										label={capitalize(route)}
-										onActive={() => this.handleActive("/" + route)}
+										label={route}
+										onActive={() => this.handleActive("/" + route)} // infinite loop without lambda(???)
 										value={route}
 										key={route}
 									/>
@@ -69,34 +93,31 @@ class Header extends React.Component {
 						</Tabs>
 					</div>
 				</AppBar>
+
 				<Drawer
 					docked={false}
 					open={this.state.open}
 					onRequestChange={open => this.setState({ open })}
 				>
-					<Link style={styles.links} to="/about">
-						<MenuItem onClick={this.handleClose}>About</MenuItem>
-					</Link>
-					<Divider />
-					<Link style={styles.links} to="/albums">
-						<MenuItem onClick={this.handleClose}>Albums</MenuItem>
-					</Link>
-					<Divider />
-					<Link style={styles.links} to="/artists">
-						<MenuItem onClick={this.handleClose}>Artists</MenuItem>
-					</Link>
-					<Divider />
-					<Link style={styles.links} to="/tracks">
-						<MenuItem onClick={this.handleClose}>Tracks</MenuItem>
-					</Link>
-					<Divider />
-					<Link style={styles.links} to="/playlists">
-						<MenuItem onClick={this.handleClose}>Playlists</MenuItem>
-					</Link>
+					{this.routes.map(route => {
+						return (
+							<div key={route}>
+								<Link to={"/" + route} style={styles.links}>
+									<MenuItem
+										onClick={this.handleClose}
+										primaryText={capitalize(route)}
+									/>
+								</Link>
+								<Divider />
+							</div>
+						);
+					})}
 				</Drawer>
 			</div>
 		);
 	}
 }
 
-export default withRouter(Header);
+// makes props.history and props.location available
+// radium for media queries and :hover
+export default withRouter(Radium(Header));

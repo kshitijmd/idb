@@ -45,6 +45,7 @@
 		"eslint-plugin-react": "^7.4.0",
 		"material-ui": "latest",
 		"prettier": "^1.7.0",
+		"radium": "^0.19.5",
 		"react-router-dom": "^4.2.2",
 		"style-loader": "^0.18.2",
 		"webpack": "^1.12.12"
