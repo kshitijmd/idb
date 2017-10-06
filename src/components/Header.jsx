@@ -6,6 +6,7 @@ import Divider from "material-ui/Divider";
 import MenuItem from "material-ui/MenuItem";
 import { Tabs, Tab } from "material-ui/Tabs";
 import Radium from "radium";
+import SearchBar from "material-ui-search-bar";
 
 const styles = {
 	appBar: {
@@ -20,17 +21,40 @@ const styles = {
 	},
 	navTabsContainer: {
 		position: "absolute",
-		left: "175px",
+		left: "125px",
 		width: "50%",
 		marginTop: "auto",
-		"@media (max-width: 720px)": {
+		"@media (max-width: 850px)": {
 			display: "none",
 		},
 	},
 	drawer: {
-		"@media (max-width: 719px)": {
+		"@media (min-width: 850px)": {
 			display: "none",
 		},
+	},
+	searchBarContainer: {
+		marginRight: "10px",
+		width: "37%",
+		"@media (max-width: 850px)": {
+			width: "70%",
+			position: "absolute",
+			left: "175px",
+		},
+		"@media (max-width: 615px)": {
+			width: "60%",
+			position: "absolute",
+			left: "175px",
+		},
+		"@media (max-width: 485px)": {
+			width: "50%",
+			position: "absolute",
+			left: "175px",
+		},
+	},
+	searchBar: {
+		width: "100%",
+		marginTop: "8px",
 	},
 };
 
@@ -39,7 +63,7 @@ const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { open: false, width: "0", height: "0" };
+		this.state = { open: false, width: "0", height: "0", dataSource: [] };
 		this.routes = ["about", "artists", "albums", "tracks", "playlists"];
 	}
 
@@ -64,7 +88,7 @@ class Header extends React.Component {
 
 	render() {
 		const basepath = this.props.location.pathname.split("/")[1];
-		const useHamburgerMenu = this.state.width <= 720;
+		const useHamburgerMenu = this.state.width <= 850;
 
 		return (
 			<div>
@@ -91,6 +115,19 @@ class Header extends React.Component {
 								);
 							})}
 						</Tabs>
+					</div>
+
+					<div style={styles.searchBarContainer}>
+						<SearchBar
+							dataSource={this.state.dataSource}
+							onChange={value =>
+								this.setState({
+									dataSource: [value, value + value, value + value + value],
+								})}
+							onRequestSearch={() => console.log("onRequestSearch")}
+							style={styles.searchBar}
+							hintText={""}
+						/>
 					</div>
 				</AppBar>
 
