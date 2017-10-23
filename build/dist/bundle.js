@@ -36996,13 +36996,13 @@
 
 	var _Tabs = __webpack_require__(507);
 
-	var _radium = __webpack_require__(228);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
 	var _materialUiSearchBar = __webpack_require__(512);
 
 	var _materialUiSearchBar2 = _interopRequireDefault(_materialUiSearchBar);
+
+	var _radium = __webpack_require__(228);
+
+	var _radium2 = _interopRequireDefault(_radium);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37040,6 +37040,9 @@
 		searchBarContainer: {
 			marginRight: "10px",
 			width: "37%",
+			"@media (max-width: 1030px)": {
+				width: "33%"
+			},
 			"@media (max-width: 850px)": {
 				width: "70%",
 				position: "absolute",

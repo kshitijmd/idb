@@ -5,8 +5,8 @@ import Drawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
 import MenuItem from "material-ui/MenuItem";
 import { Tabs, Tab } from "material-ui/Tabs";
-import Radium from "radium";
 import SearchBar from "material-ui-search-bar";
+import Radium from "radium";
 
 const styles = {
 	appBar: {
@@ -36,6 +36,9 @@ const styles = {
 	searchBarContainer: {
 		marginRight: "10px",
 		width: "37%",
+		"@media (max-width: 1030px)": {
+			width: "33%",
+		},
 		"@media (max-width: 850px)": {
 			width: "70%",
 			position: "absolute",
