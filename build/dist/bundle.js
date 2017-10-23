@@ -36976,6 +36976,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _propTypes = __webpack_require__(191);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
 	var _reactRouterDom = __webpack_require__(188);
 
 	var _AppBar = __webpack_require__(434);
@@ -37159,7 +37163,7 @@
 									});
 								},
 								onRequestSearch: function onRequestSearch() {
-									return console.log("onRequestSearch");
+									return 0;
 								},
 								style: styles.searchBar,
 								hintText: ""
@@ -37198,10 +37202,13 @@
 		return Header;
 	}(_react2.default.Component);
 
+	Header.propTypes = {
+		history: _propTypes2.default.object,
+		location: _propTypes2.default.object
+	};
+
 	// makes props.history and props.location available
 	// radium for media queries and :hover
-
-
 	exports.default = (0, _reactRouterDom.withRouter)((0, _radium2.default)(Header));
 
 /***/ }),

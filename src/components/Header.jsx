@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Drawer from "material-ui/Drawer";
@@ -127,7 +128,7 @@ class Header extends React.Component {
 								this.setState({
 									dataSource: [value, value + value, value + value + value],
 								})}
-							onRequestSearch={() => console.log("onRequestSearch")}
+							onRequestSearch={() => 0}
 							style={styles.searchBar}
 							hintText={""}
 						/>
@@ -157,6 +158,11 @@ class Header extends React.Component {
 		);
 	}
 }
+
+Header.propTypes = {
+	history: PropTypes.object,
+	location: PropTypes.object,
+};
 
 // makes props.history and props.location available
 // radium for media queries and :hover
