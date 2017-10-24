@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
+import GridCard from "./GridCard";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from "material-ui/Subheader";
 
@@ -83,32 +84,18 @@ export default class AlbumGrid extends React.Component {
 		return (
 			<PageLayout>
 				<div style={styles.root}>
-					<GridList cellHeight={300} style={styles.gridList}>
+					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Albums</Subheader>
 						{albums.map(album => (
 							<Link key={album.id} to={"/albums/" + album.id}>
-								<GridTile
-									title={album.name}
-									subtitle={
-										<span>
-											<b>
-												by<Link
-													to={"/artists/" + album.artists[0].id}
-													style={styles.link}
-												>
-													{" " +
-														album.artists[0].name +
-														" on " +
-														album.releaseDate +
-														" played " +
-														album.playcount +
-														" times."}
-												</Link>
-											</b>
-										</span>
-									}
-								>
-									<img src={album.imageUrls.large} />
+								<GridTile>
+									<GridCard
+										imageSrc={album.imageUrls.large}
+										title={album.name}
+										subtitle={album.artists[0].name}
+										bonusInfo1={`Released on ${album.releaseDate}`}
+										bonusInfo2={`Played ${album.playcount} times`}
+									/>
 								</GridTile>
 							</Link>
 						))}

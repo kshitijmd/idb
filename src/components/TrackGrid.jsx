@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from "material-ui/Subheader";
+import GridCard from "./GridCard";
 
 const styles = {
 	root: {
@@ -68,24 +69,18 @@ export default class TrackGrid extends React.Component {
 		return (
 			<PageLayout>
 				<div style={styles.root}>
-					<GridList cellHeight={300} style={styles.gridList}>
+					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Tracks</Subheader>
 						{tracks.map(track => (
 							<Link key={track.id} to={"/tracks/" + track.id}>
-								<GridTile
-									title={track.name}
-									subtitle={
-										track.duration +
-										"s long by " +
-										track.artist +
-										". Played " +
-										track.playcount +
-										" times." +
-										" Album: " +
-										track.albums
-									}
-								>
-									<img src={track.imageUrls.large} />
+								<GridTile>
+									<GridCard
+										imageSrc={track.imageUrls.large}
+										title={track.name}
+										subtitle={`By ${track.artist}`}
+										bonusInfo1={`Played ${track.playcount} times`}
+										bonusInfo2={`Duration: ${track.duration}`}
+									/>
 								</GridTile>
 							</Link>
 						))}

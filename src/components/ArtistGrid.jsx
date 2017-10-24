@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from "material-ui/Subheader";
+import GridCard from "./GridCard";
 
 const styles = {
 	root: {
@@ -68,20 +69,18 @@ export default class ArtistGrid extends React.Component {
 		return (
 			<PageLayout>
 				<div style={styles.root}>
-					<GridList cellHeight={300} style={styles.gridList}>
+					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Artists</Subheader>
 						{artists.map(artist => (
 							<Link key={artist.id} to={"/artists/" + artist.id}>
-								<GridTile
-									title={artist.name}
-									subtitle={
-										"Played " +
-										artist.playcount +
-										" times. Genre: " +
-										artist.genres[0]
-									}
-								>
-									<img src={artist.imageUrls.large} />
+								<GridTile>
+									<GridCard
+										imageSrc={artist.imageUrls.large}
+										title={artist.name}
+										subtitle={"TODO"}
+										bonusInfo1={`Played ${artist.playcount} times`}
+										bonusInfo2={`Genre: ${artist.genres[0]}`}
+									/>
 								</GridTile>
 							</Link>
 						))}
