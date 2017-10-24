@@ -3,12 +3,13 @@ from sqlalchemy import (
     Integer,
     String,
     Boolean,
-    Table,
-    ForeignKey,
     DateTime
 )
 from sqlalchemy.orm import relationship
 from .database import Base
+from .associations import (
+    tracks_playlists
+)
 
 
 class Track(Base):
