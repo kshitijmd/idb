@@ -6,21 +6,14 @@
 # pylint: disable=too-many-arguments
 
 from application.app import db
-from .associations import (
-    tracks_playlists,
-    tracks_artists,
-    artists_playlists,
-    albums_artists,
-    albums_genres,
-    artists_genres)
 
 
 class Track(db.Model):
     """
     Track is the most basic model in our project. Other models use this
-    as a building block. 
+    as a building block.
 
-    It has a many-to-one relationship with album and 
+    It has a many-to-one relationship with album and
     many-to-many relationships with artists and playlists
 
     The relationship with playlists is unidirectional (track does not link to playlist)
@@ -70,7 +63,7 @@ class Artist(db.Model):
     """
     Artist is the top relation of our model hierarchy
 
-    Artist has many-to-many relations with track, album, genre, 
+    Artist has many-to-many relations with track, album, genre,
     and playlist
 
     The relationship with playlists is unidirectional (artist does not link to playlist)
@@ -122,22 +115,22 @@ class Artist(db.Model):
 
 class Playlist(db.Model):
     """
-    Playlist is somewhat outside the main relations of 
-    artist, album and track; It is a collection of tracks, 
+    Playlist is somewhat outside the main relations of
+    artist, album and track; It is a collection of tracks,
     and includes some basic statistics
 
     Playlist has many-to-many relationships with artist and track
     Playlist has links to artist and track, but not the other way around
 
     Attributes:
-        id (int): unique identifier for this playlist 
+        id (int): unique identifier for this playlist
         name (str): name of this playlist
-        spotify_uri (str): spotify uri for this playlist 
+        spotify_uri (str): spotify uri for this playlist
         num_artists (int): number of artists appearing on this playlist
-        num_songs (int): number of songs on this playlist 
-        num_followers (int): number of people who follow the playlist on spotify 
+        num_songs (int): number of songs on this playlist
+        num_followers (int): number of people who follow the playlist on spotify
         duration (int): length of the playlist in ms
-        image_url (str): image url for the playlist 
+        image_url (str): image url for the playlist
     """
     __tablename__ = "playlists"
 
@@ -175,10 +168,10 @@ class Album(db.Model):
     and many-to-many relationships with artist, playlist and genre
 
     Attributes:
-        id (int): unique identifier 
+        id (int): unique identifier
         name (str): name of the album
         spotify_uri (str): spotify uri for the album
-        playcount (int): playcount of the album 
+        playcount (int): playcount of the album
         releasedate (date): release date of the album
     """
     __tablename__ = "albums"
@@ -210,15 +203,15 @@ class Album(db.Model):
 
 class Genre(db.Model):
     """
-    Genre is a secondary model which is included associated with 
-    artists and albums 
+    Genre is a secondary model which is included associated with
+    artists and albums
 
-    It has many-to-many relationships with album and artist 
+    It has many-to-many relationships with album and artist
     The links are unidirectional (don't appear in Genre)
 
     Attributes:
         id (int): unique identifer
-        name (str): name of the genre 
+        name (str): name of the genre
     """
     __tablename__ = 'genres'
 
@@ -239,3 +232,90 @@ class Genre(db.Model):
 
     def __repr__(self):
         return '<Genre {}: {!r}>'.format(self.id, self.name)
+
+
+# Junction tables
+
+tracks_playlists = db.Table(
+    'tracks_playlists',
+    db.Column(
+        'track_id',
+        db.Integer,
+        db.ForeignKey('tracks.id'),
+        primary_key=True),
+    db.Column(
+        'playlist_id',
+        db.Integer,
+        db.ForeignKey('playlists.id'),
+        primary_key=True)
+)
+
+tracks_artists = db.Table(
+    'tracks_artists',
+    db.Column(
+        'track_id',
+        db.Integer,
+        db.ForeignKey('tracks.id'),
+        primary_key=True),
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True)
+)
+
+artists_playlists = db.Table(
+    'artists_playlists',
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True),
+    db.Column(
+        'playlist_id',
+        db.Integer,
+        db.ForeignKey('playlists.id'),
+        primary_key=True)
+)
+
+albums_artists = db.Table(
+    'albums_artists',
+    db.Column(
+        'albums_id',
+        db.Integer,
+        db.ForeignKey('albums.id'),
+        primary_key=True),
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True)
+)
+
+albums_genres = db.Table(
+    'albums_genres',
+    db.Column(
+        'album_id',
+        db.Integer,
+        db.ForeignKey('albums.id'),
+        primary_key=True),
+    db.Column(
+        'genre_id',
+        db.Integer,
+        db.ForeignKey('genres.id'),
+        primary_key=True)
+)
+
+artists_genres = db.Table(
+    'artists_genres',
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True),
+    db.Column(
+        'genre_id',
+        db.Integer,
+        db.ForeignKey('genres.id'),
+        primary_key=True)
+)
