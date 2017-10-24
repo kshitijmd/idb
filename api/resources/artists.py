@@ -14,11 +14,11 @@ artists_api = Blueprint('resources.artists', __name__)
 api = Api(artists_api)
 api.add_resource(
     ArtistList,
-    '/api/v1/artists',
+    '/artists',
     endpoint='artists'
 )
 api.add_resource(
     Artist,
-    '/api/v1/artist/<int:id>',
+    '/<int:id>',
     endpoint='artist'
 )
