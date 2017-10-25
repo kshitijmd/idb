@@ -1,6 +1,5 @@
 from flask import Blueprint
 from database.models import Track
-from app.app import db
 from api.util import serialize
 
 tracks_blueprint = Blueprint('tracks', __name__)

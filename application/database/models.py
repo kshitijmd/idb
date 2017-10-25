@@ -6,6 +6,7 @@
 # pylint: disable=too-many-arguments
 
 from app.app import db
+from api.util import serialize
 
 # Junction Tables
 
@@ -87,17 +88,8 @@ class Track(db.Model):
 
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    album = db.relationship('Album', back_populates='track')
-    artist = db.relationship('Artist', back_populates='track')
-
-    playlists = db.relationship(
-        'Playlist',
-        secondary=track_playlist,
-        back_populates='track')
-
-    @property
-    def album(self):
-        return Album.query.filter(Album.id == self.album_id).first()
+    album = db.relationship('Album', back_populates='tracks')
+    artist = db.relationship('Artist', back_populates='tracks')
 
     def __serialize__(self):
         return {
@@ -107,8 +99,14 @@ class Track(db.Model):
             "duration": self.duration,
             "spotifyUri": self.spotify_uri,
             "imageUrl": self.image_url,
-            "album": self.album.name if self.album else None,
-            "artist": self.artists[0] if len(self.artists) else None
+            "album": {
+                "id": self.album_id,
+                "name": self.album.name if self.album else None
+            },
+            "artist": {
+                "id": self.artist_id,
+                "name": self.artist.name if self.artist else None
+            }
         }
 
     def __repr__(self):
@@ -141,14 +139,19 @@ class Artist(db.Model):
     tracks = db.relationship('Track', back_populates='artist')
     albums = db.relationship('Album', back_populates='artist')
 
-    playlists = db.relationship(
-        'Playlist',
-        secondary=artist_playlist,
-        back_populates='artist')
-    genres = db.relationship(
-        'Genre',
-        secondary=artist_genre,
-        back_populates='artist')
+    genres = db.relationship('Genre', secondary=artist_genre)
+
+    def __serialize__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "bio": self.bio,
+            "spotifyUri": self.spotify_uri,
+            "playcount": self.playcount,
+            "imageUrl": self.image_url,
+            "tracks": [{"id": track.id, "name": track.name} for track in self.tracks],
+            "albums": [{"id": album.id, "name": album.name} for album in self.albums]
+        }
 
     def __repr__(self):
         return '<Artist {}: {!r}>'.format(self.id, self.name)
@@ -187,6 +190,18 @@ class Playlist(db.Model):
     tracks = db.relationship('Track', secondary=track_playlist)
     artists = db.relationship('Artist', secondary=artist_playlist)
 
+    def __serialize__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "numFollowers": self.num_followers,
+            "spotifyUri": self.spotify_uri,
+            "duration": self.duration,
+            "numTracks": self.num_tracks,
+            "tracks": [{"id": track.id, "name": track.name} for track in self.tracks],
+            "artists": [{"id": artist.id, "name": artist.name} for artist in self.artists]
+        }
+
     def __repr__(self):
         return '<Playlist {}: {!r}>'.format(self.id, self.name)
 
@@ -214,12 +229,29 @@ class Album(db.Model):
     spotify_uri = db.Column(db.String(255))
     playcount = db.Column(db.Integer)
     releasedate = db.Column(db.DateTime)
+    image_url = db.Column(db.String(255))
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    artist = db.relationship('Artist', back_populates='album')
+    artist = db.relationship('Artist', back_populates='albums')
 
     tracks = db.relationship('Track', back_populates='album')
     genres = db.relationship('Genre', secondary=album_genre)
+
+    def __serialize__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "playcount": self.playcount,
+            "releaseDate": self.releasedate,
+            "spotifyUri": self.spotify_uri,
+            "imageUrl": self.image_url,
+            "artist": {
+                "id": self.artist_id,
+                "name": self.artist.name if self.artist else None
+            },
+            "tracks": [{"id": track.id, "name": track.name} for track in self.tracks],
+            "genres": [genre.name for genre in self.genres]
+        }
 
     def __repr__(self):
         return '<Album {}: {!r}>'.format(self.id, self.name)
@@ -241,15 +273,6 @@ class Genre(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, index=True, nullable=False)
-
-    albums = db.relationship(
-        'Album',
-        secondary=album_genre,
-        back_populates='genre')
-    artists = db.relationship(
-        'Artist',
-        secondary=artist_genre,
-        back_populates='genre')
 
     def __repr__(self):
         return '<Genre {}: {!r}>'.format(self.id, self.name)

@@ -1,4 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
+from database.models import Artist
+from api.util import serialize
+
 # probably going to need to import from our models here
 
 artists_blueprint = Blueprint('artists', __name__)
@@ -18,7 +21,4 @@ def get_artists():
 
 @artists_blueprint.route('/<artist_id>')
 def get_artist(artist_id):
-    jsondata = {}
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return serialize(Artist.query.filter(Artist.id == artist_id).first())

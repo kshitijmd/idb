@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify
-# probably going to need to import from our models here
+from database.models import Album
+from api.util import serialize
 
 albums_blueprint = Blueprint('albums', __name__)
 
@@ -18,7 +19,4 @@ def get_albums():
 
 @albums_blueprint.route('/<album_id>')
 def get_album(album_id):
-    jsondata = {}
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return serialize(Album.query.filter(Album.id == album_id).first())
