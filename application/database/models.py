@@ -5,7 +5,93 @@
 # pylint: disable=trailing-whitespace
 # pylint: disable=too-many-arguments
 
-from application.app import db
+from app.app import db
+
+# Junction Tables
+
+tracks_playlists = db.Table(
+    'tracks_playlists',
+    db.Column(
+        'track_id',
+        db.Integer,
+        db.ForeignKey('tracks.id'),
+        primary_key=True),
+    db.Column(
+        'playlist_id',
+        db.Integer,
+        db.ForeignKey('playlists.id'),
+        primary_key=True)
+)
+
+tracks_artists = db.Table(
+    'tracks_artists',
+    db.Column(
+        'track_id',
+        db.Integer,
+        db.ForeignKey('tracks.id'),
+        primary_key=True),
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True)
+)
+
+artists_playlists = db.Table(
+    'artists_playlists',
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True),
+    db.Column(
+        'playlist_id',
+        db.Integer,
+        db.ForeignKey('playlists.id'),
+        primary_key=True)
+)
+
+albums_artists = db.Table(
+    'albums_artists',
+    db.Column(
+        'albums_id',
+        db.Integer,
+        db.ForeignKey('albums.id'),
+        primary_key=True),
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True)
+)
+
+albums_genres = db.Table(
+    'albums_genres',
+    db.Column(
+        'album_id',
+        db.Integer,
+        db.ForeignKey('albums.id'),
+        primary_key=True),
+    db.Column(
+        'genre_id',
+        db.Integer,
+        db.ForeignKey('genres.id'),
+        primary_key=True)
+)
+
+artists_genres = db.Table(
+    'artists_genres',
+    db.Column(
+        'artist_id',
+        db.Integer,
+        db.ForeignKey('artists.id'),
+        primary_key=True),
+    db.Column(
+        'genre_id',
+        db.Integer,
+        db.ForeignKey('genres.id'),
+        primary_key=True)
+)
 
 
 class Track(db.Model):
@@ -183,7 +269,7 @@ class Album(db.Model):
     releasedate = db.Column(db.DateTime)
 
     tracks = db.relationship('Track', backref='Album')
-    artists = db.elationship(
+    artists = db.relationship(
         'Artist',
         secondary=albums_artists,
         back_populates='albums')
@@ -232,90 +318,3 @@ class Genre(db.Model):
 
     def __repr__(self):
         return '<Genre {}: {!r}>'.format(self.id, self.name)
-
-
-# Junction tables
-
-tracks_playlists = db.Table(
-    'tracks_playlists',
-    db.Column(
-        'track_id',
-        db.Integer,
-        db.ForeignKey('tracks.id'),
-        primary_key=True),
-    db.Column(
-        'playlist_id',
-        db.Integer,
-        db.ForeignKey('playlists.id'),
-        primary_key=True)
-)
-
-tracks_artists = db.Table(
-    'tracks_artists',
-    db.Column(
-        'track_id',
-        db.Integer,
-        db.ForeignKey('tracks.id'),
-        primary_key=True),
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True)
-)
-
-artists_playlists = db.Table(
-    'artists_playlists',
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True),
-    db.Column(
-        'playlist_id',
-        db.Integer,
-        db.ForeignKey('playlists.id'),
-        primary_key=True)
-)
-
-albums_artists = db.Table(
-    'albums_artists',
-    db.Column(
-        'albums_id',
-        db.Integer,
-        db.ForeignKey('albums.id'),
-        primary_key=True),
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True)
-)
-
-albums_genres = db.Table(
-    'albums_genres',
-    db.Column(
-        'album_id',
-        db.Integer,
-        db.ForeignKey('albums.id'),
-        primary_key=True),
-    db.Column(
-        'genre_id',
-        db.Integer,
-        db.ForeignKey('genres.id'),
-        primary_key=True)
-)
-
-artists_genres = db.Table(
-    'artists_genres',
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True),
-    db.Column(
-        'genre_id',
-        db.Integer,
-        db.ForeignKey('genres.id'),
-        primary_key=True)
-)
