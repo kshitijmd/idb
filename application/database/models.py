@@ -14,13 +14,11 @@ tracks_playlists = db.Table(
     db.Column(
         'track_id',
         db.Integer,
-        db.ForeignKey('tracks.id'),
-        primary_key=True),
+        db.ForeignKey('tracks.id')),
     db.Column(
         'playlist_id',
         db.Integer,
-        db.ForeignKey('playlists.id'),
-        primary_key=True)
+        db.ForeignKey('playlists.id'))
 )
 
 tracks_artists = db.Table(
@@ -28,13 +26,11 @@ tracks_artists = db.Table(
     db.Column(
         'track_id',
         db.Integer,
-        db.ForeignKey('tracks.id'),
-        primary_key=True),
+        db.ForeignKey('tracks.id')),
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True)
+        db.ForeignKey('artists.id'))
 )
 
 artists_playlists = db.Table(
@@ -42,13 +38,11 @@ artists_playlists = db.Table(
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True),
+        db.ForeignKey('artists.id')),
     db.Column(
         'playlist_id',
         db.Integer,
-        db.ForeignKey('playlists.id'),
-        primary_key=True)
+        db.ForeignKey('playlists.id'))
 )
 
 albums_artists = db.Table(
@@ -56,13 +50,11 @@ albums_artists = db.Table(
     db.Column(
         'albums_id',
         db.Integer,
-        db.ForeignKey('albums.id'),
-        primary_key=True),
+        db.ForeignKey('albums.id')),
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True)
+        db.ForeignKey('artists.id'))
 )
 
 albums_genres = db.Table(
@@ -70,13 +62,11 @@ albums_genres = db.Table(
     db.Column(
         'album_id',
         db.Integer,
-        db.ForeignKey('albums.id'),
-        primary_key=True),
+        db.ForeignKey('albums.id')),
     db.Column(
         'genre_id',
         db.Integer,
-        db.ForeignKey('genres.id'),
-        primary_key=True)
+        db.ForeignKey('genres.id'))
 )
 
 artists_genres = db.Table(
@@ -84,13 +74,11 @@ artists_genres = db.Table(
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id'),
-        primary_key=True),
+        db.ForeignKey('artists.id')),
     db.Column(
         'genre_id',
         db.Integer,
-        db.ForeignKey('genres.id'),
-        primary_key=True)
+        db.ForeignKey('genres.id'))
 )
 
 
@@ -131,15 +119,6 @@ class Track(db.Model):
         'Artist',
         secondary=tracks_artists,
         back_populates='tracks')
-
-    def __init__(self, name, album_id=None, image_url=None,
-                 playcount=0, duration=0, spotify_uri=None):
-        self.name = name
-        self.spotify_uri = spotify_uri
-        self.image_url = image_url
-        self.playcount = playcount
-        self.duration = duration
-        self.album_id = album_id
 
     def __repr__(self):
         return '<Track {}: {!r}>'.format(self.id, self.name)
@@ -187,14 +166,6 @@ class Artist(db.Model):
         secondary=artists_genres,
         back_populates='artists')
 
-    def __init__(self, name, bio=None, image_url=None,
-                 spotify_uri=None, playcount=0):
-        self.name = name
-        self.bio = bio
-        self.image_url = image_url
-        self.spotify_uri = spotify_uri
-        self.playcount = playcount
-
     def __repr__(self):
         return '<Artist {}: {!r}>'.format(self.id, self.name)
 
@@ -229,18 +200,8 @@ class Playlist(db.Model):
     duration = db.Column(db.Integer, default=0)
 
     # No backpopulation, only want unidirectional links
-    db.relationship('Track', secondary=tracks_playlists)
-    db.relationship('Artist', secondary=artists_playlists)
-
-    def __init__(self, name, spotify_uri=None, num_artists=0, num_songs=0,
-                 num_followers=0, duration=0, image_url=None):
-        self.name = name
-        self.spotify_uri = spotify_uri
-        self.num_artists = num_artists
-        self.num_songs = num_songs
-        self.num_followers = num_followers
-        self.duration = duration
-        self.image_url = image_url
+    tracks = db.relationship('Track', secondary=tracks_playlists)
+    artists = db.relationship('Artist', secondary=artists_playlists)
 
     def __repr__(self):
         return '<Playlist {}: {!r}>'.format(self.id, self.name)
@@ -277,12 +238,6 @@ class Album(db.Model):
         'Genre',
         secondary=albums_genres)
 
-    def __init__(self, name, spotify_uri=None, playcount=0, releasedate=None):
-        self.name = name
-        self.spotify_uri = spotify_uri
-        self.playcount = playcount
-        self.releasedate = releasedate
-
     def __repr__(self):
         return '<Album {}: {!r}>'.format(self.id, self.name)
 
@@ -312,9 +267,6 @@ class Genre(db.Model):
         'Artist',
         secondary=artists_genres,
         back_populates='genres')
-
-    def __init__(self, name=None):
-        self.name = name
 
     def __repr__(self):
         return '<Genre {}: {!r}>'.format(self.id, self.name)
