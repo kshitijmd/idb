@@ -9,76 +9,52 @@ from app.app import db
 
 # Junction Tables
 
-tracks_playlists = db.Table(
-    'tracks_playlists',
+track_playlist = db.Table(
+    'track_playlist',
     db.Column(
         'track_id',
         db.Integer,
-        db.ForeignKey('tracks.id')),
+        db.ForeignKey('track.id')),
     db.Column(
         'playlist_id',
         db.Integer,
-        db.ForeignKey('playlists.id'))
+        db.ForeignKey('playlist.id'))
 )
 
-tracks_artists = db.Table(
-    'tracks_artists',
-    db.Column(
-        'track_id',
-        db.Integer,
-        db.ForeignKey('tracks.id')),
+artist_playlist = db.Table(
+    'artist_playlist',
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id'))
-)
-
-artists_playlists = db.Table(
-    'artists_playlists',
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id')),
+        db.ForeignKey('artist.id')),
     db.Column(
         'playlist_id',
         db.Integer,
-        db.ForeignKey('playlists.id'))
+        db.ForeignKey('playlist.id'))
 )
 
-albums_artists = db.Table(
-    'albums_artists',
-    db.Column(
-        'albums_id',
-        db.Integer,
-        db.ForeignKey('albums.id')),
-    db.Column(
-        'artist_id',
-        db.Integer,
-        db.ForeignKey('artists.id'))
-)
-
-albums_genres = db.Table(
-    'albums_genres',
+album_genre = db.Table(
+    'album_genre',
     db.Column(
         'album_id',
         db.Integer,
-        db.ForeignKey('albums.id')),
+        db.ForeignKey('album.id')),
     db.Column(
         'genre_id',
         db.Integer,
-        db.ForeignKey('genres.id'))
+        db.ForeignKey('genre.id'))
 )
 
-artists_genres = db.Table(
-    'artists_genres',
+artist_genre = db.Table(
+    'artist_genre',
     db.Column(
         'artist_id',
         db.Integer,
-        db.ForeignKey('artists.id')),
+        db.ForeignKey('artist.id')),
     db.Column(
         'genre_id',
         db.Integer,
-        db.ForeignKey('genres.id'))
+        db.ForeignKey('genre.id'))
 )
 
 
@@ -87,38 +63,37 @@ class Track(db.Model):
     Track is the most basic model in our project. Other models use this
     as a building block.
 
-    It has a many-to-one relationship with album and
-    many-to-many relationships with artists and playlists
-
+    Is many-to-one with artist and album and many-to-many with playlists
     The relationship with playlists is unidirectional (track does not link to playlist)
 
     Attributes:
         id (int): unique identifier
         album_id (int): unique identifier for the album this track appears on
+        artist_id (int): unique identifier for the artist of this track
         name (str): name of the track
         playcount (int): number of times this track has been played
         duration (int): length of the track in ms
         spotify_uri (str): spotify uri of this track
         image_url (str): url to the image for this track
     """
-    __tablename__ = 'tracks'
+    __tablename__ = 'track'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True, nullable=False)
     playcount = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
-    album_id = db.Column(db.Integer, db.ForeignKey('albums.id'))
     spotify_uri = db.Column(db.String(255))
     image_url = db.Column(db.String(255))
 
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
+    album = db.relationship('Album', back_populates='track')
+    artist = db.relationship('Artist', back_populates='track')
+
     playlists = db.relationship(
         'Playlist',
-        secondary=tracks_playlists,
-        back_populates='tracks')
-    artists = db.relationship(
-        'Artist',
-        secondary=tracks_artists,
-        back_populates='tracks')
+        secondary=track_playlist,
+        back_populates='track')
 
     @property
     def album(self):
@@ -144,9 +119,7 @@ class Artist(db.Model):
     """
     Artist is the top relation of our model hierarchy
 
-    Artist has many-to-many relations with track, album, genre,
-    and playlist
-
+    Is one-to-many with track and album, many-to-many with playlist and genre
     The relationship with playlists is unidirectional (artist does not link to playlist)
 
     Attributes:
@@ -156,7 +129,7 @@ class Artist(db.Model):
         spotify_uri (str): spotify uri for this artist
         image_url (str): url of the image for this artist
     """
-    __tablename__ = 'artists'
+    __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True, nullable=False)
@@ -165,22 +138,17 @@ class Artist(db.Model):
     playcount = db.Column(db.Integer, default=0)
     image_url = db.Column(db.String(255))
 
-    tracks = db.relationship(
-        'Track',
-        secondary=tracks_artists,
-        back_populates='artists')
-    albums = db.relationship(
-        'Album',
-        secondary=albums_artists,
-        back_populates='artists')
+    tracks = db.relationship('Track', back_populates='artist')
+    albums = db.relationship('Album', back_populates='artist')
+
     playlists = db.relationship(
         'Playlist',
-        secondary=artists_playlists,
-        back_populates='artists')
+        secondary=artist_playlist,
+        back_populates='artist')
     genres = db.relationship(
         'Genre',
-        secondary=artists_genres,
-        back_populates='artists')
+        secondary=artist_genre,
+        back_populates='artist')
 
     def __repr__(self):
         return '<Artist {}: {!r}>'.format(self.id, self.name)
@@ -205,19 +173,19 @@ class Playlist(db.Model):
         duration (int): length of the playlist in ms
         image_url (str): image url for the playlist
     """
-    __tablename__ = "playlists"
+    __tablename__ = 'playlist'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True, nullable=False)
     spotify_uri = db.Column(db.String(255))
     num_artists = db.Column(db.Integer, default=0)
-    num_songs = db.Column(db.Integer, default=0)
+    num_tracks = db.Column(db.Integer, default=0)
     num_followers = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
 
     # No backpopulation, only want unidirectional links
-    tracks = db.relationship('Track', secondary=tracks_playlists)
-    artists = db.relationship('Artist', secondary=artists_playlists)
+    tracks = db.relationship('Track', secondary=track_playlist)
+    artists = db.relationship('Artist', secondary=artist_playlist)
 
     def __repr__(self):
         return '<Playlist {}: {!r}>'.format(self.id, self.name)
@@ -228,16 +196,18 @@ class Album(db.Model):
     Album lies between track and artist in the hierarchy
 
     Album has a one-to-many relationship with track,
-    and many-to-many relationships with artist, playlist and genre
+    many-to-one with artist, 
+    and many-to-many with playlist and genre
 
     Attributes:
         id (int): unique identifier
+        artist_id (int): unique identifier of the artist for this album 
         name (str): name of the album
         spotify_uri (str): spotify uri for the album
         playcount (int): playcount of the album
         releasedate (date): release date of the album
     """
-    __tablename__ = "albums"
+    __tablename__ = 'album'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True, nullable=False)
@@ -245,14 +215,11 @@ class Album(db.Model):
     playcount = db.Column(db.Integer)
     releasedate = db.Column(db.DateTime)
 
-    tracks = db.relationship('Track', backref='Album')
-    artists = db.relationship(
-        'Artist',
-        secondary=albums_artists,
-        back_populates='albums')
-    genres = db.relationship(
-        'Genre',
-        secondary=albums_genres)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
+    artist = db.relationship('Artist', back_populates='album')
+
+    tracks = db.relationship('Track', back_populates='album')
+    genres = db.relationship('Genre', secondary=album_genre)
 
     def __repr__(self):
         return '<Album {}: {!r}>'.format(self.id, self.name)
@@ -263,26 +230,26 @@ class Genre(db.Model):
     Genre is a secondary model which is included associated with
     artists and albums
 
-    It has many-to-many relationships with album and artist
+    Has many-to-many relationships with album and artist
     The links are unidirectional (don't appear in Genre)
 
     Attributes:
         id (int): unique identifer
         name (str): name of the genre
     """
-    __tablename__ = 'genres'
+    __tablename__ = 'genre'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, index=True, nullable=False)
 
     albums = db.relationship(
         'Album',
-        secondary=albums_genres,
-        back_populates='genres')
+        secondary=album_genre,
+        back_populates='genre')
     artists = db.relationship(
         'Artist',
-        secondary=artists_genres,
-        back_populates='genres')
+        secondary=artist_genre,
+        back_populates='genre')
 
     def __repr__(self):
         return '<Genre {}: {!r}>'.format(self.id, self.name)
