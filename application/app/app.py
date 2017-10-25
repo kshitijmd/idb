@@ -6,12 +6,6 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from api.artists import artists_blueprint
-from api.albums import albums_blueprint
-from api.playlists import playlists_blueprint
-from api.tracks import tracks_blueprint
-
-
 app = Flask(__name__)
 app.config.from_json(
     os.path.join(
@@ -21,6 +15,12 @@ app.config.from_json(
     )
 )
 db = SQLAlchemy(app)
+
+# these are down here to avoid circular import problems
+from api.artists import artists_blueprint
+from api.albums import albums_blueprint
+from api.playlists import playlists_blueprint
+from api.tracks import tracks_blueprint
 
 app.register_blueprint(artists_blueprint, url_prefix='/artists')
 app.register_blueprint(albums_blueprint, url_prefix='/albums')
