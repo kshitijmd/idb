@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify
-# probably going to need to import from our models here
+from flask import Blueprint
+from database.models import Track
+from app.app import db
+from api.util import serialize
 
 tracks_blueprint = Blueprint('tracks', __name__)
 
@@ -18,7 +20,4 @@ def get_tracks():
 
 @tracks_blueprint.route('/<track_id>')
 def get_track(track_id):
-    jsondata = {}
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return serialize(Track.query.filter_by(id=track_id).first())

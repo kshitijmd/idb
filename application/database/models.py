@@ -120,6 +120,22 @@ class Track(db.Model):
         secondary=tracks_artists,
         back_populates='tracks')
 
+    @property
+    def album(self):
+        return Album.query.filter(Album.id == self.album_id).first()
+
+    def __serialize__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "playcount": self.playcount,
+            "duration": self.duration,
+            "spotifyUri": self.spotify_uri,
+            "imageUrl": self.image_url,
+            "album": self.album.name if self.album else None,
+            "artist": self.artists[0] if len(self.artists) else None
+        }
+
     def __repr__(self):
         return '<Track {}: {!r}>'.format(self.id, self.name)
 
