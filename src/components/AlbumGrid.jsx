@@ -87,7 +87,7 @@ export default class AlbumGrid extends React.Component {
 					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Albums</Subheader>
 						{albums.map(album => (
-							<Link key={album.id} to={"/albums/" + album.id}>
+							<Link key={album.id} to={"/albums/" + album.id} style={styles.link}>
 								<GridTile>
 									<GridCard
 										imageSrc={album.imageUrls.large}
@@ -95,6 +95,7 @@ export default class AlbumGrid extends React.Component {
 										subtitle={album.artists[0].name}
 										bonusInfo1={`Released on ${album.releaseDate}`}
 										bonusInfo2={`Played ${album.playcount} times`}
+										bonusInfo3={`Spotify uri: ${album.spotifyUri}`}
 									/>
 								</GridTile>
 							</Link>
