@@ -80,7 +80,11 @@ export default class PlaylistGrid extends React.Component {
 					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Playlists</Subheader>
 						{playlists.map(playlist => (
-							<Link key={playlist.id} to={"/playlists/" + playlist.id} style={styles.link}>
+							<Link
+								key={playlist.id}
+								to={"/playlists/" + playlist.id}
+								style={styles.link}
+							>
 								<GridTile>
 									<GridCard
 										imageSrc={playlist.imageUrls.large}

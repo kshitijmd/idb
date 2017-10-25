@@ -81,7 +81,7 @@ export default class ArtistGrid extends React.Component {
 										subtitle={`Genre: ${artist.genres[0]}`}
 										bonusInfo1={`Played ${artist.playcount} times`}
 										bonusInfo2={`Spotify uri: ${artist.spotifyUri}`}
-										bonusInfo3={`Bio: ${ellipsize(artist.bio, 100)}`}										
+										bonusInfo3={`Bio: ${ellipsize(artist.bio, 100)}`}
 									/>
 								</GridTile>
 							</Link>
