@@ -4,6 +4,7 @@ import PageLayout from "./PageLayout";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from "material-ui/Subheader";
 import GridCard from "./GridCard";
+import ellipsize from "ellipsize";
 
 const styles = {
 	root: {
@@ -72,14 +73,15 @@ export default class ArtistGrid extends React.Component {
 					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Artists</Subheader>
 						{artists.map(artist => (
-							<Link key={artist.id} to={"/artists/" + artist.id}>
+							<Link key={artist.id} to={"/artists/" + artist.id} style={styles.link}>
 								<GridTile>
 									<GridCard
 										imageSrc={artist.imageUrls.large}
 										title={artist.name}
-										subtitle={"TODO"}
+										subtitle={`Genre: ${artist.genres[0]}`}
 										bonusInfo1={`Played ${artist.playcount} times`}
-										bonusInfo2={`Genre: ${artist.genres[0]}`}
+										bonusInfo2={`Spotify uri: ${artist.spotifyUri}`}
+										bonusInfo3={`Bio: ${ellipsize(artist.bio, 100)}`}										
 									/>
 								</GridTile>
 							</Link>

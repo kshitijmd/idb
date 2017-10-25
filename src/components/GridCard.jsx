@@ -24,6 +24,7 @@ export default class GridCard extends React.PureComponent {
 					<ul>
 						<li>{this.props.bonusInfo1}</li>
 						<li>{this.props.bonusInfo2}</li>
+						<li>{this.props.bonusInfo3}</li>
 					</ul>
 				</CardText>
 			</Card>
@@ -39,4 +40,5 @@ GridCard.propTypes = {
 	// Required so there are 5 attributes per model
 	bonusInfo1: PropTypes.string.isRequired,
 	bonusInfo2: PropTypes.string.isRequired,
+	bonusInfo3: PropTypes.string.isRequired,
 };
