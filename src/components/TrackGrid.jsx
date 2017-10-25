@@ -72,7 +72,7 @@ export default class TrackGrid extends React.Component {
 					<GridList cellHeight={550} style={styles.gridList}>
 						<Subheader>Tracks</Subheader>
 						{tracks.map(track => (
-							<Link key={track.id} to={"/tracks/" + track.id}>
+							<Link key={track.id} to={"/tracks/" + track.id} style={styles.link}>
 								<GridTile>
 									<GridCard
 										imageSrc={track.imageUrls.large}
@@ -80,6 +80,7 @@ export default class TrackGrid extends React.Component {
 										subtitle={`By ${track.artist}`}
 										bonusInfo1={`Played ${track.playcount} times`}
 										bonusInfo2={`Duration: ${track.duration}`}
+										bonusInfo3={`Spotify uri: ${track.spotifyUri}`}
 									/>
 								</GridTile>
 							</Link>
