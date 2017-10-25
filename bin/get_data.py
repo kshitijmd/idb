@@ -1,14 +1,13 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-client_credentials_manager = SpotifyClientCredentials("6f939a1e97e243ef8cadce766c6f56f7", "dbc4d00337a24cef8b89fb60a66f4695")
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Grab data from tracks from Spotify
-def show_tracks(tracks):
-    for i, item in enumerate(tracks['items']):
-            track = item['track']
-            print ("%d %32.32s %s %32.32s" % (i+1, track['artists'][0]['name'], track['name'], track['album']['name']))
+# def show_tracks(tracks):
+#     for i, item in enumerate(tracks['items']):
+#             track = item['track']
+#             print ("%d %32.32s %s %32.32s" % (i+1, track['artists'][0]['name'], track['name'], track['album']['name']))
 
 
 
