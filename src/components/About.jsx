@@ -13,8 +13,8 @@ const memberInfo = {
 				"Nick is a 4th year Computer Science senior from San Antonio, TX. He been interested in computers and programming ever since the 5th grade. His CS interests include operating systems, web development, and video game hacking.",
 			responsibilities: "front-end",
 			commits: 22,
-			issues: 5,
-			unit_tests: 0,
+			issues: 16,
+			unit_tests: 8,
 		},
 		{
 			name: "Taylor Kline",
@@ -22,8 +22,8 @@ const memberInfo = {
 			bio:
 				"Taylor is about to graduate in December 2017. He intends to pursue web development in modern technologies and work from his hammock as much as possibe.",
 			responsibilities: "Workflow and documentation",
-			commits: 17,
-			issues: 6,
+			commits: 44,
+			issues: 7,
 			unit_tests: 0,
 		},
 		{
@@ -33,8 +33,8 @@ const memberInfo = {
 			bio:
 				"K is from India, Kuwait, Midland TX, Dallas TX and Austin TX. He will join PestRoutes as a software engineer in December 2017. Ask him about his bbq paneer kabobs.",
 			responsibilities: "Hosting and API",
-			commits: 12,
-			issues: 9,
+			commits: 16,
+			issues: 11,
 			unit_tests: 0,
 		},
 		{
@@ -43,8 +43,8 @@ const memberInfo = {
 			bio:
 				"Scott is a Senior Computer Science major from Houston, Texas. After graduation he will be joining Amazon as a SDE in Austin. Outside of his passion for programming, he enjoys thinking longingly about the Corgi he will someday own, and playing guitar and video games.",
 			responsibilities: "Fullstack",
-			commits: 13,
-			issues: 9,
+			commits: 36,
+			issues: 12,
 			unit_tests: 0,
 		},
 		{
@@ -54,8 +54,8 @@ const memberInfo = {
 			bio:
 				"David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
 			responsibilities: "API design and documentation",
-			commits: 5,
-			issues: 4,
+			commits: 17,
+			issues: 10,
 			unit_tests: 0,
 		},
 	],
@@ -128,6 +128,7 @@ const links = {
 	github: "https://github.com/mbowen13/idb",
 	apiary: "http://docs.mbowen13.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
+	uml: "https://utexas.app.box.com/s/nohry3xvi3u13xyahfkf8mfevcdbm06w",
 	report: "https://utexas.box.com/s/yl4nnesb52uiv5xhuhqlh3j1907ogelg",
 };
 
@@ -145,9 +146,9 @@ const styles = {
 };
 
 // can we pull these from Trello/GitHub/Travis?
-const totalCommits = 104;
-const totalIssues = 40;
-const totalUnitTests = 0;
+const totalCommits = 211;
+const totalIssues = 68;
+const totalUnitTests = 8;
 
 export default class About extends React.Component {
 	render() {
@@ -234,6 +235,9 @@ export default class About extends React.Component {
 								</div>
 								<div>
 									<a href={links.trello}>Trello</a>
+								</div>
+								<div>
+									<a href={links.uml}>UML Diagram</a>
 								</div>
 								<div>
 									<a href={links.report}>Report.pdf</a>
