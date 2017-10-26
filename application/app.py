@@ -13,7 +13,6 @@ def create_app(config='config.json'):
     app = Flask(__name__)
     app.config.from_json(config)
 
-    from .models import db
     db.init_app(app)
 
     # these are down here to avoid circular import problems
