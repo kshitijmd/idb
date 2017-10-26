@@ -11,7 +11,7 @@ artists_blueprint = Blueprint('artists', __name__)
 
 @artists_blueprint.route('/')
 def get_artists():
-    return jsonify([serialize(artist) for artist in Artist.query.all()])
+    return jsonify([serialize(artist) for artist in Artist.query.limit(50).all()])
 
 # Get a specific artist based on ID
 

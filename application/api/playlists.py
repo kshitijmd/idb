@@ -9,7 +9,7 @@ playlists_blueprint = Blueprint('playlists', __name__)
 
 @playlists_blueprint.route('/')
 def get_playlists():
-    return jsonify([serialize(playlist) for playlist in Playlist.query.all()])
+    return jsonify([serialize(playlist) for playlist in Playlist.query.limit(50).all()])
 
 # Get a specific playlist based on ID
 

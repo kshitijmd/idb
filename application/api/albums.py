@@ -9,7 +9,7 @@ albums_blueprint = Blueprint('albums', __name__)
 
 @albums_blueprint.route('/')
 def get_albums():
-    return jsonify([serialize(album) for album in Album.query.all()])
+    return jsonify([serialize(album) for album in Album.query.limit(50).all()])
 
 # Get a specific album based on ID
 

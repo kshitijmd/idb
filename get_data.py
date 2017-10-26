@@ -15,7 +15,6 @@ app.app_context().push()
 # API Credentials go here
 
 
-
 def walk_playlist():
     # Just walk the first page of playlists for now (can paginate later for more data)
     sp_playlists = sp.featured_playlists()['playlists']['items']
@@ -54,11 +53,12 @@ def walk_playlist():
 
             except Exception as e:
                 print(e)
-                print(e.message)
-
+                if hasattr(e, "message"):
+                    print(e.message)
+                elif hasattr(e, "msg"):
+                    print(e.msg)
 
     
-
 
 def walk_playlist_tracks(sp_tracks):
     attrs = {

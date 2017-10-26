@@ -9,7 +9,7 @@ tracks_blueprint = Blueprint('tracks', __name__)
 
 @tracks_blueprint.route('/')
 def get_tracks():
-    return jsonify([serialize(track) for track in Track.query.all()])
+    return jsonify([serialize(track) for track in Track.query.limit(50).all()])
 
 # Get a specific track based on ID
 
