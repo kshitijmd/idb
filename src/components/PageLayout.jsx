@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/*
+ AVOID USING THIS COMPONENT.
+ */
+
 const styles = {
 	margin: "1em",
 };

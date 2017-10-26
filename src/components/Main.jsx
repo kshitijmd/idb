@@ -12,7 +12,7 @@ import Track from "./Track";
 import Playlist from "./Playlist";
 
 const Main = () => (
-	<main>
+	<main style={{ margin: "1em" }}>
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/about" component={About} />
