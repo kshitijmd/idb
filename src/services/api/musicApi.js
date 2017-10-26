@@ -8,7 +8,7 @@ function getFakePromise(data) {
 			// Toggle resolve / reject to play with error state
 			resolve(data);
 			//reject();
-		}, 2500);
+		}, 1500);
 	});
 }
 
@@ -101,4 +101,98 @@ export function getAlbumDetails(albumId) {
 	};
 
 	return getFakePromise(album).then(album => album);
+}
+
+export function getArtists() {
+	const artists = [
+		{
+			albums: [
+				{
+					id: 1,
+					name: "Modern Vampires of the City",
+				},
+				{
+					id: 2,
+					name: "Contra",
+				},
+			],
+			bio: "This band is super cool!",
+			genres: ["indie"],
+			id: 1,
+			imageUrl: "asdf",
+			name: "Vampire Weekend",
+			playcount: 12345,
+			spotifyUri: "spotify.uri",
+			tracks: [
+				{
+					id: 1,
+					name: "Diane Young",
+				},
+				{
+					id: 2,
+					name: "I Think Ur A Contra",
+				},
+			],
+		},
+		{
+			albums: [
+				{
+					id: 3,
+					name: "Business As Usual",
+				},
+			],
+			bio: "This band is super cool!",
+			genres: ["rock"],
+			id: 2,
+			imageUrl: "asdf",
+			name: "Men At Work",
+			playcount: 12345,
+			spotifyUri: "spotify.uri",
+			tracks: [
+				{
+					id: 3,
+					name: "Down By The Sea",
+				},
+			],
+		},
+	];
+
+	// TODO: Replace with axios request
+	return getFakePromise(artists).then(artists => artists);
+}
+
+// TODO: Use artistId to make axios GET request
+//eslint-disable-next-line no-unused-vars
+export function getArtistDetails(artistId) {
+	const artist = {
+		albums: [
+			{
+				id: 1,
+				name: "Modern Vampires of the City",
+			},
+			{
+				id: 2,
+				name: "Contra",
+			},
+		],
+		bio: "This band is super cool!",
+		genres: ["indie"],
+		id: 1,
+		imageUrl: "asdf",
+		name: "Vampire Weekend",
+		playcount: 12345,
+		spotifyUri: "spotify.uri",
+		tracks: [
+			{
+				id: 1,
+				name: "Diane Young",
+			},
+			{
+				id: 2,
+				name: "I Think Ur A Contra",
+			},
+		],
+	};
+
+	return getFakePromise(artist).then(artist => artist);
 }
