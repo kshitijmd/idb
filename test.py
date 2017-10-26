@@ -49,6 +49,7 @@ class TestTrackApi(TestCase):
 
         a1.artists.append(ar1)
         a2.artists.append(ar1)
+        a3.artists.append(ar2)
 
         t1.artist.append(ar1)
         t1.album.append(a1)
@@ -63,7 +64,7 @@ class TestTrackApi(TestCase):
         p1.artists.append(ar1)
         p2 = self.create_playlist("Dad Rock jams", 1)
         p2.tracks.append(t3)
-        p2.artists.append(a3)
+        p2.artists.append(ar3)
 
         db.session.add_all((t1, t2, t3, a1, a2, a3, ar1, ar2, p1, p2))
         db.session.commit()
