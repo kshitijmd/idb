@@ -12,8 +12,7 @@ import os
 # Uploads a file to google cloud blob storage
 # Returns a string of the public URL
 def upload_to_clooouuddd(spotifyURL):
-
-	if not spotifyURL:
+	if not spotifyURL or spotifyURL == "":
 		return ""
 
 	spotifyURL =  spotifyURL[:4]+spotifyURL[5:]
@@ -27,7 +26,8 @@ def upload_to_clooouuddd(spotifyURL):
 	source_file_name = file_name
 
 	extension = imghdr.what("tempfile")
-
+	if not extension:
+		extension = ".jpeg"
 	bucket_name = "artifacts.playlistr-front.appspot.com"
 	destination_blob_name = images_destination + source_file_name + "." + extension
 
@@ -44,3 +44,4 @@ def upload_to_clooouuddd(spotifyURL):
 	os.remove("tempfile")
 
 	return blob.public_url
+

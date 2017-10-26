@@ -66,8 +66,9 @@ def walk_playlist_tracks(sp_tracks):
             print('PTrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
 
             sp_track = sp_track['track']
-
-            if db.session.query(Track).filter_by(spotify_uri=sp_track['spotify_uri']).first() is not None:
+            
+            if db.session.query(Track).filter_by(spotify_uri=sp_track['uri']).first() is not None:
+                print("skipping for efficiency")
                 continue #Skip this track, already covered.
 
             attrs['duration'] += sp_track['duration_ms']

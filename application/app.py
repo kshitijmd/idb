@@ -14,7 +14,7 @@ def create_app(config='config.json'):
     app.config.from_json(config)
 
     db.init_app(app)
-
+    db.create_all(app=app)
     # these are down here to avoid circular import problems
     from .api.artists import artists_blueprint
     from .api.albums import albums_blueprint
