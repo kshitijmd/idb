@@ -170,16 +170,17 @@ def create_album(sp_track, artist):
 
     playlist_track = create_track(sp_track, artist, album)
     sp_tracks = sp_album['tracks']
-    walk_tracks(sp_tracks, artist, album)
+    walk_tracks(sp_tracks, artist, album, sp_track)
 
     return album, playlist_track
 
 
-def walk_tracks(sp_tracks, artist, album):
+def walk_tracks(sp_tracks, artist, album, omit_track):
     while sp_tracks:
         for i, sp_track in enumerate(sp_tracks['items']):
             print('ATrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
-            create_track(sp.track(sp_track['id']), artist, album)
+            if sp_tracks['uri'] != omit_track['uri']:
+                create_track(sp.track(sp_track['id']), artist, album)
         sp_tracks = sp.next(sp_tracks) if sp_tracks['next'] else None
 
 
