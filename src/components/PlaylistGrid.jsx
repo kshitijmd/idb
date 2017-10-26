@@ -1,26 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
-import { GridList, GridTile } from "material-ui/GridList";
-import Subheader from "material-ui/Subheader";
-import GridCard from "./GridCard";
-
-const styles = {
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-	},
-	gridList: {
-		width: 750,
-		height: 750,
-		overflowY: "auto",
-	},
-	link: {
-		textDecoration: "none",
-		color: "rgb(255, 255, 255)",
-	},
-};
+import CardGridList from "./CardGridList";
 
 const playlists = [
 	{
@@ -73,32 +53,23 @@ const playlists = [
 ];
 
 export default class PlaylistGrid extends React.Component {
+	_transformer = playlist => ({
+		id: playlist.id,
+		imageUrl: playlist.imageUrls.large,
+		title: playlist.name,
+		subtitle: `Duration: ${playlist.totalDuration}`,
+		bonusInfo1: `${playlist.numSongs} tracks`,
+		bonusInfo2: `${playlist.followers} followers`,
+		bonusInfo3: `Spotify uri: ${playlist.spotifyUri}`,
+	});
+
 	render() {
 		return (
 			<PageLayout>
-				<div style={styles.root}>
-					<GridList cellHeight={550} style={styles.gridList}>
-						<Subheader>Playlists</Subheader>
-						{playlists.map(playlist => (
-							<Link
-								key={playlist.id}
-								to={"/playlists/" + playlist.id}
-								style={styles.link}
-							>
-								<GridTile>
-									<GridCard
-										imageSrc={playlist.imageUrls.large}
-										title={playlist.name}
-										subtitle={`Duration: ${playlist.totalDuration}`}
-										bonusInfo1={`${playlist.numSongs} tracks`}
-										bonusInfo2={`${playlist.followers} followers`}
-										bonusInfo3={`Spotify uri: ${playlist.spotifyUri}`}
-									/>
-								</GridTile>
-							</Link>
-						))}
-					</GridList>
-				</div>
+				<CardGridList
+					routerBaseUrl="playlists"
+					data={playlists.map(playlist => this._transformer(playlist))}
+				/>
 			</PageLayout>
 		);
 	}

@@ -1,26 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
-import { GridList, GridTile } from "material-ui/GridList";
-import Subheader from "material-ui/Subheader";
-import GridCard from "./GridCard";
-
-const styles = {
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-	},
-	gridList: {
-		width: 750,
-		height: 750,
-		overflowY: "auto",
-	},
-	link: {
-		textDecoration: "none",
-		color: "rgb(255, 255, 255)",
-	},
-};
+import CardGridList from "./CardGridList";
 
 const tracks = [
 	{
@@ -62,31 +42,91 @@ const tracks = [
 		albums: "A Head Full of Dreams",
 		artist: "Coldplay",
 	},
+	{
+		id: 4,
+		name: "Hymn For the Weekend",
+		imageUrls: {
+			small: "https://i.scdn.co/image/6196f528b365e8ef504fd0706fb7e87adecfe647",
+			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		},
+		duration: 258,
+		playcount: 1711993,
+		spotifyUri: "spotify:track:3RiPr603aXAoi4GHyXx0uy",
+		albums: "A Head Full of Dreams",
+		artist: "Coldplay",
+	},
+	{
+		id: 5,
+		name: "Hymn For the Weekend",
+		imageUrls: {
+			small: "https://i.scdn.co/image/6196f528b365e8ef504fd0706fb7e87adecfe647",
+			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		},
+		duration: 258,
+		playcount: 1711993,
+		spotifyUri: "spotify:track:3RiPr603aXAoi4GHyXx0uy",
+		albums: "A Head Full of Dreams",
+		artist: "Coldplay",
+	},
+	{
+		id: 6,
+		name: "Hymn For the Weekend",
+		imageUrls: {
+			small: "https://i.scdn.co/image/6196f528b365e8ef504fd0706fb7e87adecfe647",
+			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		},
+		duration: 258,
+		playcount: 1711993,
+		spotifyUri: "spotify:track:3RiPr603aXAoi4GHyXx0uy",
+		albums: "A Head Full of Dreams",
+		artist: "Coldplay",
+	},
+	{
+		id: 7,
+		name: "Hymn For the Weekend",
+		imageUrls: {
+			small: "https://i.scdn.co/image/6196f528b365e8ef504fd0706fb7e87adecfe647",
+			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		},
+		duration: 258,
+		playcount: 1711993,
+		spotifyUri: "spotify:track:3RiPr603aXAoi4GHyXx0uy",
+		albums: "A Head Full of Dreams",
+		artist: "Coldplay",
+	},
+	{
+		id: 8,
+		name: "Hymn For the Weekend",
+		imageUrls: {
+			small: "https://i.scdn.co/image/6196f528b365e8ef504fd0706fb7e87adecfe647",
+			large: "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+		},
+		duration: 258,
+		playcount: 1711993,
+		spotifyUri: "spotify:track:3RiPr603aXAoi4GHyXx0uy",
+		albums: "A Head Full of Dreams",
+		artist: "Coldplay",
+	},
 ];
 
 export default class TrackGrid extends React.Component {
+	_transformer = track => ({
+		id: track.id,
+		imageUrl: track.imageUrls.large,
+		title: track.name,
+		subtitle: `By ${track.artist}`,
+		bonusInfo1: `Featured on album ${track.albums}`,
+		bonusInfo2: `${track.duration} seconds long`,
+		bonusInfo3: `Played ${track.playcount} times`,
+	});
+
 	render() {
 		return (
 			<PageLayout>
-				<div style={styles.root}>
-					<GridList cellHeight={550} style={styles.gridList}>
-						<Subheader>Tracks</Subheader>
-						{tracks.map(track => (
-							<Link key={track.id} to={"/tracks/" + track.id} style={styles.link}>
-								<GridTile>
-									<GridCard
-										imageSrc={track.imageUrls.large}
-										title={track.name}
-										subtitle={`By ${track.artist}`}
-										bonusInfo1={`Played ${track.playcount} times`}
-										bonusInfo2={`Duration: ${track.duration}`}
-										bonusInfo3={`Spotify uri: ${track.spotifyUri}`}
-									/>
-								</GridTile>
-							</Link>
-						))}
-					</GridList>
-				</div>
+				<CardGridList
+					routerBaseUrl={"tracks"}
+					data={tracks.map(track => this._transformer(track))}
+				/>
 			</PageLayout>
 		);
 	}

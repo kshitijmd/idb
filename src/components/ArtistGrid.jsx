@@ -1,27 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
-import { GridList, GridTile } from "material-ui/GridList";
-import Subheader from "material-ui/Subheader";
-import GridCard from "./GridCard";
+import CardGridList from "./CardGridList";
 import ellipsize from "ellipsize";
-
-const styles = {
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-	},
-	gridList: {
-		width: 750,
-		height: 750,
-		overflowY: "auto",
-	},
-	link: {
-		textDecoration: "none",
-		color: "rgb(255, 255, 255)",
-	},
-};
 
 const artists = [
 	{
@@ -66,28 +46,23 @@ const artists = [
 ];
 
 export default class ArtistGrid extends React.Component {
+	_transformer = artist => ({
+		id: artist.id,
+		imageUrl: artist.imageUrls.large,
+		title: artist.name,
+		subtitle: `Genre: ${artist.genres[0]}`,
+		bonusInfo1: `Played ${artist.playcount} times`,
+		bonusInfo2: `Spotify uri: ${artist.spotifyUri}`,
+		bonusInfo3: `Bio: ${ellipsize(artist.bio, 100)}`,
+	});
+
 	render() {
 		return (
 			<PageLayout>
-				<div style={styles.root}>
-					<GridList cellHeight={550} style={styles.gridList}>
-						<Subheader>Artists</Subheader>
-						{artists.map(artist => (
-							<Link key={artist.id} to={"/artists/" + artist.id} style={styles.link}>
-								<GridTile>
-									<GridCard
-										imageSrc={artist.imageUrls.large}
-										title={artist.name}
-										subtitle={`Genre: ${artist.genres[0]}`}
-										bonusInfo1={`Played ${artist.playcount} times`}
-										bonusInfo2={`Spotify uri: ${artist.spotifyUri}`}
-										bonusInfo3={`Bio: ${ellipsize(artist.bio, 100)}`}
-									/>
-								</GridTile>
-							</Link>
-						))}
-					</GridList>
-				</div>
+				<CardGridList
+					routerBaseUrl="artists"
+					data={artists.map(artist => this._transformer(artist))}
+				/>
 			</PageLayout>
 		);
 	}

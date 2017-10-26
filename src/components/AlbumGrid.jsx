@@ -1,26 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PageLayout from "./PageLayout";
-import GridCard from "./GridCard";
-import { GridList, GridTile } from "material-ui/GridList";
-import Subheader from "material-ui/Subheader";
-
-const styles = {
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-	},
-	gridList: {
-		width: 750,
-		height: 750,
-		overflowY: "auto",
-	},
-	link: {
-		textDecoration: "none",
-		color: "rgb(255, 255, 255)",
-	},
-};
+import CardGridList from "./CardGridList";
 
 const albums = [
 	{
@@ -80,28 +60,23 @@ const albums = [
 ];
 
 export default class AlbumGrid extends React.Component {
+	_transformer = album => ({
+		id: album.id,
+		imageUrl: album.imageUrls.large,
+		title: album.name,
+		subtitle: album.artists[0].name,
+		bonusInfo1: `Released on ${album.releaseDate}`,
+		bonusInfo2: `Played ${album.playcount} times`,
+		bonusInfo3: `Spotify uri: ${album.spotifyUri}`,
+	});
+
 	render() {
 		return (
 			<PageLayout>
-				<div style={styles.root}>
-					<GridList cellHeight={550} style={styles.gridList}>
-						<Subheader>Albums</Subheader>
-						{albums.map(album => (
-							<Link key={album.id} to={"/albums/" + album.id} style={styles.link}>
-								<GridTile>
-									<GridCard
-										imageSrc={album.imageUrls.large}
-										title={album.name}
-										subtitle={album.artists[0].name}
-										bonusInfo1={`Released on ${album.releaseDate}`}
-										bonusInfo2={`Played ${album.playcount} times`}
-										bonusInfo3={`Spotify uri: ${album.spotifyUri}`}
-									/>
-								</GridTile>
-							</Link>
-						))}
-					</GridList>
-				</div>
+				<CardGridList
+					routerBaseUrl="albums"
+					data={albums.map(album => this._transformer(album))}
+				/>
 			</PageLayout>
 		);
 	}
