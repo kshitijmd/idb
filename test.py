@@ -1,5 +1,6 @@
 import unittest
 import json
+from datetime import datetime, timezone
 from flask_testing import TestCase
 from application.app import create_app, db
 from application.models import Track, Artist, Album, Playlist, Genre
@@ -14,10 +15,12 @@ class TestApi(TestCase):
         db.drop_all()
         db.create_all()
         self.populate_db()
+        self.log = open('test.log', 'a')
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.log.close()
 
     def populate_db(self):
         g1 = self.create_genre("indie")
@@ -84,6 +87,7 @@ class TestApi(TestCase):
         a.image_url = "asdf"
         a.playcount = 12345
         a.spotify_uri = "spotify.uri"
+        a.releasedate = datetime(1970, 1, 1, tzinfo=timezone.utc)
         a.name = title
         return a
 
@@ -123,8 +127,11 @@ class TestApi(TestCase):
             "playcount": 12345,
             "imageUrl": "asdf",
             "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
-            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}]
+            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}],
+            "genres": ["indie"]
         }
+        self.log.write('GET /artists/1 \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(artist, expected)
 
     def test_get_artist_all(self):
@@ -138,7 +145,8 @@ class TestApi(TestCase):
             "playcount": 12345,
             "imageUrl": "asdf",
             "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
-            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}]
+            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}],
+            "genres": ["indie"]
         },
             {
             "id": 2,
@@ -148,8 +156,11 @@ class TestApi(TestCase):
             "playcount": 12345,
             "imageUrl": "asdf",
             "tracks": [{"id": 3, "name": "Down By The Sea"}],
-            "albums": [{"id": 3, "name": "Business As Usual"}]
+            "albums": [{"id": 3, "name": "Business As Usual"}],
+            "genres": ["rock"]
         }]
+        self.log.write('GET /artists/ \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(artist, expected)
 
     def test_get_album_specific(self):
@@ -159,13 +170,15 @@ class TestApi(TestCase):
             "id": 1,
             "imageUrl": "asdf",
             "playcount": 12345,
-            "releaseDate": None,
+            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
             "spotifyUri": "spotify.uri",
             "name": "Modern Vampires of the City",
             "artist": {"id": 1, "name": "Vampire Weekend"},
             "tracks": [{"id": 1, "name": "Diane Young"}],
             "genres": ["indie"]
         }
+        self.log.write('GET /albums/1 \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(album, expected)
 
     def test_get_album_all(self):
@@ -175,7 +188,7 @@ class TestApi(TestCase):
             "id": 1,
             "imageUrl": "asdf",
             "playcount": 12345,
-            "releaseDate": None,
+            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
             "spotifyUri": "spotify.uri",
             "name": "Modern Vampires of the City",
             "artist": {"id": 1, "name": "Vampire Weekend"},
@@ -186,7 +199,7 @@ class TestApi(TestCase):
             "id": 2,
             "imageUrl": "asdf",
             "playcount": 12345,
-            "releaseDate": None,
+            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
             "spotifyUri": "spotify.uri",
             "name": "Contra",
             "artist": {"id": 1, "name": "Vampire Weekend"},
@@ -197,7 +210,7 @@ class TestApi(TestCase):
             "id": 3,
             "imageUrl": "asdf",
             "playcount": 12345,
-            "releaseDate": None,
+            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
             "spotifyUri": "spotify.uri",
             "name": "Business As Usual",
             "artist": {"id": 2, "name": "Men At Work"},
@@ -205,6 +218,8 @@ class TestApi(TestCase):
             "genres": ["rock"]
 
         }]
+        self.log.write('GET /albums/ \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(album, expected)
 
     def test_get_track_specific(self):
@@ -226,12 +241,13 @@ class TestApi(TestCase):
                 "name": "Vampire Weekend"
             }
         }
+        self.log.write('GET /tracks/1 \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(track, expected)
 
     def test_get_track_all(self):
         response = self.client.get('/tracks/')
         track = json.loads(response.data.decode('utf-8'))
-        print(track)
         expected = [{
             "id": 1,
             "name": "Diane Young",
@@ -280,6 +296,8 @@ class TestApi(TestCase):
                 "name": "Men At Work"
             }
         }]
+        self.log.write('GET /tracks/ \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(track, expected)
 
     def test_get_playlist_specific(self):
@@ -296,6 +314,8 @@ class TestApi(TestCase):
             "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
             "artists": [{"id": 1, "name": "Vampire Weekend"}]
         }
+        self.log.write('GET /playlists/1 \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(playlist, expected)
 
     def test_get_playlist_all(self):
@@ -323,6 +343,8 @@ class TestApi(TestCase):
             "tracks": [{"id": 3, "name": "Down By The Sea"}],
             "artists": [{"id": 2, "name": "Men At Work"}]
         }]
+        self.log.write('GET /playlists/ \n')
+        self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(playlist, expected)
 
 

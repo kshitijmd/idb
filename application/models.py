@@ -147,7 +147,8 @@ class Artist(db.Model):
             "playcount": self.playcount,
             "imageUrl": self.image_url,
             "tracks": [{"id": track.id, "name": track.name} for track in self.tracks],
-            "albums": [{"id": album.id, "name": album.name} for album in self.albums]
+            "albums": [{"id": album.id, "name": album.name} for album in self.albums],
+            "genres": [genre.name for genre in self.genres]
         }
 
     def __repr__(self):
