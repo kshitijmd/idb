@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from database.models import Playlist
 from api.util import serialize
 
@@ -9,10 +9,7 @@ playlists_blueprint = Blueprint('playlists', __name__)
 
 @playlists_blueprint.route('/')
 def get_playlists():
-    jsondata = []
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return jsonify([serialize(playlist) for playlist in Playlist.query.all()])
 
 # Get a specific playlist based on ID
 

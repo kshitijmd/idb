@@ -9,14 +9,11 @@ albums_blueprint = Blueprint('albums', __name__)
 
 @albums_blueprint.route('/')
 def get_albums():
-    jsondata = []
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return jsonify([serialize(album) for album in Album.query.all()])
 
 # Get a specific album based on ID
 
 
 @albums_blueprint.route('/<album_id>')
 def get_album(album_id):
-    return serialize(Album.query.filter(Album.id == album_id).first())
+    return jsonify(serialize(Album.query.filter(Album.id == album_id).first()))

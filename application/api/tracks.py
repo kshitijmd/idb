@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from database.models import Track
 from api.util import serialize
 
@@ -9,14 +9,11 @@ tracks_blueprint = Blueprint('tracks', __name__)
 
 @tracks_blueprint.route('/')
 def get_tracks():
-    jsondata = []
-    # Put the data into a python object
-
-    return jsonify(jsondata)
+    return jsonify([serialize(track) for track in Track.query.all()])
 
 # Get a specific track based on ID
 
 
 @tracks_blueprint.route('/<track_id>')
 def get_track(track_id):
-    return serialize(Track.query.filter_by(id=track_id).first())
+    return jsonify(serialize(Track.query.filter_by(id=track_id).first()))
