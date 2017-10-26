@@ -4,3 +4,4 @@ node_modules/
 application/config.json
 .DS_STORE
 *.pyc
+build/dist/
