@@ -1,5 +1,5 @@
 {
-	"SQLALCHEMY_DATABASE_URI": "postgresql://localhost:5432/playlistr",
+	"SQLALCHEMY_DATABASE_URI": "postgresql://localhost:5432/playlistr_test",
 	"APPLICATION_ROOT": "/api",
 	"DEBUG": "True",
 	"HOST": "0.0.0.0",
