@@ -111,7 +111,8 @@ def create_artist(sp_artist):
         genre = db.session.query(Genre).filter_by(name=g).first()
         artist.genres.append(genre)
 
-    db.session.add(artist)
+    if db.session.query(Artist).filter_by(spotify_uri=artist.spotify_uri).first() is None:
+        db.session.add(artist)
 
     success = False
     while not success:
@@ -151,7 +152,8 @@ def create_album(sp_track, artist):
         genre = db.session.query(Genre).filter_by(name=g).first()
         album.genres.append(genre)
 
-    db.session.add(album)
+    if db.session.query(Album).filter_by(spotify_uri=album.spotify_uri).first() is None:
+        db.session.add(album)
 
     success = False
     while not success:
@@ -194,7 +196,8 @@ def create_track(sp_track, artist, album):
         album=album,
         artist=artist)
 
-    db.session.add(track)
+    if db.session.query(Track).filter_by(spotify_uri=track.spotify_uri).first() is None:
+        db.session.add(track)
 
     success = False
     while not success:
@@ -211,7 +214,8 @@ def create_track(sp_track, artist, album):
 
 def create_playlist(playlist_attrs):
     playlist = Playlist(**playlist_attrs)
-    db.session.add(playlist)
+    if db.session.query(Playlist).filter_by(spotify_uri=playlist.spotify_uri).first() is None:
+        db.session.add(playlist)
     return playlist
 
 
