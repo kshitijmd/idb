@@ -183,6 +183,7 @@ class Playlist(db.Model):
     num_tracks = db.Column(db.Integer, default=0)
     num_followers = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
+    image_url = db.Column(db.String(255))
 
     # No backpopulation, only want unidirectional links
     tracks = db.relationship('Track', secondary=track_playlist)
@@ -197,6 +198,7 @@ class Playlist(db.Model):
             "spotifyUri": self.spotify_uri,
             "duration": self.duration,
             "numTracks": self.num_tracks,
+            "imageUrl": self.image_url,
             "tracks": [{"id": track.id, "name": track.name} for track in self.tracks],
             "artists": [{"id": artist.id, "name": artist.name} for artist in self.artists]
         }
