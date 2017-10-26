@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from database.models import Artist
-from api.util import serialize
+from application.models import Artist
+from .util import serialize
 
 # probably going to need to import from our models here
 

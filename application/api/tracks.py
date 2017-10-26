@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from database.models import Track
-from api.util import serialize
+from application.models import Track
+from .util import serialize
 
 tracks_blueprint = Blueprint('tracks', __name__)
 

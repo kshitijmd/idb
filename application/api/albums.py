@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from database.models import Album
-from api.util import serialize
+from application.models import Album
+from .util import serialize
 
 albums_blueprint = Blueprint('albums', __name__)
 

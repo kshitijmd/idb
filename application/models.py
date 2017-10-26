@@ -5,7 +5,6 @@
 # pylint: disable=trailing-whitespace
 # pylint: disable=too-many-arguments
 
-from api.util import serialize
 from .app import db
 
 # Junction Tables
