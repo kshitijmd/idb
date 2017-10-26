@@ -118,10 +118,6 @@ const tools = [
 			"PostgreSQL is a relational database. We use it through the Google Cloud SQL service.",
 	},
 	{
-		name: "Google Cloud SQL",
-		description: "Google Cloud SQL is a cloud database platform that we use for our database.",
-	},
-	{
 		name: "SQLAlchemy",
 		description:
 			"SQLAlchemy is an Object Relational Model library for Python. We use it as an abstraction to operate on data in our database.",
