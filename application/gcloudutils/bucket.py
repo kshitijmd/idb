@@ -33,7 +33,6 @@ def upload_to_clooouuddd(spotifyURL):
 	bucket = storage_client.get_bucket(bucket_name)
 
 	blob = bucket.blob(destination_blob_name)
-	print(blob)
 
 	blob.upload_from_filename("tempfile")
 
