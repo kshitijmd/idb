@@ -38,16 +38,6 @@ const memberInfo = {
 			unit_tests: 0,
 		},
 		{
-			name: "Michael Bowen",
-			photo_url: "https://avatars2.githubusercontent.com/u/5522920?v=4&s=460",
-			bio:
-				"Michael is a 3rd year Computer Science at UT Austin specializing in software engineering. He interned at Gulf States Toyota in the summer of 2017 as a full stack .NET developer.",
-			responsibilities: "Group leader, hosting, version control, PM",
-			commits: 15,
-			issues: 8,
-			unit_tests: 0,
-		},
-		{
 			name: "Scott Jackson",
 			photo_url: "https://avatars1.githubusercontent.com/u/10877192?v=4&s=460",
 			bio:
