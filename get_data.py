@@ -67,6 +67,9 @@ def walk_playlist_tracks(sp_tracks):
 
             sp_track = sp_track['track']
 
+            if db.session.query(Track).filter_by(spotify_uri=sp_track['spotify_uri']).first() is not None:
+                continue #Skip this track, already covered.
+
             attrs['duration'] += sp_track['duration_ms']
 
             # create db artist obj from artist ID
@@ -90,7 +93,6 @@ def create_artist(sp_artist):
     sp_artist = sp.artist(sp_artist['id'])
     name = sp_artist['name']
     image_url = upload_to_clooouuddd(sp_artist['images'][0]['url'])
-    print(image_url)
     spotify_uri = sp_artist['uri']
     lfm_artist = plast.get_artist(name)
     bio = lfm_artist.get_bio_summary()
@@ -225,7 +227,6 @@ def create_genres(genres):
         try:
             # db.session.begin(nested=True)
             if db.session.query(Genre).filter_by(name=g.name).first() is None:
-                print("ACTUALLY ADDED "+g.name)
                 db.session.add(g)
                 db.session.commit()
             # else:
