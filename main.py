@@ -1,4 +1,4 @@
-from application.app import app
+from application.app import create_app
 
 if __name__ == '__main__':
-    app.run()
+    create_app('config.json').run()

@@ -16,4 +16,4 @@ def get_playlists():
 
 @playlists_blueprint.route('/<playlist_id>')
 def get_playlist(playlist_id):
-    return serialize(Playlist.query.filter_by(id=playlist_id).first())
+    return jsonify(serialize(Playlist.query.filter_by(id=playlist_id).first()))

@@ -4,9 +4,9 @@
 # pylint: disable=invalid-name
 # pylint: disable=trailing-whitespace
 # pylint: disable=too-many-arguments
+from flask_sqlalchemy import SQLAlchemy
 
-from .app import db
-
+db = SQLAlchemy()
 # Junction Tables
 
 track_playlist = db.Table(
