@@ -9,6 +9,9 @@ const styles = {
 		flexWrap: "wrap",
 		justifyContent: "flex-start",
 	},
+	hyperlink: {
+		textDecoration: "none",
+	},
 	card: {
 		maxWidth: "400px",
 		marginBottom: "20px",
@@ -17,13 +20,16 @@ const styles = {
 	},
 };
 
-/* TODO: Remove underlining of hyperlinks */
 export default class CardGridList extends React.PureComponent {
 	render() {
 		return (
 			<div style={styles.root}>
 				{this.props.data.map(item => (
-					<Link key={item.id} to={`/${this.props.routerBaseUrl}/${item.id}`}>
+					<Link
+						key={item.id}
+						to={`/${this.props.routerBaseUrl}/${item.id}`}
+						style={styles.hyperlink}
+					>
 						<Card style={styles.card}>
 							<CardMedia>
 								<img src={item.imageUrl} />
