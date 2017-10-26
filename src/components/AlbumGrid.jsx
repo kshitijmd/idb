@@ -19,10 +19,7 @@ function transformer(album) {
 
 export default class AlbumGrid extends React.Component {
 	state = {
-		loading: true,
-		loaded: false,
-		error: false,
-		data: [],
+		data: undefined,
 	};
 
 	componentDidMount() {
@@ -30,34 +27,24 @@ export default class AlbumGrid extends React.Component {
 			.getAlbums()
 			.then(data => {
 				this.setState({
-					loading: false,
-					loaded: true,
-					error: false,
 					data: data.map(album => transformer(album)),
 				});
 			})
 			.catch(err => {
 				logger.error(err);
 				this.setState({
-					loading: false,
-					loaded: false,
-					error: true,
-					data: [],
+					data: null,
 				});
 			});
 	}
 
 	_renderData = () => <CardGridList routerBaseUrl="albums" data={this.state.data} />;
 
-	_renderLoading = () => <ProgressSpinner />;
-
-	_renderError = () => <ErrorCard />;
-
 	render() {
-		if (this.state.loading) {
-			return this._renderLoading();
-		} else if (this.state.error) {
-			return this._renderError();
+		if (this.state.data === undefined) {
+			return <ProgressSpinner />;
+		} else if (this.state.data === null) {
+			return <ErrorCard />;
 		} else {
 			return this._renderData();
 		}
