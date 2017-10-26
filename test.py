@@ -6,11 +6,12 @@ from application.models import Track, Artist, Album, Playlist, Genre
 from application.api import albums, artists, playlists, tracks, util
 
 
-class TestTrackApi(TestCase):
+class TestApi(TestCase):
     def create_app(self):
         return create_app('test_config.json')
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
         self.populate_db()
 
@@ -19,8 +20,8 @@ class TestTrackApi(TestCase):
         db.drop_all()
 
     def populate_db(self):
-        g1 = create_genre("indie")
-        g2 = create_genre("rock")
+        g1 = self.create_genre("indie")
+        g2 = self.create_genre("rock")
 
         t1 = self.create_track("Diane Young")
         t2 = self.create_track("I Think Ur A Contra")
@@ -47,16 +48,16 @@ class TestTrackApi(TestCase):
         ar2.genres.append(g2)
         ar2.tracks.append(t3)
 
-        a1.artists.append(ar1)
-        a2.artists.append(ar1)
-        a3.artists.append(ar2)
+        a1.artist = ar1
+        a2.artist = ar1
+        a3.artist = ar2
 
-        t1.artist.append(ar1)
-        t1.album.append(a1)
-        t2.artist.append(ar1)
-        t2.album.append(a2)
-        t3.artist.append(ar2)
-        t3.album.append(a3)
+        t1.artist = ar1
+        t1.album = a1
+        t2.artist = ar1
+        t2.album = a2
+        t3.artist = ar2
+        t3.album = a3
 
         p1 = self.create_playlist("sicc Vampire Weekend playlist", 2)
         p1.tracks.append(t1)
@@ -64,7 +65,7 @@ class TestTrackApi(TestCase):
         p1.artists.append(ar1)
         p2 = self.create_playlist("Dad Rock jams", 1)
         p2.tracks.append(t3)
-        p2.artists.append(ar3)
+        p2.artists.append(ar2)
 
         db.session.add_all((t1, t2, t3, a1, a2, a3, ar1, ar2, p1, p2))
         db.session.commit()
@@ -113,7 +114,7 @@ class TestTrackApi(TestCase):
 
     def test_get_artist_specific(self):
         response = self.client.get('/artists/1')
-        artist = json.load(response.data.decode('utf-8'))
+        artist = json.loads(response.data.decode('utf-8'))
         expected = {
             "id": 1,
             "name": "Vampire Weekend",
@@ -225,11 +226,12 @@ class TestTrackApi(TestCase):
                 "name": "Vampire Weekend"
             }
         }
-        self.assertEqual(track, expected) 
+        self.assertEqual(track, expected)
 
     def test_get_track_all(self):
         response = self.client.get('/tracks/')
         track = json.loads(response.data.decode('utf-8'))
+        print(track)
         expected = [{
             "id": 1,
             "name": "Diane Young",
@@ -248,7 +250,7 @@ class TestTrackApi(TestCase):
         },
             {
             "id": 2,
-            "name": "Contra",
+            "name": "I Think Ur A Contra",
             "playcount": 12345,
             "duration": 456,
             "spotifyUri": "spotify.uri",
@@ -264,14 +266,14 @@ class TestTrackApi(TestCase):
         },
             {
             "id": 3,
-            "name": "Business As Usual",
+            "name": "Down By The Sea",
             "playcount": 12345,
             "duration": 456,
             "spotifyUri": "spotify.uri",
             "imageUrl": "asdf",
             "album": {
                 "id": 3,
-                "name": "Down By The Sea"
+                "name": "Business As Usual"
             },
             "artist": {
                 "id": 2,
@@ -288,7 +290,7 @@ class TestTrackApi(TestCase):
             "name": "sicc Vampire Weekend playlist",
             "numFollowers": 21,
             "numArtists": 1,
-            "spotifyUri": "spotify_uri",
+            "spotifyUri": "spotify.uri",
             "duration": 456,
             "numTracks": 2,
             "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
@@ -304,24 +306,25 @@ class TestTrackApi(TestCase):
             "name": "sicc Vampire Weekend playlist",
             "numFollowers": 21,
             "numArtists": 1,
-            "spotifyUri": "spotify_uri",
+            "spotifyUri": "spotify.uri",
             "duration": 456,
             "numTracks": 2,
             "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
             "artists": [{"id": 1, "name": "Vampire Weekend"}]
-        }, 
+        },
             {
             "id": 2,
             "name": "Dad Rock jams",
             "numFollowers": 21,
             "numArtists": 1,
-            "spotifyUri": "spotify_uri",
+            "spotifyUri": "spotify.uri",
             "duration": 456,
             "numTracks": 1,
             "tracks": [{"id": 3, "name": "Down By The Sea"}],
             "artists": [{"id": 2, "name": "Men At Work"}]
         }]
         self.assertEqual(playlist, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
