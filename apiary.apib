@@ -14,68 +14,6 @@ types of music.
 
         [
             {
-                "artists": [
-                    {
-                        "id": 1,
-                        "name": "Pink Floyd",
-                        "genres": [
-                            "album rock",
-                            "art rock",
-                            "classic rock",
-                            "mellow gold",
-                            "progressive rock",
-                            "psychedelic rock",
-                            "rock",
-                            "space rock",
-                            "symphonic rock"
-                        ],
-                        "image": "https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07",
-                        "bio": "Pink Floyd are a psychedelic/progressive rock band formed in Cambridge, England, United Kingdom in 1965. Pink Floyd is one of rock's most successful and influential acts, having sold over 200 million albums worldwide and with 74.5 million certified units in the United States, making them one of the best-selling artists of all time. Currently the band consists of David Gilmour (vocals, guitar) and Nick Mason (drums).\n\nThe band's classic lineup was Roger Waters (vocals <a href=\"https://www.last.fm/music/Pink+Floyd\">Read more on Last.fm</a>",
-                        "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
-                        "playcount": 293729187,
-                        "albums": [
-                            "The Dark Side of the Moon",
-                            "Wish You Were Here",
-                            "The Wall"
-                        ],
-                        "tracks": [
-                            "Wish You Were Here",
-                            "Comfortably Numb",
-                            "Another Brick in the Wall"
-                        ],
-                    }, {
-                        "id": 2,
-                        "name": "Coldplay",
-                        "genres": [
-                            "permanent wave",
-                            "pop",
-                            "pop christmas"
-                        ],
-                        "image": "https://i.scdn.co/image/9815eb48540fa0d1c87ebd22289060729b1ab32a",
-                        "bio": "Coldplay is a British alternative rock band, formed in London, United Kingdom in 1997. The band comprises vocalist and pianist Chris Martin, lead guitarist Jonny Buckland – who met each other in September 1996 at Ramsay Hall (halls of residence) at University College London - bassist Guy Berryman and drummer Will Champion.\n\nNot only have Coldplay had 7 highly successful studio album releases (all of which reached #1 on the UK album chart) - with their latest 7th studio album released on December 4 <a href=\"https://www.last.fm/music/Coldplay\">Read more on Last.fm</a>",
-                        "spotifyUri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
-                        "playcount": 345732045,
-                        "albums": [
-                            "Ghost Stories",
-                            "X&Y",
-                            "A Head Full Of Dreams"
-                        ],
-                        "tracks": [
-                            "Paradise",
-                            "Viva la Vida",
-                            "A Head Full Of Dreams"
-                        ]
-                    }
-                ]
-            }
-        ]
-       
-### Get Artist [GET /artists/{id}]
-
-+ Response 200 (application/json)
-
-        [
-            {
                 "id": 1,
                 "name": "Pink Floyd",
                 "genres": [
@@ -89,21 +27,132 @@ types of music.
                     "space rock",
                     "symphonic rock"
                 ],
-                "image": "https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07",
+                "imageUrl": "https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07",
                 "bio": "Pink Floyd are a psychedelic/progressive rock band formed in Cambridge, England, United Kingdom in 1965. Pink Floyd is one of rock's most successful and influential acts, having sold over 200 million albums worldwide and with 74.5 million certified units in the United States, making them one of the best-selling artists of all time. Currently the band consists of David Gilmour (vocals, guitar) and Nick Mason (drums).\n\nThe band's classic lineup was Roger Waters (vocals <a href=\"https://www.last.fm/music/Pink+Floyd\">Read more on Last.fm</a>",
                 "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
                 "playcount": 293729187,
                 "albums": [
-                    "The Dark Side of the Moon",
-                    "Wish You Were Here",
-                    "The Wall"
+                    {
+                        id: 1, 
+                        name: "The Dark Side of the Moon"
+                    },
+                    {
+                        id: 2, 
+                        name: "Wish You Were Here"
+                    },
+                    {
+                        id: 3, 
+                        name: "The Wall"
+                    }
                 ],
                 "tracks": [
-                    "Wish You Were Here",
-                    "Comfortably Numb",
-                    "Another Brick in the Wall"
+                    {
+                        id: 1, 
+                        name: "Wish You Were Here"
+                    },
+                    {
+                        id: 2, 
+                        name: "Comfortably Numb"
+                    },
+                    {
+                        id: 3, 
+                        name: "Another Brick in the Wall"
+                    }
                 ],
+            }, {
+                "id": 2,
+                "name": "Coldplay",
+                "genres": [
+                    "permanent wave",
+                    "pop",
+                    "pop christmas"
+                ],
+                "imageUrl": "https://i.scdn.co/image/9815eb48540fa0d1c87ebd22289060729b1ab32a",
+                "bio": "Coldplay is a British alternative rock band, formed in London, United Kingdom in 1997. The band comprises vocalist and pianist Chris Martin, lead guitarist Jonny Buckland – who met each other in September 1996 at Ramsay Hall (halls of residence) at University College London - bassist Guy Berryman and drummer Will Champion.\n\nNot only have Coldplay had 7 highly successful studio album releases (all of which reached #1 on the UK album chart) - with their latest 7th studio album released on December 4 <a href=\"https://www.last.fm/music/Coldplay\">Read more on Last.fm</a>",
+                "spotifyUri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
+                "playcount": 345732045,
+                "albums": [
+                    {
+                        id: 4, 
+                        name: "Ghost Stories"
+                    },
+                    {
+                        id: 5, 
+                        name: "X&Y"
+                    },
+                    {
+                        id: 6, 
+                        name: "A Head Full Of Dreams"
+                    }                
+                ],
+                "tracks": [
+                    {
+                        id: 4, 
+                        name: "Paradise"
+                    },
+                    {
+                        id: 5, 
+                        name: "Viva la Vida"
+                    },
+                    {
+                        id: 6, 
+                        name: "A Head Full Of Dreams"
+                    }  
+                ]
+            }
         ]
+       
+### Get Artist [GET /artists/{id}]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Pink Floyd",
+            "genres": [
+                "album rock",
+                "art rock",
+                "classic rock",
+                "mellow gold",
+                "progressive rock",
+                "psychedelic rock",
+                "rock",
+                "space rock",
+                "symphonic rock"
+            ],
+            "imageUrl": "https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07",
+            "bio": "Pink Floyd are a psychedelic/progressive rock band formed in Cambridge, England, United Kingdom in 1965. Pink Floyd is one of rock's most successful and influential acts, having sold over 200 million albums worldwide and with 74.5 million certified units in the United States, making them one of the best-selling artists of all time. Currently the band consists of David Gilmour (vocals, guitar) and Nick Mason (drums).\n\nThe band's classic lineup was Roger Waters (vocals <a href=\"https://www.last.fm/music/Pink+Floyd\">Read more on Last.fm</a>",
+            "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
+            "playcount": 293729187,
+            "albums": [
+                {
+                    id: 1, 
+                    name: "The Dark Side of the Moon"
+                },
+                {
+                    id: 2, 
+                    name: "Wish You Were Here"
+                },
+                {
+                    id: 3, 
+                    name: "The Wall"
+                }
+            ],
+            "tracks": [
+                {
+                    id: 1, 
+                    name: "Wish You Were Here"
+                },
+                {
+                    id: 2, 
+                    name: "Comfortably Numb"
+                },
+                {
+                    id: 3, 
+                    name: "Another Brick in the Wall"
+                }
+            ]
+        }
             
 ## Albums [/albums]
 
@@ -113,63 +162,9 @@ types of music.
 
         [
             {
-                "albums": [
-                    {
-                        "id": 1,
-                        "name": "The Dark Side of the Moon",
-                        "genres": [
-                            "album rock",
-                            "art rock",
-                            "classic rock",
-                            "mellow gold",
-                            "progressive rock",
-                            "psychedelic rock",
-                            "rock",
-                            "space rock",
-                            "symphonic rock"
-                        ],
-                        "image": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
-                        "releaseDate": "1973-03-01",
-                        "playcount": 35925474,
-                        "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
-                        "tracks": [
-                            "Speak to Me",
-                            "On the Run",
-                            "Money"
-                        ],
-                        "artist": "Pink Floyd"
-                    }, {
-                        "id": 2,
-                        "name": "A Head Full Of Dreams",
-                        "genres": [
-                            "permanent wave",
-                            "pop",
-                            "pop christmas"
-                        ],
-                        "image": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
-                        "releaseDate": "2015-12-04",
-                        "playcount": 6415779,
-                        "spotifyUri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
-                        "tracks": [
-                            "A Head Full Of Dreams",
-                            "Everglow",
-                            "Fun"
-                        ],
-                        "artist": "Coldplay"
-                    }
-                ]
-            }
-        ]
-        
-### Get Album [GET /albums/{id}]
-
-+ Response 200 (application/json)
-
-        [
-            {
                 "id": 1,
-                "name": "The Dark Side Of The Moon",
-               "genres": [
+                "name": "The Dark Side of the Moon",
+                "genres": [
                     "album rock",
                     "art rock",
                     "classic rock",
@@ -180,18 +175,102 @@ types of music.
                     "space rock",
                     "symphonic rock"
                 ],
-                "image": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
-                "releaseDate": "1973-03-01",
+                "imageUrl": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
+                "releaseDate": "Wed, 31 Dec 1969 18:00:00 GMT",
                 "playcount": 35925474,
                 "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
                 "tracks": [
-                    "Speak to Me",
-                    "On the Run",
-                    "Money"
+                    {
+                        id: 7, 
+                        name: "Speak to Me"
+                    },
+                    {
+                        id: 8, 
+                        name: "On the Run"
+                    },
+                    {
+                        id: 9, 
+                        name: "Money"
+                    }
                 ],
-                "artist": "Pink Floyd"
+                "artist": { 
+                    id: 1
+                    name: "Pink Floyd"
+                }
+            }, {
+                "id": 2,
+                "name": "A Head Full Of Dreams",
+                "genres": [
+                    "permanent wave",
+                    "pop",
+                    "pop christmas"
+                ],
+                "imageUrl": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+                "releaseDate": "Wed, 31 Dec 1969 18:00:00 GMT",
+                "playcount": 6415779,
+                "spotifyUri": "spotify:artist:4gzpq5DPGxSnKTe4SA8HAU",
+                "tracks": [
+                    {
+                        id: 6, 
+                        name: "A Head Full Of Dreams"
+                    },
+                    {
+                        id: 10, 
+                        name: "Everglow"
+                    },
+                    {
+                        id: 11, 
+                        name: "Fun"
+                    }
+                ],
+                "artist": {
+                    id: 2
+                    name: "Coldplay"
+                }
             }
         ]
+        
+### Get Album [GET /albums/{id}]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "The Dark Side Of The Moon",
+            "genres": [
+                "album rock",
+                "art rock",
+                "classic rock",
+                "mellow gold",
+                "progressive rock",
+                "psychedelic rock",
+                "rock",
+                "space rock",
+                "symphonic rock"
+            ],
+            "imageUrl": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
+            "releaseDate": "Wed, 31 Dec 1969 18:00:00 GMT",
+            "playcount": 35925474,
+            "spotifyUri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9",
+            "tracks": [
+                {
+                    id: 7, 
+                    name: "Speak to Me"
+                },
+                {
+                    id: 8, 
+                    name: "On the Run"
+                },
+                {
+                    id: 9, 
+                    name: "Money"
+                }
+            ],
+            "artist": { 
+                id: 1
+                name: "Pink Floyd"
+            }
+        }
         
 ## Tracks [/tracks]
 
@@ -201,29 +280,37 @@ types of music.
 
         [
             {
-                "tracks": [
-                    {
-                        "id": 1,
-                        "name": "Money",
-                        "playcount": 6851637,
-                        "image":  "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
-                        "duration": 382834,
-                        "youtubeId": "https://www.youtube.com/watch?v=-0kcet4aPpQ",
-                        "spotifyUri": "spotify:track:0vFOzaXqZHahrZp6enQwQb",
-                        "artist": "Pink Floyd",
-                        "album": "The Dark Side Of The Moon"
-                    }, {
-                        "id": 2,
-                        "name": "A Head Full Of Dreams",
-                        "playcount": "",
-                        "image": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
-                        "duration": 223773,
-                        "youtubeId": "https://www.youtube.com/watch?v=vGZMvV9KBp8",
-                        "spotifyUri": "spotify:track:6f49kbOuQSOsStBpyGvQfA",
-                        "artist": "Coldplay",
-                        "album": "A Head Full Of Dreams"
-                    }
-                ]
+                "id": 1,
+                "name": "Money",
+                "playcount": 6851637,
+                "imageUrl":  "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
+                "duration": 382834,
+                "youtubeId": "https://www.youtube.com/watch?v=-0kcet4aPpQ",
+                "spotifyUri": "spotify:track:0vFOzaXqZHahrZp6enQwQb",
+                "artist": { 
+                    id: 1
+                    name: "Pink Floyd"
+                },
+                "album": {
+                    id: 1, 
+                    name: "The Dark Side of the Moon"
+                }
+            }, {
+                "id": 2,
+                "name": "A Head Full Of Dreams",
+                "playcount": "",
+                "imageUrl": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+                "duration": 223773,
+                "youtubeId": "https://www.youtube.com/watch?v=vGZMvV9KBp8",
+                "spotifyUri": "spotify:track:6f49kbOuQSOsStBpyGvQfA",
+                "artist": { 
+                    id: 2
+                    name: "Coldplay"
+                },
+                "album": {
+                    id: 6, 
+                    name: "A Head Full of Dreams"
+                }
             }
         ]
         
@@ -231,19 +318,22 @@ types of music.
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "name": "Money",
-                "playcount": 6851637,
-                "image": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
-                "duration": 382834,
-                "youtubeId": "https://www.youtube.com/watch?v=-0kcet4aPpQ",
-                "spotifyUri": "spotify:track:0vFOzaXqZHahrZp6enQwQb",
-                "artist": "Pink Floyd",
-                "album": "The Dark Side of the Moon"
+        {
+            "id": 1,
+            "name": "Money",
+            "playcount": 6851637,
+            "imageUrl": "https://i.scdn.co/image/79b9f90d29978a2edd82c8cdbfd3f091207931c7",
+            "duration": 382834,
+            "spotifyUri": "spotify:track:0vFOzaXqZHahrZp6enQwQb",
+            "artist": { 
+                id: 1
+                name: "Pink Floyd"
+            },
+            "album": {
+                id: 1, 
+                name: "The Dark Side of the Moon"
             }
-        ]
+        }
         
 ## Playlists [/playlists]
 
@@ -253,47 +343,71 @@ types of music.
 
         [
             {
-                "playlists": [
-                    {
-                        "id": 1,
-                        "name": "Transcendental Psych",
-                        "followers": 0,
-                        "description": null,
-                        "image": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
-                        "spotifyUri": "spotify:user:kshitijmd:playlist:1f5CiyJY5TqfTjhN8VApZV",
-                        "artists": [
-                            "Pink Floyd",
-                            "Hans Zimmer"
-                        ],
-                        "numArtists": 2,
-                        "tracks": [
-                            "Any Colour You Like",
-                            "Cornfield Chase",
-                            "Day One"
-                        ],
-                        "numTracks": 3,
-                        "totalDuration": 540000
-                    }, {
-                        "id": 2,
-                        "name": "Temporary Wave",
-                        "followers": 0
-                        "description": null,
-                        "image": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
-                        "spotifyUri": "spotify:user:kshitijmd:playlist:7Jth72BcjMAOHzNnax6mmK",
-                        "artists": [
-                            "Coldplay",
-                            "Hans Zimmer"
-                        ],
-                        "numArtists": 2,
-                        "tracks": [
-                            "Hymn For The Weekend",
-                            "Dust",
-                            "A Head Full Of Dreams"
-                        ],
-                        "numTracks": 3,
-                        "totalDuration": 540000
+                "id": 1,
+                "name": "Transcendental Psych",
+                "numFollowers": 0,
+                "imageUrl": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
+                "spotifyUri": "spotify:user:kshitijmd:playlist:1f5CiyJY5TqfTjhN8VApZV",
+                "artists": [
+                    { 
+                        id: 1
+                        name: "Pink Floyd"
+                    },
+                    { 
+                        id: 3
+                        name: "Hans Zimmer"
                     }
-                ]
+                ],
+                "numArtists": 2,
+                "tracks": [
+                    {
+                        id: 12, 
+                        name: "Any Colour You Like"
+                    },
+                    {
+                        id: 13, 
+                        name: "Cornfield Chase"
+                    },
+                    {
+                        id: 14, 
+                        name: "Day One"
+                    }                            
+                ],
+                "numTracks": 3,
+                "totalDuration": 540000
+            }, {
+                "id": 2,
+                "name": "Temporary Wave",
+                "numFollowers": 0
+                "imageUrl": "https://i.scdn.co/image/9c2c4a9ac9726bfd996ff96383178bbb5efc59ab",
+                "spotifyUri": "spotify:user:kshitijmd:playlist:7Jth72BcjMAOHzNnax6mmK",
+                "artists": [
+                    { 
+                        id: 2
+                        name: "Coldplay"
+                    },
+                    { 
+                        id: 3
+                        name: "Hans Zimmer"
+                    }
+                ],
+                "numArtists": 2,
+                "tracks": [
+                    {
+                        id: 6, 
+                        name: "A Head Full Of Dreams"
+                    },
+                    {
+                        id: 15, 
+                        name: "Hymn For The Weekend"
+                    },
+                    {
+                        id: 16, 
+                        name: "Dust"
+                    }                            
+                ],
+                "numTracks": 3,
+                "totalDuration": 540000
             }
         ]
         
@@ -301,25 +415,37 @@ types of music.
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "name": "Transcendental Psych",
-                "followers": 0,
-                "description": null,
-                "image": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
-                "spotifyUri": "spotify:user:kshitijmd:playlist:1f5CiyJY5TqfTjhN8VApZV",
-                "artists": [
-                    "Pink Floyd",
-                    "Hans Zimmer"
-                ],
-                "numArtists": 2,
-                "tracks": [
-                    "Any Colour You Like",
-                    "Cornfield Chase",
-                    "Day One"
-                ],
-                "numTracks": 3,
-                "totalDuration": 540000
-            }
-        ]
+        {
+            "id": 1,
+            "name": "Transcendental Psych",
+            "numFollowers": 0,
+            "imageUrl": "https://i.scdn.co/image/eed15df0d0849836293b9f787fabf077ce9e9f2e",
+            "spotifyUri": "spotify:user:kshitijmd:playlist:1f5CiyJY5TqfTjhN8VApZV",
+            "artists": [
+                { 
+                    id: 1
+                    name: "Pink Floyd"
+                },
+                { 
+                    id: 3
+                    name: "Hans Zimmer"
+                }
+            ],
+            "numArtists": 2,
+            "tracks": [
+                {
+                    id: 12, 
+                    name: "Any Colour You Like"
+                },
+                {
+                    id: 13, 
+                    name: "Cornfield Chase"
+                },
+                {
+                    id: 14, 
+                    name: "Day One"
+                }
+            ],
+            "numTracks": 3,
+            "totalDuration": 540000
+        }
