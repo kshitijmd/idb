@@ -20,7 +20,7 @@ def walk_playlist():
     # Just walk the first page of playlists for now (can paginate later for more data)
     sp_playlists = sp.featured_playlists()['playlists']['items']
     for i, sp_playlist in enumerate(sp_playlists):
-        while(confirm(" playlist")):
+        if confirm(" playlist"):
             try:
 
                 print('Playlist: {}/{}'.format(i+1, len(sp_playlists)))
@@ -54,6 +54,8 @@ def walk_playlist():
 
             except Exception as e:
                 print(e)
+                print(e.message)
+
 
     
 
@@ -101,9 +103,14 @@ def create_artist(sp_artist):
     name = sp_artist['name']
     image_url = upload_to_clooouuddd(sp_artist['images'][0]['url'])
     spotify_uri = sp_artist['uri']
-    lfm_artist = plast.get_artist(name)
-    bio = lfm_artist.get_bio_summary()
-    playcount = lfm_artist.get_playcount()
+    try:
+        lfm_artist = plast.get_artist(name)
+    except Exception as e:
+        bio = ""
+        playcount = 0
+    else:
+        bio = lfm_artist.get_bio_summary()
+        playcount = lfm_artist.get_playcount()
 
     genres = create_genres(sp_artist['genres'])
 
@@ -141,9 +148,16 @@ def create_album(sp_track, artist):
     name = sp_album['name']
     spotify_uri = sp_album['uri']
     image_url = upload_to_clooouuddd(sp_album['images'][0]['url'])
-    lfm_album = plast.get_album(artist.name, name)
-    playcount = lfm_album.get_playcount()
-    releasedate = lfm_album.get_release_date()
+    try:
+        lfm_album = plast.get_album(artist.name, name)
+    except Exception as e:
+        playcount = 0
+        releasedate = 0
+    else:
+        playcount = lfm_album.get_playcount()
+        releasedate = lfm_album.get_release_date()
+    
+    
 
     genres = create_genres(sp_album['genres'])
 
@@ -185,14 +199,18 @@ def walk_tracks(sp_tracks, artist, album, omit_track):
     while sp_tracks:
         for i, sp_track in enumerate(sp_tracks['items']):
             print('ATrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
-            if sp_tracks['uri'] != omit_track['uri']:
+            if sp_track['uri'] != omit_track['uri']:
                 create_track(sp.track(sp_track['id']), artist, album)
         sp_tracks = sp.next(sp_tracks) if sp_tracks['next'] else None
 
 
 def create_track(sp_track, artist, album):
     name = sp_track['name']
-    playcount = plast.get_track(artist.name, name).get_playcount()
+    try:
+        playcount = plast.get_track(artist.name, name).get_playcount()
+    except Exception as e:
+        playcount = 0
+    
     duration = sp_track['duration_ms']
     spotify_uri = sp_track['uri']
     image_url = upload_to_clooouuddd(sp_track['album']['images'][0]['url'])
