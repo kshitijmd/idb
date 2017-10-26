@@ -282,3 +282,82 @@ export function getPlaylistDetails(playlistId) {
 
 	return getFakePromise(playlist).then(playlist => playlist);
 }
+
+export function getTracks() {
+	const tracks = [
+		{
+			album: {
+				id: 1,
+				name: "Modern Vampires of the City",
+			},
+			artist: {
+				id: 1,
+				name: "Vampire Weekend",
+			},
+			duration: 456,
+			id: 1,
+			imageUrl: "asdf",
+			name: "Diane Young",
+			playcount: 12345,
+			spotifyUri: "spotify.uri",
+		},
+		{
+			album: {
+				id: 2,
+				name: "Contra",
+			},
+			artist: {
+				id: 1,
+				name: "Vampire Weekend",
+			},
+			duration: 456,
+			id: 2,
+			imageUrl: "asdf",
+			name: "I Think Ur A Contra",
+			playcount: 12345,
+			spotifyUri: "spotify.uri",
+		},
+		{
+			album: {
+				id: 3,
+				name: "Business As Usual",
+			},
+			artist: {
+				id: 2,
+				name: "Men At Work",
+			},
+			duration: 456,
+			id: 3,
+			imageUrl: "asdf",
+			name: "Down By The Sea",
+			playcount: 12345,
+			spotifyUri: "spotify.uri",
+		},
+	];
+
+	//TODO: Replace with Axios request
+	return getFakePromise(tracks).then(tracks => tracks);
+}
+
+// TODO: Use Id to make axios GET request
+//eslint-disable-next-line no-unused-vars
+export function getTrackDetails(trackId) {
+	const track = {
+		album: {
+			id: 1,
+			name: "Modern Vampires of the City",
+		},
+		artist: {
+			id: 1,
+			name: "Vampire Weekend",
+		},
+		duration: 456,
+		id: 1,
+		imageUrl: "asdf",
+		name: "Diane Young",
+		playcount: 12345,
+		spotifyUri: "spotify.uri",
+	};
+
+	return getFakePromise(track).then(track => track);
+}
