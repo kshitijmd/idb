@@ -192,6 +192,7 @@ class Playlist(db.Model):
             "id": self.id,
             "name": self.name,
             "numFollowers": self.num_followers,
+            "numArtists": self.num_artists,
             "spotifyUri": self.spotify_uri,
             "duration": self.duration,
             "numTracks": self.num_tracks,
