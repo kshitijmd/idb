@@ -196,3 +196,89 @@ export function getArtistDetails(artistId) {
 
 	return getFakePromise(artist).then(artist => artist);
 }
+
+export function getPlaylists() {
+	const playlists = [
+		{
+			artists: [
+				{
+					id: 1,
+					name: "Vampire Weekend",
+				},
+			],
+			duration: 456,
+			id: 1,
+			name: "sicc Vampire Weekend playlist",
+			numArtists: 1,
+			numFollowers: 21,
+			numTracks: 2,
+			spotifyUri: "spotify.uri",
+			tracks: [
+				{
+					id: 1,
+					name: "Diane Young",
+				},
+				{
+					id: 2,
+					name: "I Think Ur A Contra",
+				},
+			],
+		},
+		{
+			artists: [
+				{
+					id: 2,
+					name: "Men At Work",
+				},
+			],
+			duration: 456,
+			id: 2,
+			name: "Dad Rock jams",
+			numArtists: 1,
+			numFollowers: 21,
+			numTracks: 1,
+			spotifyUri: "spotify.uri",
+			tracks: [
+				{
+					id: 3,
+					name: "Down By The Sea",
+				},
+			],
+		},
+	];
+
+	// TODO: Replace with axios request
+	return getFakePromise(playlists).then(playlists => playlists);
+}
+
+// TODO: Use Id to make axios GET request
+//eslint-disable-next-line no-unused-vars
+export function getPlaylistDetails(playlistId) {
+	const playlist = {
+		artists: [
+			{
+				id: 1,
+				name: "Vampire Weekend",
+			},
+		],
+		duration: 456,
+		id: 1,
+		name: "sicc Vampire Weekend playlist",
+		numArtists: 1,
+		numFollowers: 21,
+		numTracks: 2,
+		spotifyUri: "spotify.uri",
+		tracks: [
+			{
+				id: 1,
+				name: "Diane Young",
+			},
+			{
+				id: 2,
+				name: "I Think Ur A Contra",
+			},
+		],
+	};
+
+	return getFakePromise(playlist).then(playlist => playlist);
+}
