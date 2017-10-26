@@ -21,34 +21,40 @@ def walk_playlist():
     sp_playlists = sp.featured_playlists()['playlists']['items']
     for i, sp_playlist in enumerate(sp_playlists):
         while(confirm(" playlist")):
-            print('Playlist: {}/{}'.format(i+1, len(sp_playlists)))
+            try:
 
-            # get the full playlist object
-            sp_full = sp.user_playlist(
-                'spotify', sp_playlist['id'], fields='tracks, followers')
-            playlist = {
-                'name': sp_playlist['name'],
-                'spotify_uri': sp_playlist['uri'],
-                'num_tracks': sp_playlist['tracks']['total'],
-                'num_followers': sp_full['followers']['total'],
-            }
+                print('Playlist: {}/{}'.format(i+1, len(sp_playlists)))
 
-            # walk the tracks on the playlist, to get back aggregate data
-            playlist_attrs = walk_playlist_tracks(sp_full['tracks'])
-            playlist.update(playlist_attrs)
+                # get the full playlist object
+                sp_full = sp.user_playlist(
+                    'spotify', sp_playlist['id'], fields='tracks, followers')
+                playlist = {
+                    'name': sp_playlist['name'],
+                    'spotify_uri': sp_playlist['uri'],
+                    'num_tracks': sp_playlist['tracks']['total'],
+                    'num_followers': sp_full['followers']['total'],
+                }
 
-            # create the db playlist obj
-            create_playlist(playlist)
+                # walk the tracks on the playlist, to get back aggregate data
+                playlist_attrs = walk_playlist_tracks(sp_full['tracks'])
+                playlist.update(playlist_attrs)
 
-            success = False
-            while not success:
-                try:
-                    db.session.commit()
-                except BaseException as e:
-                    print("playlist commit failed\n"+str(e))
-                    db.session.rollback()
-                else:
-                    success = True
+                # create the db playlist obj
+                create_playlist(playlist)
+
+                success = False
+                while not success:
+                    try:
+                        db.session.commit()
+                    except BaseException as e:
+                        print("playlist commit failed\n"+str(e))
+                        db.session.rollback()
+                    else:
+                        success = True
+
+            except Exception as e:
+                print(e)
+
     
 
 
