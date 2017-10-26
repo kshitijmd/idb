@@ -2,6 +2,7 @@
 
 function getFakePromise(data) {
 	/* Function to assist with testing loading and loaded state */
+	//eslint-disable-next-line no-unused-vars
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			// Toggle resolve / reject to play with error state
