@@ -19,46 +19,136 @@ class TestTrackApi(TestCase):
         db.drop_all()
 
     def populate_db(self):
-        g = Genre()
-        g.name = "indie"
-        t = Track()
-        t.name = "Diane Young"
-        t.playcount = 123
-        t.duration = 456
-        t2 = Track()
-        t2.name = "I Think Ur A Contra"
-        t2.playcount = 123
-        t2.duration = 456
+        g1 = create_genre("indie")
+        g2 = create_genre("rock")
 
-        a1 = self.create_vampire_weekend_album("Modern Vampires of the City")
-        a1.tracks.append(t)
-        a1.genres.append(g)
-        a2 = self.create_vampire_weekend_album("Contra")
+        t1 = self.create_track("Diane Young")
+        t2 = self.create_track("I Think Ur A Contra")
+        t3 = self.create_track("Down By The Sea")
+
+        a1 = self.create_album("Modern Vampires of the City")
+        a1.tracks.append(t1)
+        a1.genres.append(g1)
+        a2 = self.create_album("Contra")
         a2.tracks.append(t2)
-        a2.genres.append(g)
+        a2.genres.append(g1)
+        a3 = self.create_album("Business As Usual")
+        a3.tracks.append(t3)
+        a3.genres.append(g2)
 
-        ar = Artist()
-        ar.albums.append(a1)
-        ar.albums.append(a2)
-        ar.genres.append(g)
-        ar.name = "Vampire Weekend"
-        p = Playlist()
-        p.name = "sicc Vampire Weekend playlist"
-        p.tracks.append(t)
-        p.tracks.append(t2)
-        p.artists.append(ar)
-        p.num_tracks = 1
+        ar1 = self.create_artist("Vampire Weekend")
+        ar1.albums.append(a1)
+        ar1.albums.append(a2)
+        ar1.genres.append(g1)
+        ar1.tracks.append(t1)
+        ar1.tracks.append(t2)
+        ar2 = self.create_artist("Men At Work")
+        ar2.albums.append(a3)
+        ar2.genres.append(g2)
+        ar2.tracks.append(t3)
 
-        db.session.add_all((t, t2, a1, a2, ar, p))
+        a1.artists.append(ar1)
+        a2.artists.append(ar1)
+
+        t1.artist.append(ar1)
+        t1.album.append(a1)
+        t2.artist.append(ar1)
+        t2.album.append(a2)
+        t3.artist.append(ar2)
+        t3.album.append(a3)
+
+        p1 = self.create_playlist("sicc Vampire Weekend playlist", 2)
+        p1.tracks.append(t1)
+        p1.tracks.append(t2)
+        p1.artists.append(ar1)
+        p2 = self.create_playlist("Dad Rock jams", 1)
+        p2.tracks.append(t3)
+        p2.artists.append(a3)
+
+        db.session.add_all((t1, t2, t3, a1, a2, a3, ar1, ar2, p1, p2))
         db.session.commit()
 
-    def create_vampire_weekend_album(self, title):
+    def create_artist(self, title):
+        ar = Artist()
+        ar.image_url = "asdf"
+        ar.playcount = 12345
+        ar.bio = "This band is super cool!"
+        ar.spotify_uri = "spotify.uri"
+        ar.name = title
+        return ar
+
+    def create_album(self, title):
         a = Album()
         a.image_url = "asdf"
         a.playcount = 12345
         a.spotify_uri = "spotify.uri"
         a.name = title
         return a
+
+    def create_track(self, title):
+        t = Track()
+        t.image_url = "asdf"
+        t.playcount = 12345
+        t.duration = 456
+        t.spotify_uri = "spotify.uri"
+        t.name = title
+        return t
+
+    def create_playlist(self, title, numtracks):
+        p = Playlist()
+        p.image_url = "asdf"
+        p.num_followers = 21
+        p.num_artists = 1
+        p.num_tracks = numtracks
+        p.duration = 456
+        p.spotify_uri = "spotify.uri"
+        p.name = title
+        return p
+
+    def create_genre(self, title):
+        g = Genre()
+        g.name = title
+        return g
+
+    def test_get_artist_specific(self):
+        response = self.client.get('/artists/1')
+        artist = json.load(response.data.decode('utf-8'))
+        expected = {
+            "id": 1,
+            "name": "Vampire Weekend",
+            "bio": "This band is super cool!",
+            "spotifyUri": "spotify.uri",
+            "playcount": 12345,
+            "imageUrl": "asdf",
+            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}]
+        }
+        self.assertEqual(artist, expected)
+
+    def test_get_artist_all(self):
+        response = self.client.get('/artists/')
+        artist = json.loads(response.data.decode('utf-8'))
+        expected = [{
+            "id": 1,
+            "name": "Vampire Weekend",
+            "bio": "This band is super cool!",
+            "spotifyUri": "spotify.uri",
+            "playcount": 12345,
+            "imageUrl": "asdf",
+            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}]
+        },
+            {
+            "id": 2,
+            "name": "Men At Work",
+            "bio": "This band is super cool!",
+            "spotifyUri": "spotify.uri",
+            "playcount": 12345,
+            "imageUrl": "asdf",
+            "tracks": [{"id": 3, "name": "Down By The Sea"}],
+            "albums": [{"id": 3, "name": "Business As Usual"}]
+        }]
+        self.assertEqual(artist, expected)
 
     def test_get_album_specific(self):
         response = self.client.get('/albums/1')
@@ -100,9 +190,137 @@ class TestTrackApi(TestCase):
             "artist": {"id": 1, "name": "Vampire Weekend"},
             "tracks": [{"id": 2, "name": "I Think Ur A Contra"}],
             "genres": ["indie"]
+        },
+            {
+            "id": 3,
+            "imageUrl": "asdf",
+            "playcount": 12345,
+            "releaseDate": None,
+            "spotifyUri": "spotify.uri",
+            "name": "Business As Usual",
+            "artist": {"id": 2, "name": "Men At Work"},
+            "tracks": [{"id": 3, "name": "Down By The Sea"}],
+            "genres": ["rock"]
+
         }]
         self.assertEqual(album, expected)
 
+    def test_get_track_specific(self):
+        response = self.client.get('/tracks/1')
+        track = json.loads(response.data.decode('utf-8'))
+        expected = {
+            "id": 1,
+            "name": "Diane Young",
+            "playcount": 12345,
+            "duration": 456,
+            "spotifyUri": "spotify.uri",
+            "imageUrl": "asdf",
+            "album": {
+                "id": 1,
+                "name": "Modern Vampires of the City"
+            },
+            "artist": {
+                "id": 1,
+                "name": "Vampire Weekend"
+            }
+        }
+        self.assertEqual(track, expected) 
+
+    def test_get_track_all(self):
+        response = self.client.get('/tracks/')
+        track = json.loads(response.data.decode('utf-8'))
+        expected = [{
+            "id": 1,
+            "name": "Diane Young",
+            "playcount": 12345,
+            "duration": 456,
+            "spotifyUri": "spotify.uri",
+            "imageUrl": "asdf",
+            "album": {
+                "id": 1,
+                "name": "Modern Vampires of the City"
+            },
+            "artist": {
+                "id": 1,
+                "name": "Vampire Weekend"
+            }
+        },
+            {
+            "id": 2,
+            "name": "Contra",
+            "playcount": 12345,
+            "duration": 456,
+            "spotifyUri": "spotify.uri",
+            "imageUrl": "asdf",
+            "album": {
+                "id": 2,
+                "name": "Contra"
+            },
+            "artist": {
+                "id": 1,
+                "name": "Vampire Weekend"
+            }
+        },
+            {
+            "id": 3,
+            "name": "Business As Usual",
+            "playcount": 12345,
+            "duration": 456,
+            "spotifyUri": "spotify.uri",
+            "imageUrl": "asdf",
+            "album": {
+                "id": 3,
+                "name": "Down By The Sea"
+            },
+            "artist": {
+                "id": 2,
+                "name": "Men At Work"
+            }
+        }]
+        self.assertEqual(track, expected)
+
+    def test_get_playlist_specific(self):
+        response = self.client.get('/playlists/1')
+        playlist = json.loads(response.data.decode('utf-8'))
+        expected = {
+            "id": 1,
+            "name": "sicc Vampire Weekend playlist",
+            "numFollowers": 21,
+            "numArtists": 1,
+            "spotifyUri": "spotify_uri",
+            "duration": 456,
+            "numTracks": 2,
+            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+            "artists": [{"id": 1, "name": "Vampire Weekend"}]
+        }
+        self.assertEqual(playlist, expected)
+
+    def test_get_playlist_all(self):
+        response = self.client.get('/playlists/')
+        playlist = json.loads(response.data.decode('utf-8'))
+        expected = [{
+            "id": 1,
+            "name": "sicc Vampire Weekend playlist",
+            "numFollowers": 21,
+            "numArtists": 1,
+            "spotifyUri": "spotify_uri",
+            "duration": 456,
+            "numTracks": 2,
+            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+            "artists": [{"id": 1, "name": "Vampire Weekend"}]
+        }, 
+            {
+            "id": 2,
+            "name": "Dad Rock jams",
+            "numFollowers": 21,
+            "numArtists": 1,
+            "spotifyUri": "spotify_uri",
+            "duration": 456,
+            "numTracks": 1,
+            "tracks": [{"id": 3, "name": "Down By The Sea"}],
+            "artists": [{"id": 2, "name": "Men At Work"}]
+        }]
+        self.assertEqual(playlist, expected)
 
 if __name__ == '__main__':
     unittest.main()
