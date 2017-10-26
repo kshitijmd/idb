@@ -13,6 +13,9 @@ import os
 # Returns a string of the public URL
 def upload_to_clooouuddd(spotifyURL):
 
+	if not spotifyURL:
+		return ""
+
 	spotifyURL =  spotifyURL[:4]+spotifyURL[5:]
 
 	file_name = spotifyURL[(spotifyURL.rfind("/")+1):]
