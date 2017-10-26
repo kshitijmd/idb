@@ -76,3 +76,29 @@ export function getAlbums() {
 	// TODO: Replace with axios request
 	return getFakePromise(data).then(data => data);
 }
+
+// TODO: Use albumId to make axios GET request
+//eslint-disable-next-line no-unused-vars
+export function getAlbumDetails(albumId) {
+	const album = {
+		artist: {
+			id: 1,
+			name: "Vampire Weekend",
+		},
+		genres: ["indie"],
+		id: 1,
+		imageUrl: "asdf",
+		name: "Modern Vampires of the City",
+		playcount: 12345,
+		releaseDate: "Wed, 31 Dec 1969 18:00:00 GMT",
+		spotifyUri: "spotify.uri",
+		tracks: [
+			{
+				id: 1,
+				name: "Diane Young",
+			},
+		],
+	};
+
+	return getFakePromise(album).then(album => album);
+}
