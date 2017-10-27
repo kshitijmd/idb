@@ -4,7 +4,7 @@ services:
   app:
     image: mbowen13/playlistr
     ports:
-      - "9000:9000"
+      - "80:80"
     volumes:
       - .:/app/
     networks:
