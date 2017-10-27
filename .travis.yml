@@ -1,14 +1,14 @@
-language: node_js
-node_js:
-  - "node"
-python: "3.5"
-
 jobs:
   include:
     - stage: Frontend
+      language: node_js
+      node_js:
+        - "node"
       script:
         - npm run lint
     - stage: Backend
+      language: python
+      python: "3.5"
       install: pip install -r application/requirements.txt
       services: postgresql
       before_script:
