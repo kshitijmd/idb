@@ -1,0 +1,8 @@
+{
+	"SQLALCHEMY_DATABASE_URI": "postgresql+psycopg2://postgres:justiceleague@35.194.7.57/prod",
+	"SQLALCHEMY_TRACK_MODIFICATIONS": "False",
+	"APPLICATION_ROOT": "/api",
+	"DEBUG": "True",
+	"HOST": "0.0.0.0",
+	"PORT": "8000"
+}

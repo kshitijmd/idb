@@ -5,7 +5,7 @@
 # pylint: disable=trailing-whitespace
 # pylint: disable=too-many-arguments
 # Junction Tables
-from application.app import db
+from app.app import db
 
 track_playlist = db.Table(
     'track_playlist',

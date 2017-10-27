@@ -1,11 +1,11 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pylast
-from application.gcloudutils.bucket import upload_to_clooouuddd
+from app.gcloudutils.bucket import upload_to_clooouuddd
 
-from application.models import db, Track, Artist, Album, Playlist, Genre
+from app.models import db, Track, Artist, Album, Playlist, Genre
 
-from application.app import create_app
+from app.app import create_app
 app = create_app()
 app.app_context().push()
 
@@ -19,10 +19,10 @@ def walk_playlist():
     # Just walk the first page of playlists for now (can paginate later for more data)
     sp_playlists = sp.featured_playlists()['playlists']['items']
     for i, sp_playlist in enumerate(sp_playlists):
-        if confirm(" playlist "+str(i)):
+        if confirm(" playlist " + str(i)):
             try:
 
-                print('Playlist: {}/{}'.format(i+1, len(sp_playlists)))
+                print('Playlist: {}/{}'.format(i + 1, len(sp_playlists)))
 
                 # get the full playlist object
                 sp_full = sp.user_playlist(
@@ -46,7 +46,7 @@ def walk_playlist():
                     try:
                         db.session.commit()
                     except BaseException as e:
-                        print("playlist commit failed\n"+str(e))
+                        print("playlist commit failed\n" + str(e))
                         db.session.rollback()
                     else:
                         success = True
@@ -60,7 +60,6 @@ def walk_playlist():
                 else:
                     raise e
 
-    
 
 def walk_playlist_tracks(sp_tracks):
     attrs = {
@@ -73,14 +72,15 @@ def walk_playlist_tracks(sp_tracks):
     # paginate all tracks in playlist
     while sp_tracks:
         for i, sp_track in enumerate(sp_tracks['items'][:5]):
-            print('PTrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
+            print('PTrack: {}/{}'.format(i + 1, len(sp_tracks['items'])))
 
             sp_track = sp_track['track']
-            
+
             if db.session.query(Track).filter_by(spotify_uri=sp_track['uri']).first() is not None:
                 print("skipping for efficiency")
-                attrs['tracks'].append(db.session.query(Track).filter_by(spotify_uri=sp_track['uri']).first())
-                continue #Skip this track, already covered.
+                attrs['tracks'].append(db.session.query(Track).filter_by(
+                    spotify_uri=sp_track['uri']).first())
+                continue  # Skip this track, already covered.
 
             attrs['duration'] += sp_track['duration_ms']
 
@@ -127,9 +127,9 @@ def create_artist(sp_artist):
         bio=bio,
         playcount=playcount)
 
-    #Genres already exist in DB by this point
+    # Genres already exist in DB by this point
     for g in sp_artist['genres']:
-        #Get genre db obj
+        # Get genre db obj
         genre = db.session.query(Genre).filter_by(name=g).first()
         artist.genres.append(genre)
 
@@ -141,7 +141,7 @@ def create_artist(sp_artist):
         try:
             db.session.commit()
         except BaseException as e:
-            print("artist commit failed\n"+str(e))
+            print("artist commit failed\n" + str(e))
             db.session.rollback()
         else:
             success = True
@@ -164,8 +164,6 @@ def create_album(sp_track, artist):
     except BaseException as e:
         playcount = 0
         releasedate = None
-    
-    
 
     genres = create_genres(sp_album['genres'])
 
@@ -177,9 +175,9 @@ def create_album(sp_track, artist):
         releasedate=releasedate,
         artist=artist)
 
-    #Genres already exist in DB by this point
+    # Genres already exist in DB by this point
     for g in sp_album['genres']:
-        #Get genre db obj
+        # Get genre db obj
         genre = db.session.query(Genre).filter_by(name=g).first()
         album.genres.append(genre)
 
@@ -191,7 +189,7 @@ def create_album(sp_track, artist):
         try:
             db.session.commit()
         except BaseException as e:
-            print("album commit failed\n"+str(e))
+            print("album commit failed\n" + str(e))
             db.session.rollback()
         else:
             success = True
@@ -206,7 +204,7 @@ def create_album(sp_track, artist):
 def walk_tracks(sp_tracks, artist, album, omit_track):
     while sp_tracks:
         for i, sp_track in enumerate(sp_tracks['items']):
-            print('\tATrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
+            print('\tATrack: {}/{}'.format(i + 1, len(sp_tracks['items'])))
             if sp_track['uri'] != omit_track['uri']:
                 create_track(sp.track(sp_track['id']), artist, album)
         sp_tracks = sp.next(sp_tracks) if sp_tracks['next'] else None
@@ -218,7 +216,7 @@ def create_track(sp_track, artist, album):
         playcount = plast.get_track(artist.name, name).get_playcount()
     except BaseException as e:
         playcount = 0
-    
+
     duration = sp_track['duration_ms']
     spotify_uri = sp_track['uri']
     if len(sp_track['album']) > 0:
@@ -242,7 +240,7 @@ def create_track(sp_track, artist, album):
         try:
             db.session.commit()
         except BaseException as e:
-            print(" track commit failed\n"+str(e))
+            print(" track commit failed\n" + str(e))
             db.session.rollback()
         else:
             success = True
@@ -267,11 +265,12 @@ def create_genres(genres):
                 db.session.commit()
             # else:
                 # print("genre already in db")
-            
+
         except BaseException as ie:
             print("skipped")
             raise ie
     return genres
+
 
 def confirm(item):
     """
@@ -281,7 +280,7 @@ def confirm(item):
     """
     answer = ""
     while answer not in ["y", "n"]:
-        answer = input("OK to go to next"+item+"[y/n]? ").lower()
+        answer = input("OK to go to next" + item + "[y/n]? ").lower()
     return answer == "y"
 
 

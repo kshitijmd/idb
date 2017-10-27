@@ -2,9 +2,9 @@ import unittest
 import json
 from datetime import datetime, timezone
 from flask_testing import TestCase
-from application.app import create_app, db
-from application.models import Track, Artist, Album, Playlist, Genre
-from application.api import albums, artists, playlists, tracks, util
+from .app import create_app, db
+from .models import Track, Artist, Album, Playlist, Genre
+from .api import albums, artists, playlists, tracks, util
 
 
 class TestApi(TestCase):
@@ -349,7 +349,3 @@ class TestApi(TestCase):
         self.log.write('GET /playlists/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(playlist, expected)
-
-
-if __name__ == '__main__':
-    unittest.main()
