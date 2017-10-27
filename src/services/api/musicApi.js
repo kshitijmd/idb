@@ -1,16 +1,5 @@
-// axios docs: https://github.com/axios/axios
-
-function getFakePromise(data) {
-	/* Function to assist with testing loading and loaded state */
-	//eslint-disable-next-line no-unused-vars
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			// Toggle resolve / reject to play with error state
-			resolve(data);
-			//reject();
-		}, 1500);
-	});
-}
+import axios from "axios";
+import * as logger from "../logger";
 
 export function getAlbums() {
 	const data = [
@@ -73,12 +62,16 @@ export function getAlbums() {
 		},
 	];
 
-	// TODO: Replace with axios request
-	return getFakePromise(data).then(data => data);
+	return axios
+		.get("http://api.hackappellas.me/albums/")
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return data;
+		});
 }
 
-// TODO: Use albumId to make axios GET request
-//eslint-disable-next-line no-unused-vars
 export function getAlbumDetails(albumId) {
 	const album = {
 		artist: {
@@ -100,7 +93,14 @@ export function getAlbumDetails(albumId) {
 		],
 	};
 
-	return getFakePromise(album).then(album => album);
+	return axios
+		.get(`http://api.hackappellas.me/albums/${albumId}`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return album;
+		});
 }
 
 export function getArtists() {
@@ -157,12 +157,16 @@ export function getArtists() {
 		},
 	];
 
-	// TODO: Replace with axios request
-	return getFakePromise(artists).then(artists => artists);
+	return axios
+		.get(`http://api.hackappellas.me/artists/`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return artists;
+		});
 }
 
-// TODO: Use artistId to make axios GET request
-//eslint-disable-next-line no-unused-vars
 export function getArtistDetails(artistId) {
 	const artist = {
 		albums: [
@@ -194,7 +198,14 @@ export function getArtistDetails(artistId) {
 		],
 	};
 
-	return getFakePromise(artist).then(artist => artist);
+	return axios
+		.get(`http://api.hackappellas.me/artists/${artistId}`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return artist;
+		});
 }
 
 export function getPlaylists() {
@@ -247,12 +258,16 @@ export function getPlaylists() {
 		},
 	];
 
-	// TODO: Replace with axios request
-	return getFakePromise(playlists).then(playlists => playlists);
+	return axios
+		.get(`http://api.hackappellas.me/playlists/`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return playlists;
+		});
 }
 
-// TODO: Use Id to make axios GET request
-//eslint-disable-next-line no-unused-vars
 export function getPlaylistDetails(playlistId) {
 	const playlist = {
 		artists: [
@@ -280,7 +295,14 @@ export function getPlaylistDetails(playlistId) {
 		],
 	};
 
-	return getFakePromise(playlist).then(playlist => playlist);
+	return axios
+		.get(`http://api.hackappellas.me/playlists/${playlistId}`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return playlist;
+		});
 }
 
 export function getTracks() {
@@ -335,12 +357,16 @@ export function getTracks() {
 		},
 	];
 
-	//TODO: Replace with Axios request
-	return getFakePromise(tracks).then(tracks => tracks);
+	return axios
+		.get(`http://api.hackappellas.me/tracks/`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return tracks;
+		});
 }
 
-// TODO: Use Id to make axios GET request
-//eslint-disable-next-line no-unused-vars
 export function getTrackDetails(trackId) {
 	const track = {
 		album: {
@@ -359,5 +385,12 @@ export function getTrackDetails(trackId) {
 		spotifyUri: "spotify.uri",
 	};
 
-	return getFakePromise(track).then(track => track);
+	return axios
+		.get(`http://api.hackappellas.me/tracks/${trackId}`)
+		.then(response => response.data)
+		.catch(err => {
+			logger.error("API request failed; returning mock data instance");
+			logger.error(err);
+			return track;
+		});
 }
