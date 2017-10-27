@@ -72,7 +72,7 @@ def walk_playlist_tracks(sp_tracks):
 
     # paginate all tracks in playlist
     while sp_tracks:
-        for i, sp_track in enumerate(sp_tracks['items'][:20]):
+        for i, sp_track in enumerate(sp_tracks['items'][:5]):
             print('PTrack: {}/{}'.format(i+1, len(sp_tracks['items'])))
 
             sp_track = sp_track['track']
@@ -96,6 +96,7 @@ def walk_playlist_tracks(sp_tracks):
         sp_tracks = sp.next(sp_tracks) if sp_tracks['next'] else None
 
     attrs['num_artists'] = len(attrs['artists'])
+    attrs['artists'] = list(attrs['artists'])
     return attrs
 
 
@@ -103,7 +104,10 @@ def create_artist(sp_artist):
     """Creates a db artist obj from a spotify artist obj"""
     sp_artist = sp.artist(sp_artist['id'])
     name = sp_artist['name']
-    image_url = upload_to_clooouuddd(sp_artist['images'][0]['url'])
+    if len(sp_artist['images']) > 0:
+        image_url = upload_to_clooouuddd(sp_artist['images'][0]['url'])
+    else:
+        image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     spotify_uri = sp_artist['uri']
     try:
         lfm_artist = plast.get_artist(name)
@@ -148,14 +152,17 @@ def create_album(sp_track, artist):
     sp_album = sp.album(sp_track['album']['id'])
     name = sp_album['name']
     spotify_uri = sp_album['uri']
-    image_url = upload_to_clooouuddd(sp_album['images'][0]['url'])
+    if len(sp_album['images']) > 0:
+        image_url = upload_to_clooouuddd(sp_album['images'][0]['url'])
+    else:
+        image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     try:
         lfm_album = plast.get_album(artist.name, name)
         playcount = lfm_album.get_playcount()
         releasedate = lfm_album.get_release_date()
     except BaseException as e:
         playcount = 0
-        releasedate = 0
+        releasedate = None
     
     
 
@@ -213,8 +220,10 @@ def create_track(sp_track, artist, album):
     
     duration = sp_track['duration_ms']
     spotify_uri = sp_track['uri']
-    image_url = upload_to_clooouuddd(sp_track['album']['images'][0]['url'])
-
+    if len(sp_track['album']) > 0:
+        image_url = upload_to_clooouuddd(sp_track['album']['images'][0]['url'])
+    else:
+        image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     track = Track(
         name=name,
         playcount=playcount,
