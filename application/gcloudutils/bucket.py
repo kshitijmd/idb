@@ -13,7 +13,7 @@ import os
 # Returns a string of the public URL
 def upload_to_clooouuddd(spotifyURL):
 	if not spotifyURL or spotifyURL == "":
-		return ""
+		return "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
 
 	spotifyURL =  spotifyURL[:4]+spotifyURL[5:]
 
