@@ -8,7 +8,7 @@ matrix:
   include:
     - language: python
       python: "3.5"
-      install: pip install -r requirements.txt
+      install: pip install -r application/requirements.txt
       services: postgresql
       before_script:
         - psql -c 'create database playlistr_test;' -U postgres
