@@ -5,6 +5,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 db = SQLAlchemy()
 
@@ -12,6 +13,7 @@ db = SQLAlchemy()
 def create_app(config='config.json'):
     app = Flask(__name__)
     app.config.from_json(config)
+    CORS(app)
 
     db.init_app(app)
     db.create_all(app=app)
