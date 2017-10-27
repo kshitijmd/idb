@@ -33,7 +33,7 @@ export default class Playlist extends React.Component {
 
 	componentDidMount() {
 		musicApi
-			.getPlaylistDetails(this.props.match.playlistId)
+			.getPlaylistDetails(this.props.match.params.playlistId)
 			.then(playlist =>
 				this.setState({
 					playlist: playlist,
