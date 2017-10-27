@@ -87,7 +87,7 @@ class TestApi(TestCase):
         a.image_url = "asdf"
         a.playcount = 12345
         a.spotify_uri = "spotify.uri"
-        a.releasedate = datetime(1970, 1, 1, tzinfo=timezone.utc)
+        a.releasedate = 'Wed, 31 Dec 1969 18:00:00 GMT'
         a.name = title
         return a
 
