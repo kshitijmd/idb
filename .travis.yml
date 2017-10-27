@@ -1,15 +1,13 @@
 - language: node_js
-  node_js:
-    - "node"
-  script:
-    - npm run lint
-    - python3 test.py
-  install: pip install -r application/requirements.txt
-  services: postgresql
-  before_script:
-    - psql -c 'create database playlistr_test;' -U postgres
-  script: 
-    - python test.py
+node_js:
+  - "node"
+install: pip install -r application/requirements.txt
+before_script:
+  - psql -c 'create database playlistr_test;' -U postgres
+script:
+  - npm run lint
+  - python3 test.py
+services: postgresql
 
 notifications:
   slack: csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh
