@@ -57,6 +57,8 @@ def walk_playlist():
                     print(e.message)
                 elif hasattr(e, "msg"):
                     print(e.msg)
+                else:
+                    raise e
 
     
 
@@ -105,12 +107,11 @@ def create_artist(sp_artist):
     spotify_uri = sp_artist['uri']
     try:
         lfm_artist = plast.get_artist(name)
-    except Exception as e:
-        bio = ""
-        playcount = 0
-    else:
         bio = lfm_artist.get_bio_summary()
         playcount = lfm_artist.get_playcount()
+    except BaseException as e:
+        bio = ""
+        playcount = 0
 
     genres = create_genres(sp_artist['genres'])
 
@@ -150,12 +151,11 @@ def create_album(sp_track, artist):
     image_url = upload_to_clooouuddd(sp_album['images'][0]['url'])
     try:
         lfm_album = plast.get_album(artist.name, name)
-    except Exception as e:
-        playcount = 0
-        releasedate = 0
-    else:
         playcount = lfm_album.get_playcount()
         releasedate = lfm_album.get_release_date()
+    except BaseException as e:
+        playcount = 0
+        releasedate = 0
     
     
 
@@ -208,7 +208,7 @@ def create_track(sp_track, artist, album):
     name = sp_track['name']
     try:
         playcount = plast.get_track(artist.name, name).get_playcount()
-    except Exception as e:
+    except BaseException as e:
         playcount = 0
     
     duration = sp_track['duration_ms']
