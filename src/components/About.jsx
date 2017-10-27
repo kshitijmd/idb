@@ -126,7 +126,7 @@ const tools = [
 
 const links = {
 	github: "https://github.com/mbowen13/idb",
-	apiary: "http://docs.mbowen13.apiary.io/",
+	apiary: "http://docs.kshitijmd.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
 	uml: "https://utexas.app.box.com/s/nohry3xvi3u13xyahfkf8mfevcdbm06w",
 	report: "https://utexas.box.com/s/yl4nnesb52uiv5xhuhqlh3j1907ogelg",
