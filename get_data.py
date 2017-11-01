@@ -115,7 +115,7 @@ def create_artist(sp_artist):
         bio = lfm_artist.get_bio_summary()
         playcount = lfm_artist.get_playcount()
     except BaseException as e:
-        bio = ""
+        bio = "N/A"
         playcount = 0
 
     genres = create_genres(sp_artist['genres'])
