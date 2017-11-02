@@ -137,28 +137,34 @@ class TestApi(TestCase):
     def test_get_artist_all(self):
         response = self.client.get('/artists/')
         artist = json.loads(response.data.decode('utf-8'))
-        expected = [{
-            "id": 1,
-            "name": "Vampire Weekend",
-            "bio": "This band is super cool!",
-            "spotifyUri": "spotify.uri",
-            "playcount": 12345,
-            "imageUrl": "asdf",
-            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
-            "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}],
-            "genres": ["indie"]
-        },
-            {
-            "id": 2,
-            "name": "Men At Work",
-            "bio": "This band is super cool!",
-            "spotifyUri": "spotify.uri",
-            "playcount": 12345,
-            "imageUrl": "asdf",
-            "tracks": [{"id": 3, "name": "Down By The Sea"}],
-            "albums": [{"id": 3, "name": "Business As Usual"}],
-            "genres": ["rock"]
-        }]
+        expected = {
+            "artists": [{
+                "id": 1,
+                "name": "Vampire Weekend",
+                "bio": "This band is super cool!",
+                "spotifyUri": "spotify.uri",
+                "playcount": 12345,
+                "imageUrl": "asdf",
+                "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+                "albums": [{"id": 1, "name": "Modern Vampires of the City"}, {"id": 2, "name": "Contra"}],
+                "genres": ["indie"]
+            },
+                {
+                "id": 2,
+                "name": "Men At Work",
+                "bio": "This band is super cool!",
+                "spotifyUri": "spotify.uri",
+                "playcount": 12345,
+                "imageUrl": "asdf",
+                "tracks": [{"id": 3, "name": "Down By The Sea"}],
+                "albums": [{"id": 3, "name": "Business As Usual"}],
+                "genres": ["rock"]
+            }],
+            "next": None,
+            "pages": 1,
+            "per_page": 20,
+            "prev": None
+        }
         self.log.write('GET /artists/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(artist, expected)
@@ -184,40 +190,45 @@ class TestApi(TestCase):
     def test_get_album_all(self):
         response = self.client.get('/albums/')
         album = json.loads(response.data.decode('utf-8'))
-        expected = [{
-            "id": 1,
-            "imageUrl": "asdf",
-            "playcount": 12345,
-            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
-            "spotifyUri": "spotify.uri",
-            "name": "Modern Vampires of the City",
-            "artist": {"id": 1, "name": "Vampire Weekend"},
-            "tracks": [{"id": 1, "name": "Diane Young"}],
-            "genres": ["indie"]
-        },
-            {
-            "id": 2,
-            "imageUrl": "asdf",
-            "playcount": 12345,
-            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
-            "spotifyUri": "spotify.uri",
-            "name": "Contra",
-            "artist": {"id": 1, "name": "Vampire Weekend"},
-            "tracks": [{"id": 2, "name": "I Think Ur A Contra"}],
-            "genres": ["indie"]
-        },
-            {
-            "id": 3,
-            "imageUrl": "asdf",
-            "playcount": 12345,
-            "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
-            "spotifyUri": "spotify.uri",
-            "name": "Business As Usual",
-            "artist": {"id": 2, "name": "Men At Work"},
-            "tracks": [{"id": 3, "name": "Down By The Sea"}],
-            "genres": ["rock"]
-
-        }]
+        expected = {
+            "albums": [{
+                "id": 1,
+                "imageUrl": "asdf",
+                "playcount": 12345,
+                "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
+                "spotifyUri": "spotify.uri",
+                "name": "Modern Vampires of the City",
+                "artist": {"id": 1, "name": "Vampire Weekend"},
+                "tracks": [{"id": 1, "name": "Diane Young"}],
+                "genres": ["indie"]
+            },
+                {
+                "id": 2,
+                "imageUrl": "asdf",
+                "playcount": 12345,
+                "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
+                "spotifyUri": "spotify.uri",
+                "name": "Contra",
+                "artist": {"id": 1, "name": "Vampire Weekend"},
+                "tracks": [{"id": 2, "name": "I Think Ur A Contra"}],
+                "genres": ["indie"]
+            },
+                {
+                "id": 3,
+                "imageUrl": "asdf",
+                "playcount": 12345,
+                "releaseDate": 'Wed, 31 Dec 1969 18:00:00 GMT',
+                "spotifyUri": "spotify.uri",
+                "name": "Business As Usual",
+                "artist": {"id": 2, "name": "Men At Work"},
+                "tracks": [{"id": 3, "name": "Down By The Sea"}],
+                "genres": ["rock"]
+            }],
+            "next": None,
+            "pages": 1,
+            "per_page": 20,
+            "prev": None
+        }
         self.log.write('GET /albums/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(album, expected)
@@ -248,54 +259,60 @@ class TestApi(TestCase):
     def test_get_track_all(self):
         response = self.client.get('/tracks/')
         track = json.loads(response.data.decode('utf-8'))
-        expected = [{
-            "id": 1,
-            "name": "Diane Young",
-            "playcount": 12345,
-            "duration": 456,
-            "spotifyUri": "spotify.uri",
-            "imageUrl": "asdf",
-            "album": {
+        expected = {
+            "tracks": [{
                 "id": 1,
-                "name": "Modern Vampires of the City"
+                "name": "Diane Young",
+                "playcount": 12345,
+                "duration": 456,
+                "spotifyUri": "spotify.uri",
+                "imageUrl": "asdf",
+                "album": {
+                    "id": 1,
+                    "name": "Modern Vampires of the City"
+                },
+                "artist": {
+                    "id": 1,
+                    "name": "Vampire Weekend"
+                }
             },
-            "artist": {
-                "id": 1,
-                "name": "Vampire Weekend"
-            }
-        },
-            {
-            "id": 2,
-            "name": "I Think Ur A Contra",
-            "playcount": 12345,
-            "duration": 456,
-            "spotifyUri": "spotify.uri",
-            "imageUrl": "asdf",
-            "album": {
+                {
                 "id": 2,
-                "name": "Contra"
+                "name": "I Think Ur A Contra",
+                "playcount": 12345,
+                "duration": 456,
+                "spotifyUri": "spotify.uri",
+                "imageUrl": "asdf",
+                "album": {
+                    "id": 2,
+                    "name": "Contra"
+                },
+                "artist": {
+                    "id": 1,
+                    "name": "Vampire Weekend"
+                }
             },
-            "artist": {
-                "id": 1,
-                "name": "Vampire Weekend"
-            }
-        },
-            {
-            "id": 3,
-            "name": "Down By The Sea",
-            "playcount": 12345,
-            "duration": 456,
-            "spotifyUri": "spotify.uri",
-            "imageUrl": "asdf",
-            "album": {
+                {
                 "id": 3,
-                "name": "Business As Usual"
-            },
-            "artist": {
-                "id": 2,
-                "name": "Men At Work"
-            }
-        }]
+                "name": "Down By The Sea",
+                "playcount": 12345,
+                "duration": 456,
+                "spotifyUri": "spotify.uri",
+                "imageUrl": "asdf",
+                "album": {
+                    "id": 3,
+                    "name": "Business As Usual"
+                },
+                "artist": {
+                    "id": 2,
+                    "name": "Men At Work"
+                }
+            }],
+            "next": None,
+            "pages": 1,
+            "per_page": 20,
+            "prev": None
+        }
         self.log.write('GET /tracks/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(track, expected)
@@ -322,30 +339,36 @@ class TestApi(TestCase):
     def test_get_playlist_all(self):
         response = self.client.get('/playlists/')
         playlist = json.loads(response.data.decode('utf-8'))
-        expected = [{
-            "id": 1,
-            "name": "sicc Vampire Weekend playlist",
-            "numFollowers": 21,
-            "numArtists": 1,
-            "imageUrl": "asdf",
-            "spotifyUri": "spotify.uri",
-            "duration": 456,
-            "numTracks": 2,
-            "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
-            "artists": [{"id": 1, "name": "Vampire Weekend"}]
-        },
-            {
-            "id": 2,
-            "name": "Dad Rock jams",
-            "numFollowers": 21,
-            "imageUrl": "asdf",
-            "numArtists": 1,
-            "spotifyUri": "spotify.uri",
-            "duration": 456,
-            "numTracks": 1,
-            "tracks": [{"id": 3, "name": "Down By The Sea"}],
-            "artists": [{"id": 2, "name": "Men At Work"}]
-        }]
+        expected = {
+            "playlists": [{
+                "id": 1,
+                "name": "sicc Vampire Weekend playlist",
+                "numFollowers": 21,
+                "numArtists": 1,
+                "imageUrl": "asdf",
+                "spotifyUri": "spotify.uri",
+                "duration": 456,
+                "numTracks": 2,
+                "tracks": [{"id": 1, "name": "Diane Young"}, {"id": 2, "name": "I Think Ur A Contra"}],
+                "artists": [{"id": 1, "name": "Vampire Weekend"}]
+            },
+                {
+                "id": 2,
+                "name": "Dad Rock jams",
+                "numFollowers": 21,
+                "imageUrl": "asdf",
+                "numArtists": 1,
+                "spotifyUri": "spotify.uri",
+                "duration": 456,
+                "numTracks": 1,
+                "tracks": [{"id": 3, "name": "Down By The Sea"}],
+                "artists": [{"id": 2, "name": "Men At Work"}]
+            }],
+            "next": None,
+            "pages": 1,
+            "per_page": 20,
+            "prev": None
+        }
         self.log.write('GET /playlists/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(playlist, expected)

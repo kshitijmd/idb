@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from app.models import Artist
-from .util import serialize
+from .util import serialize, all_response
 
 # probably going to need to import from our models here
 
@@ -11,7 +11,7 @@ artists_blueprint = Blueprint('artists', __name__)
 
 @artists_blueprint.route('/')
 def get_artists():
-    return jsonify([serialize(artist) for artist in Artist.query.limit(50).all()])
+    return all_response(Artist, 'artists')
 
 # Get a specific artist based on ID
 

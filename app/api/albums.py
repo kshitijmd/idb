@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from app.models import Album
-from .util import serialize
+from .util import serialize, all_response
 
 albums_blueprint = Blueprint('albums', __name__)
 
@@ -9,7 +9,7 @@ albums_blueprint = Blueprint('albums', __name__)
 
 @albums_blueprint.route('/')
 def get_albums():
-    return jsonify([serialize(album) for album in Album.query.limit(50).all()])
+    return all_response(Album, 'albums')
 
 # Get a specific album based on ID
 
