@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 
 
 def serialize(obj):
@@ -12,7 +12,11 @@ def serialize(obj):
 
 
 def all_response(model, data_name='data'):
-    pagination = model.query.paginate()
+    query = model.query
+    order_by = request.args.get('order_by')
+    if order_by in (m.key for m in model.__table__.columns):
+        query = query.order_by(order_by)
+    pagination = query.paginate()
     return jsonify({
         'pages': pagination.pages,
         'next': pagination.next_num,
