@@ -1,4 +1,5 @@
 from flask import jsonify, request
+from sqlalchemy import desc
 
 
 def serialize(obj):
@@ -13,10 +14,16 @@ def serialize(obj):
 
 def all_response(model, data_name='data'):
     query = model.query
+
     order_by = request.args.get('order_by')
     if order_by and order_by not in (m.key for m in model.__table__.columns):
         return bad_request('Invalid order_by argument.')
-    query = query.order_by(order_by)
+    elif order_by:
+        if request.args.get('desc'):
+            query = query.order_by(desc(order_by))
+        else:
+            query = query.order_by(order_by)
+
     pagination = query.paginate()
     return jsonify({
         'pages': pagination.pages,
