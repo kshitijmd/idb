@@ -13,16 +13,7 @@ def serialize(obj):
 
 
 def all_response(model, data_name='data'):
-    query = model.query
-
-    order_by = request.args.get('order_by')
-    if order_by and order_by not in (m.key for m in model.__table__.columns):
-        return bad_request('Invalid order_by argument.')
-    elif order_by:
-        if request.args.get('desc'):
-            query = query.order_by(desc(order_by))
-        else:
-            query = query.order_by(order_by)
+    query = order_query(model.query, model.__table__.columns)
 
     pagination = query.paginate()
     return jsonify({
@@ -32,6 +23,22 @@ def all_response(model, data_name='data'):
         'per_page': pagination.per_page,
         data_name: [serialize(datum) for datum in pagination.items]
     })
+
+
+def filter_query(query):
+    pass
+
+
+def order_query(query, columns):
+    order_by = request.args.get('order_by')
+    if order_by and order_by not in (m.key for m in columns):
+        return bad_request('Invalid order_by argument.')
+    elif order_by:
+        if request.args.get('desc'):
+            query = query.order_by(desc(order_by))
+        else:
+            query = query.order_by(order_by)
+    return query
 
 
 def bad_request(message):
