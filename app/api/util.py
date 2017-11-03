@@ -41,6 +41,10 @@ def filter_query(query, model):
     if exclude:
         query = query.filter(getattr(model, filter_by) != exclude)
 
+    like = request.args.get('like')
+    if like:
+        query = query.filter(getattr(model, filter_by).like('%' + like + '%'))
+
     return query
 
 
