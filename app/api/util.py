@@ -14,8 +14,9 @@ def serialize(obj):
 def all_response(model, data_name='data'):
     query = model.query
     order_by = request.args.get('order_by')
-    if order_by in (m.key for m in model.__table__.columns):
-        query = query.order_by(order_by)
+    if order_by and order_by not in (m.key for m in model.__table__.columns):
+        return bad_request('Invalid order_by argument.')
+    query = query.order_by(order_by)
     pagination = query.paginate()
     return jsonify({
         'pages': pagination.pages,
@@ -24,3 +25,9 @@ def all_response(model, data_name='data'):
         'per_page': pagination.per_page,
         data_name: [serialize(datum) for datum in pagination.items]
     })
+
+
+def bad_request(message):
+    response = jsonify({'message': message})
+    response.status_code = 400
+    return response
