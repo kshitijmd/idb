@@ -5,7 +5,12 @@
 # pylint: disable=trailing-whitespace
 # pylint: disable=too-many-arguments
 # Junction Tables
+from flask_sqlalchemy import BaseQuery
+from sqlalchemy_searchable import make_searchable, SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
 from app.app import db
+
+make_searchable()
 
 track_playlist = db.Table(
     'track_playlist',
@@ -56,6 +61,10 @@ artist_genre = db.Table(
 )
 
 
+class SearchQuery(BaseQuery, SearchQueryMixin):
+    pass
+
+
 class Track(db.Model):
     """
     Track is the most basic model in our project. Other models use this
@@ -75,9 +84,10 @@ class Track(db.Model):
         image_url (str): url to the image for this track
     """
     __tablename__ = 'track'
+    query_class = SearchQuery
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), index=True, nullable=False)
+    name = db.Column(db.UnicodeText, index=True, nullable=False)
     playcount = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
     spotify_uri = db.Column(db.String(255))
@@ -87,6 +97,8 @@ class Track(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     album = db.relationship('Album', back_populates='tracks')
     artist = db.relationship('Artist', back_populates='tracks')
+
+    search_vector = db.Column(TSVectorType('name'))
 
     def __serialize__(self):
         return {
@@ -125,18 +137,20 @@ class Artist(db.Model):
         image_url (str): url of the image for this artist
     """
     __tablename__ = 'artist'
+    query_class = SearchQuery
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), index=True, nullable=False)
-    bio = db.Column(db.Text)
+    name = db.Column(db.UnicodeText, index=True, nullable=False)
+    bio = db.Column(db.UnicodeText)
     spotify_uri = db.Column(db.String(255))
     playcount = db.Column(db.Integer, default=0)
     image_url = db.Column(db.String(255))
 
     tracks = db.relationship('Track', back_populates='artist')
     albums = db.relationship('Album', back_populates='artist')
-
     genres = db.relationship('Genre', secondary=artist_genre)
+
+    search_vector = db.Column(TSVectorType('name', 'bio'))
 
     def __serialize__(self):
         return {
@@ -175,9 +189,10 @@ class Playlist(db.Model):
         image_url (str): image url for the playlist
     """
     __tablename__ = 'playlist'
+    query_class = SearchQuery
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), index=True, nullable=False)
+    name = db.Column(db.UnicodeText, index=True, nullable=False)
     spotify_uri = db.Column(db.String(255))
     num_artists = db.Column(db.Integer, default=0)
     num_tracks = db.Column(db.Integer, default=0)
@@ -188,6 +203,8 @@ class Playlist(db.Model):
     # No backpopulation, only want unidirectional links
     tracks = db.relationship('Track', secondary=track_playlist)
     artists = db.relationship('Artist', secondary=artist_playlist)
+
+    search_vector = db.Column(TSVectorType('name'))
 
     def __serialize__(self):
         return {
@@ -224,9 +241,10 @@ class Album(db.Model):
         releasedate (date): release date of the album
     """
     __tablename__ = 'album'
+    query_class = SearchQuery
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), index=True, nullable=False)
+    name = db.Column(db.UnicodeText, index=True, nullable=False)
     spotify_uri = db.Column(db.String(255))
     playcount = db.Column(db.Integer)
     releasedate = db.Column(db.DateTime)
@@ -234,9 +252,10 @@ class Album(db.Model):
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     artist = db.relationship('Artist', back_populates='albums')
-
     tracks = db.relationship('Track', back_populates='album')
     genres = db.relationship('Genre', secondary=album_genre)
+
+    search_vector = db.Column(TSVectorType('name'))
 
     def __serialize__(self):
         return {
