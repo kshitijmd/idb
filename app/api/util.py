@@ -13,7 +13,8 @@ def serialize(obj):
 
 
 def all_response(model, data_name='data'):
-    query = order_query(model.query, model.__table__.columns)
+    query = order_query(model.query, model)
+    query = filter_query(query, model)
 
     pagination = query.paginate()
     return jsonify({
@@ -25,13 +26,27 @@ def all_response(model, data_name='data'):
     })
 
 
-def filter_query(query):
-    pass
+def filter_query(query, model):
+    filter_by = request.args.get('filter_by')
+    if not filter_by:
+        return query
+    if filter_by not in (m.key for m in model.__table__.columns):
+        return bad_request('Invalid filter_by argument.')
+
+    include = request.args.get('include')
+    if include:
+        query = query.filter(getattr(model, filter_by) == include)
+
+    exclude = request.args.get('exclude')
+    if exclude:
+        query = query.filter(getattr(model, filter_by) != exclude)
+
+    return query
 
 
-def order_query(query, columns):
+def order_query(query, model):
     order_by = request.args.get('order_by')
-    if order_by and order_by not in (m.key for m in columns):
+    if order_by and order_by not in (m.key for m in model.__table__.columns):
         return bad_request('Invalid order_by argument.')
     elif order_by:
         if request.args.get('desc'):
