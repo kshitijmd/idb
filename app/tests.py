@@ -163,7 +163,8 @@ class TestApi(TestCase):
             "next": None,
             "pages": 1,
             "per_page": 20,
-            "prev": None
+            "prev": None,
+            "page": 1
         }
         self.log.write('GET /artists/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
@@ -227,7 +228,8 @@ class TestApi(TestCase):
             "next": None,
             "pages": 1,
             "per_page": 20,
-            "prev": None
+            "prev": None,
+            "page": 1
         }
         self.log.write('GET /albums/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
@@ -311,7 +313,8 @@ class TestApi(TestCase):
             "next": None,
             "pages": 1,
             "per_page": 20,
-            "prev": None
+            "prev": None,
+            "page": 1
         }
         self.log.write('GET /tracks/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
@@ -367,8 +370,64 @@ class TestApi(TestCase):
             "next": None,
             "pages": 1,
             "per_page": 20,
-            "prev": None
+            "prev": None,
+            "page": 1
         }
         self.log.write('GET /playlists/ \n')
         self.log.write(response.data.decode('utf-8') + '\n')
         self.assertEqual(playlist, expected)
+
+
+NUM_ALBUMS = 100
+
+
+class TestApiPagination(TestCase):
+    def create_app(self):
+        return create_app('test_config.json')
+
+    def setUp(self):
+        db.drop_all()
+        db.create_all()
+        self.populate_db()
+        self.log = open('test.log', 'a')
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.log.close()
+
+    def populate_db(self):
+        models = []
+        for i in range(1, NUM_ALBUMS + 1):
+            a = Album()
+            a.name = 'album:' + str(i)
+            models.append(a)
+        db.session.add_all(models)
+        db.session.commit()
+
+    def test_pagination_defaults(self):
+        json_response = self.client.get('/albums/')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(response['page'], 1)
+        self.assertEqual(response['next'], 2)
+        self.assertEqual(response['prev'], None)
+        self.assertEqual(response['per_page'], 20)
+        self.assertEqual(response['pages'], NUM_ALBUMS // 20)
+
+    def test_pagination_per_page_50(self):
+        json_response = self.client.get('/albums/?per_page=50')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(response['page'], 1)
+        self.assertEqual(response['next'], 2)
+        self.assertEqual(response['prev'], None)
+        self.assertEqual(response['per_page'], 50)
+        self.assertEqual(response['pages'], NUM_ALBUMS // 50)
+
+    def test_pagination_per_page_50_and_page_2(self):
+        json_response = self.client.get('/albums/?per_page=50&page=2')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(response['page'], 2)
+        self.assertEqual(response['next'], None)
+        self.assertEqual(response['prev'], 1)
+        self.assertEqual(response['per_page'], 50)
+        self.assertEqual(response['pages'], NUM_ALBUMS // 50)

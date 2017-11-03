@@ -18,6 +18,7 @@ def all_response(model, data_name='data'):
 
     pagination = query.paginate()
     return jsonify({
+        'page': pagination.page,
         'pages': pagination.pages,
         'next': pagination.next_num,
         'prev': pagination.prev_num,
