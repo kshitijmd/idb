@@ -72,6 +72,7 @@ rsa==3.4.2
 six==1.11.0
 spotipy==2.4.4
 SQLAlchemy==1.1.14
+SQLAlchemy-Searchable==0.10.6
 tenacity==4.5.0
 urllib3==1.22
 Werkzeug==0.12.2
