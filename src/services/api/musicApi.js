@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as logger from "../logger";
 
-var api_host = "localhost:8000";
+const api_host = "localhost:8000";
 
 export function getAlbums() {
 	const data = [
