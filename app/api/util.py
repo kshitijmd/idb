@@ -51,9 +51,9 @@ def filter_query(query, model):
 
 def order_query(query, model):
     order_by = request.args.get('order_by')
-    if order_by and order_by not in (m.key for m in model.__table__.columns):
-        return bad_request('Invalid order_by argument.')
-    elif order_by:
+    if order_by:
+        if order_by not in (m.key for m in model.__table__.columns):
+            return bad_request('Invalid order_by argument.')
         if request.args.get('desc'):
             query = query.order_by(desc(order_by))
         else:

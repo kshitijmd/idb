@@ -389,7 +389,7 @@ class TestApiPagination(TestCase):
         db.drop_all()
         db.create_all()
         self.populate_db()
-        self.log = open('test.log', 'a')
+        self.log = open('test_pagination.log', 'a')
 
     def tearDown(self):
         db.session.remove()
@@ -431,3 +431,58 @@ class TestApiPagination(TestCase):
         self.assertEqual(response['prev'], 1)
         self.assertEqual(response['per_page'], 50)
         self.assertEqual(response['pages'], NUM_ALBUMS // 50)
+
+
+class TestApiSorting(TestCase):
+    def create_app(self):
+        return create_app('test_config.json')
+
+    def setUp(self):
+        db.drop_all()
+        db.create_all()
+        self.populate_db()
+        self.log = open('test_sorting.log', 'a')
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.log.close()
+
+    def populate_db(self):
+        models = []
+        # 'a' - 'z' in ASCII
+        for i in range(97, 123):
+            a = Album()
+            a.name = 'album:' + chr(i)
+            # 'z' - 'a'
+            a.spotify_uri = 'uri:' + opposite_chr(i)
+            models.append(a)
+        db.session.add_all(models)
+        db.session.commit()
+
+    def test_sort_defaults(self):
+        json_response = self.client.get(
+            '/albums/?order_by=spotify_uri')
+        response = json.loads(json_response.data.decode('utf-8'))
+        albums = response['albums']
+        i = 97
+        # do it this way in case the per_page default changes
+        for a in albums:
+            self.assertEqual(a['name'], 'album:' + opposite_chr(i))
+            self.assertEqual(a['spotifyUri'], 'uri:' + chr(i))
+            i += 1
+
+    def test_sort_desc(self):
+        json_response = self.client.get('/albums/?order_by=name&desc=true')
+        response = json.loads(json_response.data.decode('utf-8'))
+        albums = response['albums']
+        i = 97
+        # do it this way in case the per_page default changes
+        for a in albums:
+            self.assertEqual(a['name'], 'album:' + opposite_chr(i))
+            self.assertEqual(a['spotifyUri'], 'uri:' + chr(i))
+            i += 1
+
+
+def opposite_chr(c):
+    return chr(97 + (25 - c % 97))
