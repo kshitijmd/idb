@@ -483,6 +483,64 @@ class TestApiSorting(TestCase):
             self.assertEqual(a['spotifyUri'], 'uri:' + chr(i))
             i += 1
 
+class TestApiFiltering(TestCase):
+    def create_app(self):
+        return create_app('test_config.json')
+
+    def setUp(self):
+        db.drop_all()
+        db.create_all()
+        self.populate_db()
+        self.log = open('test_sorting.log', 'a')
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.log.close()
+
+    def populate_db(self):
+        models = []
+        # 'a' - 'z' in ASCII
+        for i in range(97, 123):
+            a = Album()
+            a.name = 'album:' + chr(i)
+            # 'z' - 'a'
+            a.spotify_uri = 'uri:' + opposite_chr(i)
+            models.append(a)
+        db.session.add_all(models)
+        db.session.commit()
+        
+    def test_filter_include_name(self):
+        json_response = self.client.get('/albums/?filter_by=name&include=album:a')
+        response = json.loads(json_response.data.decode('utf-8'))
+        albums = response['albums']
+        # we expect only 1 album in albums
+        album = albums[0]
+        self.assertEqual(album['name'], 'album:a')
+        self.assertEqual(album['spotifyUri'], 'uri:z')
+
+    def test_filter_like_name(self):
+        json_response = self.client.get('/albums/?filter_by=name&like=album:')            
+        response = json.loads(json_response.data.decode('utf-8'))
+        albums = response['albums']
+        i = 97
+        # do it this way in case the per_page default changes
+        for a in albums:
+            self.assertEqual(a['name'], 'album:' + chr(i))
+            self.assertEqual(a['spotifyUri'], 'uri:' + opposite_chr(i))
+            i += 1
+
+    def test_filter_like_exclude_name(self):
+        json_response = self.client.get('/albums/?filter_by=name&like=album:&exclude=album:a')
+        response = json.loads(json_response.data.decode('utf-8'))
+        albums = response['albums']
+        # change i to 98 because we expect a to be gone
+        i = 98
+        # do it this way in case the per_page default changes
+        for a in albums:
+            self.assertEqual(a['name'], 'album:' + chr(i))
+            self.assertEqual(a['spotifyUri'], 'uri:' + opposite_chr(i))
+            i += 1
 
 def opposite_chr(c):
     return chr(97 + (25 - c % 97))
