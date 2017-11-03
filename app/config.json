@@ -1,5 +1,6 @@
 {
-	"SQLALCHEMY_DATABASE_URI": "postgresql+psycopg2://postgres:justiceleague@35.194.7.57/prod",
+	"SQLALCHEMY_DATABASE_URI":
+		"postgresql+psycopg2://postgres:justiceleague@localhost:5432/playlistr",
 	"SQLALCHEMY_TRACK_MODIFICATIONS": "False",
 	"APPLICATION_ROOT": "/api",
 	"DEBUG": "True",

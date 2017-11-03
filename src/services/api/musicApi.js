@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as logger from "../logger";
 
+var api_host = "localhost:8000";
+
 export function getAlbums() {
 	const data = [
 		{
@@ -63,8 +65,8 @@ export function getAlbums() {
 	];
 
 	return axios
-		.get("http://api.hackappellas.me/albums/")
-		.then(response => response.data)
+		.get("http://" + api_host + "/albums/")
+		.then(response => response.data.albums)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
 			logger.error(err);
@@ -94,7 +96,7 @@ export function getAlbumDetails(albumId) {
 	};
 
 	return axios
-		.get(`http://api.hackappellas.me/albums/${albumId}`)
+		.get(`http://` + api_host + `/albums/${albumId}`)
 		.then(response => response.data)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
@@ -158,8 +160,8 @@ export function getArtists() {
 	];
 
 	return axios
-		.get(`http://api.hackappellas.me/artists/`)
-		.then(response => response.data)
+		.get(`http://` + api_host + `/artists/`)
+		.then(response => response.data.artists)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
 			logger.error(err);
@@ -199,7 +201,7 @@ export function getArtistDetails(artistId) {
 	};
 
 	return axios
-		.get(`http://api.hackappellas.me/artists/${artistId}`)
+		.get(`http://` + api_host + `/artists/${artistId}`)
 		.then(response => response.data)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
@@ -259,8 +261,8 @@ export function getPlaylists() {
 	];
 
 	return axios
-		.get(`http://api.hackappellas.me/playlists/`)
-		.then(response => response.data)
+		.get(`http://` + api_host + `/playlists/`)
+		.then(response => response.data.playlists)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
 			logger.error(err);
@@ -296,8 +298,8 @@ export function getPlaylistDetails(playlistId) {
 	};
 
 	return axios
-		.get(`http://api.hackappellas.me/playlists/${playlistId}`)
-		.then(response => response.data)
+		.get(`http://` + api_host + `/playlists/${playlistId}`)
+		.then(response => response.data.playlists)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
 			logger.error(err);
@@ -358,8 +360,8 @@ export function getTracks() {
 	];
 
 	return axios
-		.get(`http://api.hackappellas.me/tracks/`)
-		.then(response => response.data)
+		.get(`http://` + api_host + `/tracks/`)
+		.then(response => response.data.tracks)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
 			logger.error(err);
@@ -386,7 +388,7 @@ export function getTrackDetails(trackId) {
 	};
 
 	return axios
-		.get(`http://api.hackappellas.me/tracks/${trackId}`)
+		.get(`http://` + api_host + `/tracks/${trackId}`)
 		.then(response => response.data)
 		.catch(err => {
 			logger.error("API request failed; returning mock data instance");
