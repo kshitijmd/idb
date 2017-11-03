@@ -1,19 +1,36 @@
 # SWE-IDB
 
-## Install
+
+## Run backend as a python application
+Set up PostgreSQL with a database named "playlistr" and set the password of the "postgres" user to "justiceleague"
+```
+python3 main.py
+```
+The backend will run on localhost:8000. Try http://localhost:8000/tracks
+
+
+## Run frontend directly
+The backend needs to be running first, see above.
 ```
 npm install
-npm start
+npm run dev
 ```
+Then, in a new tab
+```
+node server
+```
+Any code changes will recompile automatically. If you aren't developing, npm start will build and run the server. It requires the backend to be running on the machine as well, unless if you change the api_host in [musicApi.js](src/services/api/musicApi.js) to `api.hackapellas.me`. Then the server will use data from the deployed API.
 
-## Run as a container
-Pull from Docker Cloud
+
+
+## Run frontend as a container
+First, reconfigure the frontend to use the deployed api at api.hackappellas.me (see above)
 ```
-docker pull mbowen13/playlistr
-docker-compose up
+docker build -t frontend .
+docker run --rm -p 9000:9000 frontend
 ```
 Navigate to http://localhost:9000
-Any code changes are automatically reflected in the image, so all you have to do is refresh the browser to see the changes.
+
 
 ## Contributing
 
