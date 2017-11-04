@@ -23,6 +23,9 @@ const styles = {
 	},
 };
 
+// TODO: Handle pagination:
+// Add footer with page selection
+// Request new data on page change
 export default class CardGridList extends React.PureComponent {
 	state = {
 		data: undefined,
@@ -32,8 +35,11 @@ export default class CardGridList extends React.PureComponent {
 		this.props
 			.modelApiFn()
 			.then(response => {
-				// TODO: Handle pagination
 				this.setState({
+					currentPage: response.currentPage,
+					nextPage: response.nextPage,
+					prevPage: response.prevPage,
+					totalPages: response.totalPages,
 					data: response.data,
 				});
 			})
