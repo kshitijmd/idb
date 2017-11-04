@@ -28,15 +28,17 @@ Ensure you are in the root directory of the repo
 ```
 docker build -t frontend .
 docker run -v ${PWD}:/app --rm -p 9000:9000 frontend
+# A Docker container will start running webpack
+# Open up a new tab of your machine's shell
 docker ps
-# Take note of your container id
+# Take note of your container id, then start a new shell for the Docker container
 docker exec -it <CONTAINER_ID> bash
 # Wait for webpack to finish in the original Docker container shell
 # Then, in the second Docker container shell
 node server
 ```
 Navigate to http://localhost:9000
-Hot reloading!
+Marvel at the hot reloading!
 
 
 ## Contributing
