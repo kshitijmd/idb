@@ -31,10 +31,10 @@ export default class CardGridList extends React.PureComponent {
 	componentDidMount() {
 		this.props
 			.modelApiFn()
-			.then(data => {
+			.then(response => {
 				// TODO: Handle pagination
 				this.setState({
-					data: data,
+					data: response.data,
 				});
 			})
 			.catch(err => {
