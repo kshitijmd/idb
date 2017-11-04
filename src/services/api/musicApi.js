@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_host = "localhost:8000";
+const api_host = "dev-api.hackappellas.me";
 
 export function getAlbums() {
 	return axios.get("http://" + api_host + "/albums/").then(response => response.data.albums);

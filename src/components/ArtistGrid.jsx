@@ -1,11 +1,8 @@
 import React from "react";
 import CardGridList from "./CardGridList";
-import ellipsize from "ellipsize";
-import ProgressSpinner from "./ProgressSpinner";
-import ErrorCard from "./ErrorCard";
 import * as musicApi from "../services/api/musicApi";
-import * as logger from "../services/logger";
 
+import ellipsize from "ellipsize";
 function transformer(artist) {
 	return {
 		id: artist.id,
@@ -19,35 +16,7 @@ function transformer(artist) {
 }
 
 export default class ArtistGrid extends React.Component {
-	state = {
-		data: undefined,
-	};
-
-	componentDidMount() {
-		musicApi
-			.getArtists()
-			.then(data => {
-				this.setState({
-					data: data.map(artist => transformer(artist)),
-				});
-			})
-			.catch(err => {
-				logger.error(err);
-				this.setState({
-					data: null,
-				});
-			});
-	}
-
-	_renderData = () => <CardGridList routerBaseUrl="artists" data={this.state.data} />;
-
 	render() {
-		if (this.state.data === undefined) {
-			return <ProgressSpinner />;
-		} else if (this.state.data === null) {
-			return <ErrorCard />;
-		} else {
-			return this._renderData();
-		}
+		return <CardGridList routerBaseUrl="artists" modelApiFn={musicApi.getArtists} />;
 	}
 }
