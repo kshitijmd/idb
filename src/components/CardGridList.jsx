@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Card, CardText, CardTitle, CardMedia } from "material-ui/Card";
 import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
+import PaginationBar from "./PaginationBar";
 import * as logger from "../services/logger";
 
 const styles = {
@@ -37,8 +38,6 @@ export default class CardGridList extends React.PureComponent {
 			.then(response => {
 				this.setState({
 					currentPage: response.currentPage,
-					nextPage: response.nextPage,
-					prevPage: response.prevPage,
 					totalPages: response.totalPages,
 					data: response.data,
 				});
@@ -52,28 +51,34 @@ export default class CardGridList extends React.PureComponent {
 	}
 
 	_renderData = () => (
-		<div style={styles.root}>
-			{this.state.data.map(item => (
-				<Link
-					key={item.id}
-					to={`/${this.props.routerBaseUrl}/${item.id}`}
-					style={styles.hyperlink}
-				>
-					<Card style={styles.card}>
-						<CardMedia>
-							<img src={item.imageUrl} />
-						</CardMedia>
-						<CardTitle title={item.title} subtitle={item.subtitle} />
-						<CardText>
-							<ol>
-								<li>{item.bonusInfo1}</li>
-								<li>{item.bonusInfo2}</li>
-								<li>{item.bonusInfo3}</li>
-							</ol>
-						</CardText>
-					</Card>
-				</Link>
-			))}
+		<div>
+			<div style={styles.root}>
+				{this.state.data.map(item => (
+					<Link
+						key={item.id}
+						to={`/${this.props.routerBaseUrl}/${item.id}`}
+						style={styles.hyperlink}
+					>
+						<Card style={styles.card}>
+							<CardMedia>
+								<img src={item.imageUrl} />
+							</CardMedia>
+							<CardTitle title={item.title} subtitle={item.subtitle} />
+							<CardText>
+								<ol>
+									<li>{item.bonusInfo1}</li>
+									<li>{item.bonusInfo2}</li>
+									<li>{item.bonusInfo3}</li>
+								</ol>
+							</CardText>
+						</Card>
+					</Link>
+				))}
+			</div>
+			<PaginationBar
+				currentPage={this.state.currentPage}
+				totalPages={this.state.totalPages}
+			/>
 		</div>
 	);
 
