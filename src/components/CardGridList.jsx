@@ -22,14 +22,43 @@ const styles = {
 		marginLeft: "20px",
 		marginRight: "20px",
 	},
+	footer: {
+		display: "flex",
+		justifyContent: "center",
+	},
 };
 
-// TODO: Handle pagination:
-// Add footer with page selection
-// Request new data on page change
 export default class CardGridList extends React.PureComponent {
 	state = {
 		data: undefined,
+	};
+
+	_onPageChange = newPage => {
+		if (newPage < 1 || newPage > this.state.totalPages) {
+			logger.error(`Attempted to switch to an invalid page ${newPage}`);
+			return;
+		}
+
+		this.props
+			.modelApiFn(newPage)
+			.then(response => {
+				if (response.currentPage != newPage) {
+					logger.warn(
+						`Requested page ${newPage} but recieved page ${response.currentPage}`
+					);
+				}
+				this.setState({
+					currentPage: response.currentPage,
+					totalPages: response.totalPages,
+					data: response.data,
+				});
+			})
+			.catch(err => {
+				logger.error(err);
+				this.setState({
+					data: null,
+				});
+			});
 	};
 
 	componentDidMount() {
@@ -75,10 +104,13 @@ export default class CardGridList extends React.PureComponent {
 					</Link>
 				))}
 			</div>
-			<PaginationBar
-				currentPage={this.state.currentPage}
-				totalPages={this.state.totalPages}
-			/>
+			<div style={styles.footer}>
+				<PaginationBar
+					currentPage={this.state.currentPage}
+					totalPages={this.state.totalPages}
+					onPageChange={this._onPageChange}
+				/>
+			</div>
 		</div>
 	);
 
