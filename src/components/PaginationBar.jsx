@@ -29,9 +29,11 @@ export default class PaginationBar extends React.PureComponent {
 	}
 
 	render() {
-		const data = Array.from(Array(this.props.totalPages).keys()).map(num =>
-			this._renderNum(num + 1)
-		);
+		const data = [];
+		const start = Math.max(1, this.props.currentPage - 4);
+		for (let i = 0; i < 9; i++) {
+			data.push(this._renderNum(start + i));
+		}
 		return (
 			<div style={styles.container}>
 				{this.props.currentPage > 1 ? (
