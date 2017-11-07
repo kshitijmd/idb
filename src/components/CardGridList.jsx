@@ -98,7 +98,7 @@ class CardGridList extends React.PureComponent {
 				<PaginationBar
 					currentPage={this.state.currentPage}
 					totalPages={this.state.totalPages}
-					baseUrl={this.props.match.url}
+					location={this.props.history.location}
 				/>
 			</div>
 		</div>
