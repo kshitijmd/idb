@@ -6,6 +6,7 @@ import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
 import PaginationBar from "./PaginationBar";
 import * as logger from "../services/logger";
+import * as searchParams from "../constants/searchParams";
 
 const styles = {
 	root: {
@@ -28,22 +29,9 @@ const styles = {
 	},
 };
 
-const PAGE = "p";
 class CardGridList extends React.PureComponent {
 	state = {
 		data: undefined,
-	};
-
-	_onPageChange = newPage => {
-		if (newPage < 1 || newPage > this.state.totalPages) {
-			logger.error(`Attempted to switch to an invalid page ${newPage}`);
-			return;
-		}
-
-		this.props.history.push({
-			pathname: `${this.props.match.url}`,
-			search: `?${PAGE}=${newPage}`,
-		});
 	};
 
 	_getDataForPage = page => {
@@ -77,7 +65,7 @@ class CardGridList extends React.PureComponent {
 			totalPages: null,
 		});
 		const qs = new URLSearchParams(location.search);
-		const page = qs.get(PAGE) ? qs.get(PAGE) : 1;
+		const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
 		this._getDataForPage(page);
 	}
 
