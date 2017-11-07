@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pylast
-from app.gcloudutils.bucket import upload_to_clooouuddd
+from application.gcloudutils.bucket import upload_to_cloud
 
 from app.models import db, Track, Artist, Album, Playlist, Genre
 
@@ -106,7 +106,7 @@ def create_artist(sp_artist):
     sp_artist = sp.artist(sp_artist['id'])
     name = sp_artist['name']
     if len(sp_artist['images']) > 0:
-        image_url = upload_to_clooouuddd(sp_artist['images'][0]['url'])
+        image_url = upload_to_cloud(sp_artist['images'][0]['url'])
     else:
         image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     spotify_uri = sp_artist['uri']
@@ -154,7 +154,7 @@ def create_album(sp_track, artist):
     name = sp_album['name']
     spotify_uri = sp_album['uri']
     if len(sp_album['images']) > 0:
-        image_url = upload_to_clooouuddd(sp_album['images'][0]['url'])
+        image_url = upload_to_cloud(sp_album['images'][0]['url'])
     else:
         image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     try:
@@ -220,7 +220,7 @@ def create_track(sp_track, artist, album):
     duration = sp_track['duration_ms']
     spotify_uri = sp_track['uri']
     if len(sp_track['album']) > 0:
-        image_url = upload_to_clooouuddd(sp_track['album']['images'][0]['url'])
+        image_url = upload_to_cloud(sp_track['album']['images'][0]['url'])
     else:
         image_url = "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
     track = Track(

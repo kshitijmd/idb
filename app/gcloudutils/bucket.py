@@ -11,7 +11,7 @@ import os
 
 # Uploads a file to google cloud blob storage
 # Returns a string of the public URL
-def upload_to_clooouuddd(spotifyURL):
+def upload_to_cloud(spotifyURL):
 	if not spotifyURL or spotifyURL == "":
 		return "https://storage.googleapis.com/artifacts.playlistr-front.appspot.com/images/no_image.jpg"
 
