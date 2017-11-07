@@ -130,7 +130,7 @@ class Header extends React.Component {
 								})}
 							onRequestSearch={() => 0}
 							style={styles.searchBar}
-							hintText={""}
+							hintText={"Search for your favorite music!"}
 						/>
 					</div>
 				</AppBar>
