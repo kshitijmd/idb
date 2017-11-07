@@ -28,6 +28,7 @@ const styles = {
 	},
 };
 
+const PAGE = "p";
 class CardGridList extends React.PureComponent {
 	state = {
 		data: undefined,
@@ -39,14 +40,16 @@ class CardGridList extends React.PureComponent {
 			return;
 		}
 
+		this.props.history.push({
+			pathname: `${this.props.match.url}`,
+			search: `?${PAGE}=${newPage}`,
+		});
+	};
+
+	_getDataForPage = page => {
 		this.props
-			.modelApiFn(newPage)
+			.modelApiFn(page)
 			.then(response => {
-				if (response.currentPage != newPage) {
-					logger.warn(
-						`Requested page ${newPage} but recieved page ${response.currentPage}`
-					);
-				}
 				this.setState({
 					currentPage: response.currentPage,
 					totalPages: response.totalPages,
@@ -56,31 +59,26 @@ class CardGridList extends React.PureComponent {
 			.catch(err => {
 				logger.error(err);
 				this.setState({
+					currentPage: null,
+					totalPages: null,
 					data: null,
 				});
 			});
 	};
 
 	componentDidMount() {
-		this.props
-			.modelApiFn()
-			.then(response => {
-				this.setState({
-					currentPage: response.currentPage,
-					totalPages: response.totalPages,
-					data: response.data,
-				});
-			})
-			.catch(err => {
-				logger.error(err);
-				this.setState({
-					data: null,
-				});
-			});
+		this._getDataForPage(1);
 	}
 
 	componentWillReceiveProps() {
-		// TODO: Handle a page change here
+		this.setState({
+			data: undefined,
+			currentPage: null,
+			totalPages: null,
+		});
+		const qs = new URLSearchParams(location.search);
+		const page = qs.get(PAGE) ? qs.get(PAGE) : 1;
+		this._getDataForPage(page);
 	}
 
 	_renderData = () => (
@@ -132,6 +130,7 @@ class CardGridList extends React.PureComponent {
 CardGridList.propTypes = {
 	modelApiFn: PropTypes.func.isRequired,
 	match: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired,
 };
 
 export default withRouter(CardGridList);
