@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FlatButton from "material-ui/FlatButton";
+import LinkButton from "./LinkButton";
 
 const styles = {
 	container: {
@@ -13,52 +13,46 @@ export default class PaginationBar extends React.PureComponent {
 	static propTypes = {
 		currentPage: PropTypes.number.isRequired,
 		totalPages: PropTypes.number.isRequired,
-		onPageChange: PropTypes.func.isRequired,
+		baseUrl: PropTypes.string.isRequired,
 	};
 
 	_renderNum(num) {
 		return (
-			<FlatButton
+			<LinkButton
 				key={num}
-				disabled={num == this.props.currentPage}
-				onClick={() => this.props.onPageChange(num)}
+				to={`${this.props.baseUrl}?p=${num}`}
+				disabled={this.props.currentPage == num}
 			>
 				{num}
-			</FlatButton>
+			</LinkButton>
 		);
 	}
 
 	render() {
 		const data = [];
-		const start = Math.max(1, this.props.currentPage - 4);
-		for (let i = 0; i < 9; i++) {
+		const start = Math.max(1, this.props.currentPage - 2);
+		for (let i = 0; i < 5 && i + start <= this.props.totalPages; i++) {
 			data.push(this._renderNum(start + i));
 		}
 		return (
 			<div style={styles.container}>
 				{this.props.currentPage > 1 ? (
-					<div>
-						<FlatButton onClick={() => this.props.onPageChange(1)}>
-							{"<< First"}
-						</FlatButton>
-						<FlatButton
-							onClick={() => this.props.onPageChange(this.props.currentPage - 1)}
-						>
+					<div style={styles.container}>
+						<LinkButton to={`${this.props.baseUrl}?p=1`}>{"<< First"}</LinkButton>
+						<LinkButton to={`${this.props.baseUrl}?p=${this.props.currentPage - 1}`}>
 							{"< Prev"}
-						</FlatButton>
+						</LinkButton>
 					</div>
 				) : null}
 				{data}
 				{this.props.currentPage < this.props.totalPages ? (
-					<div>
-						<FlatButton
-							onClick={() => this.props.onPageChange(this.props.currentPage + 1)}
-						>
+					<div style={styles.container}>
+						<LinkButton to={`${this.props.baseUrl}?p=${this.props.currentPage + 1}`}>
 							{"Next >"}
-						</FlatButton>
-						<FlatButton onClick={() => this.props.onPageChange(this.props.totalPages)}>
+						</LinkButton>
+						<LinkButton to={`${this.props.baseUrl}?p=${this.props.totalPages}`}>
 							{"Last >>"}
-						</FlatButton>
+						</LinkButton>
 					</div>
 				) : null}
 			</div>
