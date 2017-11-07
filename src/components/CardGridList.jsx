@@ -9,7 +9,10 @@ import * as logger from "../services/logger";
 import * as searchParams from "../constants/searchParams";
 
 const styles = {
-	root: {
+	container: {
+		display: "flex",
+	},
+	cardsContainer: {
 		display: "flex",
 		flexWrap: "wrap",
 		justifyContent: "flex-start",
@@ -69,37 +72,50 @@ class CardGridList extends React.PureComponent {
 		this._getDataForPage(page);
 	}
 
+	_renderControls = () => {
+		/* TODO: Add sorting and filtering controls here. */
+		return (
+			<Card style={styles.sidebar}>
+				<CardText>Sort</CardText>
+				<CardText>Filter</CardText>
+			</Card>
+		);
+	};
+
 	_renderData = () => (
-		<div>
-			<div style={styles.root}>
-				{this.state.data.map(item => (
-					<Link
-						key={item.id}
-						to={`${this.props.match.url}/${item.id}`}
-						style={styles.hyperlink}
-					>
-						<Card style={styles.card}>
-							<CardMedia>
-								<img src={item.imageUrl} />
-							</CardMedia>
-							<CardTitle title={item.title} subtitle={item.subtitle} />
-							<CardText>
-								<ol>
-									<li>{item.bonusInfo1}</li>
-									<li>{item.bonusInfo2}</li>
-									<li>{item.bonusInfo3}</li>
-								</ol>
-							</CardText>
-						</Card>
-					</Link>
-				))}
-			</div>
-			<div style={styles.footer}>
-				<PaginationBar
-					currentPage={this.state.currentPage}
-					totalPages={this.state.totalPages}
-					location={this.props.history.location}
-				/>
+		<div style={styles.container}>
+			{this._renderControls()}
+			<div>
+				<div style={styles.cardsContainer}>
+					{this.state.data.map(item => (
+						<Link
+							key={item.id}
+							to={`${this.props.match.url}/${item.id}`}
+							style={styles.hyperlink}
+						>
+							<Card style={styles.card}>
+								<CardMedia>
+									<img src={item.imageUrl} />
+								</CardMedia>
+								<CardTitle title={item.title} subtitle={item.subtitle} />
+								<CardText>
+									<ol>
+										<li>{item.bonusInfo1}</li>
+										<li>{item.bonusInfo2}</li>
+										<li>{item.bonusInfo3}</li>
+									</ol>
+								</CardText>
+							</Card>
+						</Link>
+					))}
+				</div>
+				<div style={styles.footer}>
+					<PaginationBar
+						currentPage={this.state.currentPage}
+						totalPages={this.state.totalPages}
+						location={this.props.history.location}
+					/>
+				</div>
 			</div>
 		</div>
 	);
