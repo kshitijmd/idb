@@ -56,7 +56,7 @@ const memberInfo = {
 			responsibilities: "API design and documentation",
 			commits: 17,
 			issues: 10,
-			unit_tests: 0,
+			unit_tests: 6,
 		},
 	],
 };
