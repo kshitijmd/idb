@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, CardText, CardTitle, CardMedia } from "material-ui/Card";
 import ProgressSpinner from "./ProgressSpinner";
@@ -28,7 +28,7 @@ const styles = {
 	},
 };
 
-export default class CardGridList extends React.PureComponent {
+class CardGridList extends React.PureComponent {
 	state = {
 		data: undefined,
 	};
@@ -79,13 +79,17 @@ export default class CardGridList extends React.PureComponent {
 			});
 	}
 
+	componentWillReceiveProps() {
+		// TODO: Handle a page change here
+	}
+
 	_renderData = () => (
 		<div>
 			<div style={styles.root}>
 				{this.state.data.map(item => (
 					<Link
 						key={item.id}
-						to={`/${this.props.routerBaseUrl}/${item.id}`}
+						to={`${this.props.match.url}/${item.id}`}
 						style={styles.hyperlink}
 					>
 						<Card style={styles.card}>
@@ -126,6 +130,8 @@ export default class CardGridList extends React.PureComponent {
 }
 
 CardGridList.propTypes = {
-	routerBaseUrl: PropTypes.string.isRequired,
 	modelApiFn: PropTypes.func.isRequired,
+	match: PropTypes.object.isRequired,
 };
+
+export default withRouter(CardGridList);
