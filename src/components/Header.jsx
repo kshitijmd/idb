@@ -126,7 +126,7 @@ class Header extends React.Component {
 							dataSource={this.state.dataSource}
 							onChange={value =>
 								this.setState({
-									dataSource: [value, value + value, value + value + value],
+									dataSource: [value],
 								})}
 							onRequestSearch={() => {
 								this.props.history.push({
