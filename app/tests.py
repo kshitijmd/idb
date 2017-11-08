@@ -483,6 +483,7 @@ class TestApiSorting(TestCase):
             self.assertEqual(a['spotifyUri'], 'uri:' + chr(i))
             i += 1
 
+
 class TestApiFiltering(TestCase):
     def create_app(self):
         return create_app('test_config.json')
@@ -509,9 +510,10 @@ class TestApiFiltering(TestCase):
             models.append(a)
         db.session.add_all(models)
         db.session.commit()
-        
+
     def test_filter_include_name(self):
-        json_response = self.client.get('/albums/?filter_by=name&include=album:a')
+        json_response = self.client.get(
+            '/albums/?filter_by=name&include=album:a')
         response = json.loads(json_response.data.decode('utf-8'))
         albums = response['albums']
         # we expect only 1 album in albums
@@ -520,7 +522,7 @@ class TestApiFiltering(TestCase):
         self.assertEqual(album['spotifyUri'], 'uri:z')
 
     def test_filter_like_name(self):
-        json_response = self.client.get('/albums/?filter_by=name&like=album:')            
+        json_response = self.client.get('/albums/?filter_by=name&like=album:')
         response = json.loads(json_response.data.decode('utf-8'))
         albums = response['albums']
         i = 97
@@ -531,7 +533,8 @@ class TestApiFiltering(TestCase):
             i += 1
 
     def test_filter_like_exclude_name(self):
-        json_response = self.client.get('/albums/?filter_by=name&like=album:&exclude=album:a')
+        json_response = self.client.get(
+            '/albums/?filter_by=name&like=album:&exclude=album:a')
         response = json.loads(json_response.data.decode('utf-8'))
         albums = response['albums']
         # change i to 98 because we expect a to be gone
@@ -541,6 +544,7 @@ class TestApiFiltering(TestCase):
             self.assertEqual(a['name'], 'album:' + chr(i))
             self.assertEqual(a['spotifyUri'], 'uri:' + opposite_chr(i))
             i += 1
+
 
 class TestApiSearch(TestCase):
     def create_app(self):
@@ -599,6 +603,70 @@ class TestApiSearch(TestCase):
         self.assertEqual(len(artists), 1)
         self.assertEqual(len(tracks), 0)
         self.assertEqual(len(playlists), 0)
+
+
+class TestApiSearch(TestCase):
+    def create_app(self):
+        return create_app('test_config.json')
+
+    def setUp(self):
+        db.drop_all()
+        db.create_all()
+        self.populate_db()
+        self.log = open('test.log', 'a')
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.log.close()
+
+    def populate_db(self):
+        all_albums = []
+        for i in range(0, 100):
+            a = Album()
+            a.name = 'vampire ' + str(i)
+            all_albums.append(a)
+        db.session.add_all(all_albums)
+        db.session.commit()
+
+    def test_search_pagination_defaults(self):
+        json_response = self.client.get(
+            '/search/?query=vampire')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(len(response['albums']), 10)
+        self.assertEqual(len(response['artists']), 0)
+        self.assertEqual(len(response['tracks']), 0)
+        self.assertEqual(len(response['playlists']), 0)
+        self.assertEqual(response['pages'], 10)
+        self.assertEqual(response['prev'], None)
+        self.assertEqual(response['next'], 2)
+        self.assertEqual(response['page'], 1)
+
+    def test_search_pagination_default_per_page_next(self):
+        json_response = self.client.get(
+            '/search/?query=vampire&page=2')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(len(response['albums']), 10)
+        self.assertEqual(len(response['artists']), 0)
+        self.assertEqual(len(response['tracks']), 0)
+        self.assertEqual(len(response['playlists']), 0)
+        self.assertEqual(response['pages'], 10)
+        self.assertEqual(response['prev'], 1)
+        self.assertEqual(response['next'], 3)
+        self.assertEqual(response['page'], 2)
+
+    def test_search_pagination_per_page(self):
+        json_response = self.client.get(
+            '/search/?query=vampire&per_page=100')
+        response = json.loads(json_response.data.decode('utf-8'))
+        self.assertEqual(len(response['albums']), 100)
+        self.assertEqual(len(response['artists']), 0)
+        self.assertEqual(len(response['tracks']), 0)
+        self.assertEqual(len(response['playlists']), 0)
+        self.assertEqual(response['pages'], 1)
+        self.assertEqual(response['prev'], None)
+        self.assertEqual(response['next'], None)
+        self.assertEqual(response['page'], 1)
 
 
 def opposite_chr(c):
