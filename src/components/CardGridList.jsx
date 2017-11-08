@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Card, CardText, CardTitle, CardMedia } from "material-ui/Card";
+import { Card, CardText, CardTitle } from "material-ui/Card";
 import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
 import PaginationBar from "./PaginationBar";
