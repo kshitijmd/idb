@@ -1,4 +1,5 @@
 import ellipsize from "ellipsize";
+import getYear from "date-fns/get_year";
 
 export function albumTransformer(album) {
 	return {
@@ -7,7 +8,7 @@ export function albumTransformer(album) {
 		title: album.name,
 		subtitle: album.artist.name,
 		bonusInfo1: `Contains ${album.tracks.length} songs`,
-		bonusInfo2: `Released on ${album.releaseDate}`,
+		bonusInfo2: `Released in ${getYear(album.releaseDate)}`,
 		bonusInfo3: `Played ${album.playcount} times on Last.FM`,
 	};
 }

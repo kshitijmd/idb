@@ -6,6 +6,7 @@ import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
 import * as musicApi from "../services/api/musicApi";
 import * as logger from "../services/logger";
+import getYear from "date-fns/get_year";
 
 const styles = {
 	card: {
@@ -65,7 +66,7 @@ export default class Album extends React.Component {
 						</li>
 					))}
 				</ol>
-				<div>Release date: {this.state.album.releaseDate}</div>
+				<div>Released in {getYear(this.state.album.releaseDate)}</div>
 				<div>Playcount: {this.state.album.playcount}</div>
 				<div>
 					Genres: {this.state.album.genres.map(genre => <p key={genre}>{genre}</p>)}
