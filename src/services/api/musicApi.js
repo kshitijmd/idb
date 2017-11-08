@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as modelTransformers from "../modelTransformers";
 
-const api_host = "dev-api.hackappellas.me";
+const api_host = "api.hackappellas.me";
 
 export function getAlbums(page = 1) {
 	return axios.get(`http://${api_host}/albums/?page=${page}`).then(response => {
