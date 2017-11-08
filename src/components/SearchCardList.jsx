@@ -64,17 +64,17 @@ class SearchCardList extends React.PureComponent {
 		this._getDataForPage();
 	}
 
-	// needed for pagination
-	// componentWillReceiveProps() {
-	// 	this.setState({
-	// 		data: undefined,
-	// 		currentPage: null,
-	// 		totalPages: null,
-	// 	});
-	// 	const qs = new URLSearchParams(this.props.location.search);
-	// 	const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
-	// 	this._getDataForPage(page);
-	// }
+	//needed for pagination
+	componentWillReceiveProps() {
+		this.setState({
+			data: undefined,
+			currentPage: null,
+			totalPages: null,
+		});
+		//const qs = new URLSearchParams(this.props.location.search);
+		//const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
+		this._getDataForPage();
+	}
 
 	_renderData = () => (
 		<div style={styles.container}>
