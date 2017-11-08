@@ -76,32 +76,24 @@ class SearchCardList extends React.PureComponent {
 	// 	this._getDataForPage(page);
 	// }
 
-	_renderControls = () => {
-		/* TODO: Add sorting and filtering controls here. */
-		return (
-			<Card style={styles.sidebar}>
-				<CardText>Sort</CardText>
-				<CardText>Filter</CardText>
-			</Card>
-		);
-	};
-
 	_renderData = () => (
 		<div style={styles.container}>
-			{this._renderControls()}
+			
 			<div>
 				<div style={styles.cardsContainer}>
 					{this.state.data.map(item => (
 						<Link
 							key={item.id}
-							to={`${this.props.match.url}/${item.id}`}
+							to={`${item.url}/${item.id}`}
 							style={styles.hyperlink}
 						>
 							<Card style={styles.card}>
 								<CardMedia>
 									<img src={item.imageUrl} />
 								</CardMedia>
-								<CardTitle title={item.title} subtitle={item.subtitle} />
+								{/*<CardTitle title={item.title} subtitle={item.subtitle} /> */}
+
+								<CardTitle title={<div style={{backgroundColor: "green"}}>{item.title}</div>} subtitle={item.subtitle} />
 								<CardText>
 									<ol>
 										<li>{item.bonusInfo1}</li>
