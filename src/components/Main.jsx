@@ -7,6 +7,7 @@ import Album from "./Album";
 import Artist from "./Artist";
 import Track from "./Track";
 import Playlist from "./Playlist";
+import Search from "./Search";
 import * as musicApi from "../services/api/musicApi";
 
 const Main = () => (
@@ -45,6 +46,7 @@ const Main = () => (
 				)}
 			/>
 			<Route exact path="/playlists/:playlistId" component={Playlist} />
+			<Route exact path="/search" component={Search} />
 		</Switch>
 	</main>
 );

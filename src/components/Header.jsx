@@ -128,7 +128,12 @@ class Header extends React.Component {
 								this.setState({
 									dataSource: [value, value + value, value + value + value],
 								})}
-							onRequestSearch={() => 0}
+							onRequestSearch={() => {
+								/* TODO: this.props.history.push({
+								location: "/search",
+								search: "?search_text="
+								}) */
+							}}
 							style={styles.searchBar}
 							hintText={"Search for your favorite music!"}
 						/>

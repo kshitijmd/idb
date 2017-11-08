@@ -10,6 +10,7 @@ export function albumTransformer(album) {
 		bonusInfo1: `Contains ${album.tracks.length} songs`,
 		bonusInfo2: `Released in ${getYear(album.releaseDate)}`,
 		bonusInfo3: `Played ${album.playcount} times on Last.FM`,
+		// baseUrl: "/albums/"
 	};
 }
 
