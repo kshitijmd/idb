@@ -10,6 +10,7 @@ export function albumTransformer(album) {
 		bonusInfo1: `Contains ${album.tracks.length} songs`,
 		bonusInfo2: `Released in ${getYear(album.releaseDate)}`,
 		bonusInfo3: `Played ${album.playcount} times on Last.FM`,
+		url: "/albums",
 	};
 }
 
@@ -22,6 +23,7 @@ export function playlistTransformer(playlist) {
 		bonusInfo1: `${playlist.numTracks} tracks`,
 		bonusInfo2: `${playlist.numArtists} artists`,
 		bonusInfo3: `${playlist.numFollowers} followers`,
+		url: "/playlists",
 	};
 }
 
@@ -34,6 +36,7 @@ export function trackTransformer(track) {
 		bonusInfo1: `Featured on album ${track.album.name}`,
 		bonusInfo2: `${track.duration} seconds long`,
 		bonusInfo3: `Played ${track.playcount} times on Last.FM`,
+		url: "/tracks",
 	};
 }
 
@@ -46,5 +49,6 @@ export function artistTransformer(artist) {
 		bonusInfo1: `Played ${artist.playcount} times on Last.FM`,
 		bonusInfo2: `${artist.albums.length} albums available`,
 		bonusInfo3: `Bio: ${ellipsize(artist.bio, 100)}`,
+		url: "/artists",
 	};
 }
