@@ -21,7 +21,7 @@ const styles = {
 		textDecoration: "none",
 	},
 	card: {
-		maxWidth: "400px",
+		maxWidth: "300px",
 		marginBottom: "20px",
 		marginLeft: "20px",
 		marginRight: "20px",
@@ -29,6 +29,19 @@ const styles = {
 	footer: {
 		display: "flex",
 		justifyContent: "center",
+	},
+	cardImgContainer: {
+		backgroundColor: "black",
+		width: "100%",
+		height: "300px",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	cardImg: {
+		display: "block",
+		maxWidth: "100%",
+		maxHeight: "100%",
 	},
 };
 
@@ -94,9 +107,9 @@ class CardGridList extends React.PureComponent {
 							style={styles.hyperlink}
 						>
 							<Card style={styles.card}>
-								<CardMedia>
-									<img src={item.imageUrl} />
-								</CardMedia>
+								<div style={styles.cardImgContainer}>
+									{<img src={item.imageUrl} style={styles.cardImg} />}
+								</div>
 								<CardTitle title={item.title} subtitle={item.subtitle} />
 								<CardText>
 									<ol>
