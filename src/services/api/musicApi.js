@@ -59,17 +59,19 @@ export function getTracks(page = 1) {
 
 export function searchModels(query) {
 	return axios.get(`http://${api_host}/search/${query}`).then(response => {
-		// parse response
-		console.log("Response " + Object.keys(response.data));
 		let albums = response.data.albums.map(album => modelTransformers.albumTransformer(album));
-		let artists = response.data.artists.map(artist => modelTransformers.artistTransformer(artist))
-		let tracks = response.data.tracks.map(track => modelTransformers.trackTransformer(track))
-		let playlists = response.data.playlists.map(playlist => modelTransformers.playlistTransformer(playlist))
+		let artists = response.data.artists.map(artist =>
+			modelTransformers.artistTransformer(artist)
+		);
+		let tracks = response.data.tracks.map(track => modelTransformers.trackTransformer(track));
+		let playlists = response.data.playlists.map(playlist =>
+			modelTransformers.playlistTransformer(playlist)
+		);
 
 		let searchData = albums.concat(artists, tracks, playlists);
 		return {
 			// pagination stuff will be done later
-			data: searchData
+			data: searchData,
 		};
 	});
 }

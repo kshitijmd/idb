@@ -47,7 +47,7 @@ const Main = () => (
 			/>
 			<Route exact path="/playlists/:playlistId" component={Playlist} />
 			<Route
-				exact 
+				exact
 				path="/search"
 				key={"Search"}
 				render={({ props }) => <SearchCardList {...props} />}

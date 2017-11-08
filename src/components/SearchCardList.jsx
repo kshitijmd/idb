@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 import { Card, CardText, CardTitle, CardMedia } from "material-ui/Card";
 import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
-import PaginationBar from "./PaginationBar";
 import * as logger from "../services/logger";
-import * as searchParams from "../constants/searchParams";
 import * as musicApi from "../services/api/musicApi";
 
 const styles = {
@@ -39,8 +37,9 @@ class SearchCardList extends React.PureComponent {
 	};
 
 	_getDataForPage = () => {
-		const qp = location.search
-		musicApi.searchModels(qp)
+		const qp = location.search;
+		musicApi
+			.searchModels(qp)
 			.then(response => {
 				this.setState({
 					// TODO: implement pagination so these two aren't undefined
@@ -57,10 +56,10 @@ class SearchCardList extends React.PureComponent {
 					data: null,
 				});
 			});
-		logger.log("Value " + qp);	
+		logger.log("Value " + qp);
 	};
 
-	// At the moment, pagination doesn't work. 
+	// At the moment, pagination doesn't work.
 	componentDidMount() {
 		this._getDataForPage();
 	}
@@ -115,7 +114,7 @@ class SearchCardList extends React.PureComponent {
 					))}
 				</div>
 				<div style={styles.footer}>
-				{/*TODO: Add backend pagination. Commented out for safety
+					{/*TODO: Add backend pagination. Commented out for safety
 					<PaginationBar
 						currentPage={this.state.currentPage}
 						totalPages={this.state.totalPages}

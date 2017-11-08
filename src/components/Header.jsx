@@ -131,8 +131,8 @@ class Header extends React.Component {
 							onRequestSearch={() => {
 								this.props.history.push({
 									pathname: "/search",
-									search: "?query=" + this.state.dataSource[0]
-								}) 
+									search: "?query=" + this.state.dataSource[0],
+								});
 							}}
 							style={styles.searchBar}
 							hintText={"Search for your favorite music!"}
