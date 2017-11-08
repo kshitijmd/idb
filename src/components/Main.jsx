@@ -3,11 +3,11 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
 import CardGridList from "./CardGridList";
+import SearchCardList from "./SearchCardList";
 import Album from "./Album";
 import Artist from "./Artist";
 import Track from "./Track";
 import Playlist from "./Playlist";
-import Search from "./Search";
 import * as musicApi from "../services/api/musicApi";
 
 const Main = () => (
@@ -46,7 +46,12 @@ const Main = () => (
 				)}
 			/>
 			<Route exact path="/playlists/:playlistId" component={Playlist} />
-			<Route exact path="/search" component={Search} />
+			<Route
+				exact 
+				path="/search"
+				key={"Search"}
+				render={({ props }) => <SearchCardList {...props} />}
+			/>
 		</Switch>
 	</main>
 );
