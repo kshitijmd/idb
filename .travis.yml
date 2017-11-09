@@ -10,11 +10,24 @@ jobs:
       language: python
       python: "3.5"
       install: pip install -r app/requirements.txt
-      services: postgresql
+      services: postgresql docker
+      cache:
+        directories:
+          - "$HOME/google-cloud-sdk/"
       before_script:
         - psql -c 'create database playlistr_test;' -U postgres
       script: 
         - python run_tests.py
+      after_success:
+        - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com | bash; fi
+        # Add gcloud to $PATH
+        - source /home/travis/google-cloud-sdk/path.bash.inc
+        # Auth flow
+        - bash auth-gcloud.sh
+        # Deployment if master branch and !PR
+        - bash deploy.sh
+        # Thanks to http://thylong.com/ci/2016/deploying-from-travis-to-gce/
+
 
 notifications:
   slack: csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh
