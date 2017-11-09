@@ -78,22 +78,16 @@ class SearchCardList extends React.PureComponent {
 
 	_renderData = () => (
 		<div style={styles.container}>
-			
 			<div>
 				<div style={styles.cardsContainer}>
 					{this.state.data.map(item => (
-						<Link
-							key={item.id}
-							to={`${item.url}/${item.id}`}
-							style={styles.hyperlink}
-						>
+						<Link key={item.id} to={`${item.url}/${item.id}`} style={styles.hyperlink}>
 							<Card style={styles.card}>
 								<CardMedia>
 									<img src={item.imageUrl} />
 								</CardMedia>
-								{/*<CardTitle title={item.title} subtitle={item.subtitle} /> */}
-
-								<CardTitle title={<div style={{backgroundColor: "green"}}>{item.title}</div>} subtitle={item.subtitle} />
+								<CardTitle title={item.title} subtitle={item.subtitle} />
+								{/*<CardTitle title={<div style={{backgroundColor: "green"}}>{item.title}</div>} subtitle={item.subtitle} />*/}
 								<CardText>
 									<ol>
 										<li>{item.bonusInfo1}</li>
