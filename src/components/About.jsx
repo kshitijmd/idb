@@ -12,9 +12,9 @@ const memberInfo = {
 			bio:
 				"Nick is a 4th year Computer Science senior from San Antonio, TX. He been interested in computers and programming ever since the 5th grade. His CS interests include operating systems, web development, and video game hacking.",
 			responsibilities: "front-end",
-			commits: 22,
-			issues: 16,
-			unit_tests: 8,
+			commits: 63,
+			issues: 29,
+			unit_tests: 12,
 		},
 		{
 			name: "Taylor Kline",
@@ -22,8 +22,8 @@ const memberInfo = {
 			bio:
 				"Taylor is about to graduate in December 2017. He intends to pursue web development in modern technologies and work from his hammock as much as possibe.",
 			responsibilities: "Workflow and documentation",
-			commits: 44,
-			issues: 7,
+			commits: 68,
+			issues: 25,
 			unit_tests: 0,
 		},
 		{
@@ -33,7 +33,7 @@ const memberInfo = {
 			bio:
 				"K is from India, Kuwait, Midland TX, Dallas TX and Austin TX. He will join PestRoutes as a software engineer in December 2017. Ask him about his bbq paneer kabobs.",
 			responsibilities: "Hosting and API",
-			commits: 16,
+			commits: 44,
 			issues: 11,
 			unit_tests: 0,
 		},
@@ -43,7 +43,7 @@ const memberInfo = {
 			bio:
 				"Scott is a Senior Computer Science major from Houston, Texas. After graduation he will be joining Amazon as a SDE in Austin. Outside of his passion for programming, he enjoys thinking longingly about the Corgi he will someday own, and playing guitar and video games.",
 			responsibilities: "Fullstack",
-			commits: 36,
+			commits: 40,
 			issues: 12,
 			unit_tests: 0,
 		},
@@ -54,9 +54,9 @@ const memberInfo = {
 			bio:
 				"David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
 			responsibilities: "API design and documentation",
-			commits: 17,
+			commits: 44,
 			issues: 10,
-			unit_tests: 6,
+			unit_tests: 7,
 		},
 	],
 };
@@ -146,9 +146,9 @@ const styles = {
 };
 
 // can we pull these from Trello/GitHub/Travis?
-const totalCommits = 211;
-const totalIssues = 68;
-const totalUnitTests = 8;
+const totalCommits = 326;
+const totalIssues = 97;
+const totalUnitTests = 19;
 
 export default class About extends React.Component {
 	render() {
