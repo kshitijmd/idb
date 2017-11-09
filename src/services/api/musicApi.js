@@ -3,8 +3,8 @@ import * as modelTransformers from "../modelTransformers";
 
 const api_host = "api.hackappellas.me";
 
-export function getAlbums(page = 1) {
-	return axios.get(`http://${api_host}/albums/?page=${page}`).then(response => {
+export function getAlbums(searchParams) {
+	return axios.get(`http://${api_host}/albums${searchParams}`).then(response => {
 		return {
 			itemsPerPage: response.data.per_page,
 			currentPage: response.data.page,
@@ -16,8 +16,8 @@ export function getAlbums(page = 1) {
 	});
 }
 
-export function getArtists(page = 1) {
-	return axios.get(`http://${api_host}/artists/?page=${page}`).then(response => {
+export function getArtists(searchParams) {
+	return axios.get(`http://${api_host}/artists${searchParams}`).then(response => {
 		return {
 			itemsPerPage: response.data.per_page,
 			currentPage: response.data.page,
@@ -29,8 +29,8 @@ export function getArtists(page = 1) {
 	});
 }
 
-export function getPlaylists(page = 1) {
-	return axios.get(`http://${api_host}/playlists/?page=${page}`).then(response => {
+export function getPlaylists(searchParams) {
+	return axios.get(`http://${api_host}/playlists${searchParams}`).then(response => {
 		return {
 			itemsPerPage: response.data.per_page,
 			currentPage: response.data.page,
@@ -44,8 +44,8 @@ export function getPlaylists(page = 1) {
 	});
 }
 
-export function getTracks(page = 1) {
-	return axios.get(`http://${api_host}/tracks/?page=${page}`).then(response => {
+export function getTracks(searchParams) {
+	return axios.get(`http://${api_host}/tracks${searchParams}`).then(response => {
 		return {
 			itemsPerPage: response.data.per_page,
 			currentPage: response.data.page,

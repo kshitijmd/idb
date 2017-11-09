@@ -18,7 +18,7 @@ const styles = {
 		flexWrap: "wrap",
 		justifyContent: "flex-start",
 	},
-	buttonContainer: {
+	buttonRow: {
 		display: "flex",
 	},
 	button: {
@@ -58,9 +58,9 @@ class CardGridList extends React.PureComponent {
 		data: undefined,
 	};
 
-	_getDataForPage = page => {
+	_getData = () => {
 		this.props
-			.modelApiFn(page)
+			.modelApiFn(location.search)
 			.then(response => {
 				this.setState({
 					currentPage: response.currentPage,
@@ -79,7 +79,7 @@ class CardGridList extends React.PureComponent {
 	};
 
 	componentDidMount() {
-		this._getDataForPage(1);
+		this._getData();
 	}
 
 	componentWillReceiveProps() {
@@ -88,21 +88,43 @@ class CardGridList extends React.PureComponent {
 			currentPage: null,
 			totalPages: null,
 		});
-		const qs = new URLSearchParams(location.search);
-		const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
-		this._getDataForPage(page);
+		this._getData();
 	}
 
 	_renderControls = () => {
+		const qs = new URLSearchParams(location.search);
 		/* TODO: Add sorting and filtering controls here. */
 		return (
 			<Card>
 				<CardTitle>Sort</CardTitle>
-				<div style={styles.buttonContainer}>
-					{/* TODO: Support asc / desc */}
-					{/* TODO: Register onClick handlers http://www.material-ui.com/#/components/raised-button */}
-					<RaisedButton style={styles.button}>Popularity</RaisedButton>
-					<RaisedButton style={styles.button}>Title</RaisedButton>
+				<div style={styles.buttonRow}>
+					{/* TODO: Support toggling asc / desc */}
+					<RaisedButton
+						style={styles.button}
+						onClick={() => {
+							qs.set(searchParams.ORDERBY, searchParams.POP);
+							qs.set(searchParams.DESC, true);
+							this.props.history.push({
+								pathname: location.pathname,
+								search: qs.toString(),
+							});
+						}}
+					>
+						Popularity
+					</RaisedButton>
+					<RaisedButton
+						style={styles.button}
+						onClick={() => {
+							qs.set(searchParams.ORDERBY, searchParams.NAME);
+							qs.delete(searchParams.DESC);
+							this.props.history.push({
+								pathname: location.pathname,
+								search: qs.toString(),
+							});
+						}}
+					>
+						Title
+					</RaisedButton>
 				</div>
 
 				<CardTitle>Filter out</CardTitle>
