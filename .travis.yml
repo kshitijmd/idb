@@ -1,8 +1,29 @@
-language: node_js
+jobs:
+  include:
+    - stage: Frontend
+      language: node_js
+      node_js:
+        - "node"
+      script:
+        - npm run lint
+    - stage: Backend
+      language: python
+      python: "3.5"
+      install: pip install -r app/requirements.txt
+      services:
+        - postgresql
+        - docker
+      cache:
+        directories:
+          - "$HOME/google-cloud-sdk/"
+      before_script:
+        - psql -c 'create database playlistr_test;' -U postgres
+      script: 
+        - python run_tests.py
+      after_success:
+        # Deployment if master branch and !PR
+        if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash deploy.sh; else echo "Not on master branch, no deployment"; fi
 
-node_js:
-   - "node"
 
-script:
-   - npm run eslint-check-prettier-config
-   - npm run check-style
+notifications:
+  slack: csswejusticeleague:zsFlRhEbi7aDPGANxA8tRSoh

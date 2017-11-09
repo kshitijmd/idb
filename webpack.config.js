@@ -4,7 +4,7 @@ module.exports = {
 	entry: ["./src/index.jsx"],
 
 	output: {
-		path: __dirname + "/static/dist/",
+		path: __dirname + "/build/dist/",
 		filename: "bundle.js",
 	},
 
@@ -25,4 +25,5 @@ module.exports = {
 		],
 	},
 	plugins: [],
+   devtool: "source-map",
 };

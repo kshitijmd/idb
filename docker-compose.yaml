@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    image: mbowen13/playlistr
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app/
+    networks:
+      - frontend
+networks:
+  frontend:
+    driver: bridge
