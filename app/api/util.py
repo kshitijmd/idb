@@ -1,5 +1,6 @@
 from flask import jsonify, request
 from sqlalchemy import desc
+from sqlalchemy import func
 
 
 def serialize(obj):
@@ -36,15 +37,19 @@ def filter_query(query, model):
 
     include = request.args.get('include')
     if include:
-        query = query.filter(getattr(model, filter_by) == include)
+        query = query.filter(func.lower(getattr(model, filter_by)) == func.lower(include))
 
     exclude = request.args.get('exclude')
     if exclude:
-        query = query.filter(getattr(model, filter_by) != exclude)
+        query = query.filter(func.lower(getattr(model, filter_by)) != func.lower(exclude))
 
     like = request.args.get('like')
     if like:
-        query = query.filter(getattr(model, filter_by).like('%' + like + '%'))
+        query = query.filter(getattr(model, filter_by).ilike('%' + like + '%'))
+
+    notlike = request.args.get('notlike')
+    if notlike:
+        query = query.filter(~getattr(model, filter_by).ilike('%' + notlike + '%'))
 
     return query
 
