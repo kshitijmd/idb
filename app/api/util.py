@@ -32,7 +32,7 @@ def single_response(model, id):
     result = model.query.filter(model.id == id).first()
     if not result:
         response = jsonify({"message": "Item not found."})
-        response.status_code = 400
+        response.status_code = 404
         return response
     return jsonify(serialize(result))
 
