@@ -7,6 +7,7 @@ import ErrorCard from "./ErrorCard";
 import * as logger from "../services/logger";
 import * as musicApi from "../services/api/musicApi";
 import PaginationBar from "./PaginationBar";
+import * as searchParams from "../constants/searchParams";
 
 const styles = {
 	container: {
@@ -37,10 +38,10 @@ class SearchCardList extends React.PureComponent {
 		data: undefined,
 	};
 
-	_getDataForPage = () => {
+	_getDataForPage = page => {
 		const qp = location.search;
 		musicApi
-			.searchModels(qp)
+			.searchModels(qp, page)
 			.then(response => {
 				this.setState({
 					currentPage: response.currentPage,
@@ -59,21 +60,19 @@ class SearchCardList extends React.PureComponent {
 		logger.log("Value " + qp);
 	};
 
-	// At the moment, pagination doesn't work.
 	componentDidMount() {
-		this._getDataForPage();
+		this._getDataForPage(1);
 	}
 
-	//needed for pagination
 	componentWillReceiveProps() {
 		this.setState({
 			data: undefined,
 			currentPage: null,
 			totalPages: null,
 		});
-		//const qs = new URLSearchParams(this.props.location.search);
-		//const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
-		this._getDataForPage();
+		const qs = new URLSearchParams(location.search);
+		const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
+		this._getDataForPage(page);
 	}
 
 	_renderData = () => (
@@ -122,7 +121,6 @@ class SearchCardList extends React.PureComponent {
 }
 
 SearchCardList.propTypes = {
-	//modelApiFn: PropTypes.func.isRequired,
 	match: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
 };

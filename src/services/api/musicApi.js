@@ -57,8 +57,8 @@ export function getTracks(page = 1) {
 	});
 }
 
-export function searchModels(query) {
-	return axios.get(`http://${api_host}/search/${query}`).then(response => {
+export function searchModels(query, page = 1) {
+	return axios.get(`http://${api_host}/search/${query}&page=${page}`).then(response => {
 		let albums = response.data.albums.map(album => modelTransformers.albumTransformer(album));
 		let artists = response.data.artists.map(artist =>
 			modelTransformers.artistTransformer(artist)
