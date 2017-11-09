@@ -37,19 +37,27 @@ def filter_query(query, model):
 
     include = request.args.get('include')
     if include:
-        query = query.filter(func.lower(getattr(model, filter_by)) == func.lower(include))
+        include = include.split(',')
+        for item in include:
+            query = query.filter(func.lower(getattr(model, filter_by)) == func.lower(item))
 
     exclude = request.args.get('exclude')
     if exclude:
-        query = query.filter(func.lower(getattr(model, filter_by)) != func.lower(exclude))
+        exclude = exclude.split(',')
+        for item in exclude:
+            query = query.filter(func.lower(getattr(model, filter_by)) != func.lower(item))
 
     like = request.args.get('like')
     if like:
-        query = query.filter(getattr(model, filter_by).ilike('%' + like + '%'))
+        like = like.split(',')
+        for item in like:
+            query = query.filter(getattr(model, filter_by).ilike('%' + item + '%'))
 
     notlike = request.args.get('notlike')
     if notlike:
-        query = query.filter(~getattr(model, filter_by).ilike('%' + notlike + '%'))
+        notlike = notlike.split(',')
+        for item in notlike:
+            query = query.filter(~getattr(model, filter_by).ilike('%' + item + '%'))
 
     return query
 
