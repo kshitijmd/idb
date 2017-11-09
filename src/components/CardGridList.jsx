@@ -100,12 +100,10 @@ class CardGridList extends React.PureComponent {
 		const activeOrderBy = qs.get(searchParams.ORDERBY);
 		const currentlyDescending = qs.get(searchParams.DESC) === "true";
 		const excludeVal = qs.get(searchParams.EXCLUDE) ? qs.get(searchParams.EXCLUDE) : "";
-		/* TODO: Add sorting and filtering controls here. */
 		return (
 			<Card>
 				<CardTitle>Sort</CardTitle>
 				<div style={styles.buttonRow}>
-					{/* TODO: Support toggling asc / desc */}
 					<RaisedButton
 						style={styles.button}
 						onClick={() => {
@@ -164,6 +162,7 @@ class CardGridList extends React.PureComponent {
 					</RaisedButton>
 				</div>
 
+				{/* TODO: Debounce the filtering requests */}
 				<CardTitle>Exclude</CardTitle>
 				<input
 					style={styles.formInput}
