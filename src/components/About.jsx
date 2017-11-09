@@ -128,7 +128,7 @@ const links = {
 	github: "https://github.com/mbowen13/idb",
 	apiary: "http://docs.kshitijmd.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
-	uml: "https://utexas.app.box.com/s/nohry3xvi3u13xyahfkf8mfevcdbm06w",
+	uml: "https://utexas.app.box.com/s/nvksyy4ufj5cmj7l78gx1cu83rh5655i",
 	report: "https://utexas.box.com/s/s5zhzivo18jxchrczzeyi3czq7ajpjla",
 };
 
