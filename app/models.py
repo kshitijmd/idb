@@ -89,6 +89,7 @@ class Track(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.UnicodeText, index=True, nullable=False)
     playcount = db.Column(db.Integer, default=0)
+    popularity = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
     spotify_uri = db.Column(db.String(255))
     image_url = db.Column(db.String(255))
@@ -144,6 +145,7 @@ class Artist(db.Model):
     bio = db.Column(db.UnicodeText)
     spotify_uri = db.Column(db.String(255))
     playcount = db.Column(db.Integer, default=0)
+    popularity = db.Column(db.Integer, default=0)
     image_url = db.Column(db.String(255))
 
     tracks = db.relationship('Track', back_populates='artist')
@@ -197,6 +199,7 @@ class Playlist(db.Model):
     num_artists = db.Column(db.Integer, default=0)
     num_tracks = db.Column(db.Integer, default=0)
     num_followers = db.Column(db.Integer, default=0)
+    popularity = db.Column(db.Integer, default=0)
     duration = db.Column(db.Integer, default=0)
     image_url = db.Column(db.String(255))
 
@@ -247,6 +250,7 @@ class Album(db.Model):
     name = db.Column(db.UnicodeText, index=True, nullable=False)
     spotify_uri = db.Column(db.String(255))
     playcount = db.Column(db.Integer)
+    popularity = db.Column(db.Integer, default=0)
     releasedate = db.Column(db.DateTime)
     image_url = db.Column(db.String(255))
 

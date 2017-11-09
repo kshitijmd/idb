@@ -27,7 +27,8 @@ def upload_to_cloud(spotifyURL):
 
 	extension = imghdr.what("tempfile")
 	if not extension:
-		extension = ".jpeg"
+		extension = "jpeg"
+	os.rename("tempfile", "tempfile"+"."+extension)
 	bucket_name = "artifacts.playlistr-front.appspot.com"
 	destination_blob_name = images_destination + source_file_name + "." + extension
 
@@ -37,11 +38,11 @@ def upload_to_cloud(spotifyURL):
 
 	blob = bucket.blob(destination_blob_name)
 
-	blob.upload_from_filename("tempfile")
+	blob.upload_from_filename("tempfile"+"."+extension)
 
 	blob.make_public()
 
-	os.remove("tempfile")
+	os.remove("tempfile"+"."+extension)
 
 	return blob.public_url
 

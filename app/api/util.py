@@ -54,7 +54,7 @@ def order_query(query, model):
     if order_by:
         if order_by not in (m.key for m in model.__table__.columns):
             return bad_request('Invalid order_by argument.')
-        if request.args.get('desc'):
+        if request.args.get('desc') == "true":
             query = query.order_by(desc(order_by))
         else:
             query = query.order_by(order_by)

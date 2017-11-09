@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pylast
-from application.gcloudutils.bucket import upload_to_cloud
+from app.gcloudutils.bucket import upload_to_cloud
 
 from app.models import db, Track, Artist, Album, Playlist, Genre
 
@@ -15,9 +15,12 @@ app.app_context().push()
 # API Credentials go here
 
 
-def walk_playlist():
+def walk_playlist(specific_playlist=None):
     # Just walk the first page of playlists for now (can paginate later for more data)
-    sp_playlists = sp.featured_playlists()['playlists']['items']
+    if not specific_playlist:
+        sp_playlists = sp.featured_playlists()['playlists']['items']
+    else:
+        sp_playlists = [specific_playlist]
     for i, sp_playlist in enumerate(sp_playlists):
         if confirm(" playlist " + str(i)):
             try:
@@ -25,8 +28,11 @@ def walk_playlist():
                 print('Playlist: {}/{}'.format(i + 1, len(sp_playlists)))
 
                 # get the full playlist object
-                sp_full = sp.user_playlist(
-                    'spotify', sp_playlist['id'], fields='tracks, followers')
+                if not specific_playlist:
+                    sp_full = sp.user_playlist(
+                        'spotify', sp_playlist['id'], fields='tracks, followers')
+                else:
+                    sp_full = sp_playlist
                 playlist = {
                     'name': sp_playlist['name'],
                     'spotify_uri': sp_playlist['uri'],
@@ -71,7 +77,7 @@ def walk_playlist_tracks(sp_tracks):
 
     # paginate all tracks in playlist
     while sp_tracks:
-        for i, sp_track in enumerate(sp_tracks['items'][:5]):
+        for i, sp_track in enumerate(sp_tracks['items']):
             print('PTrack: {}/{}'.format(i + 1, len(sp_tracks['items'])))
 
             sp_track = sp_track['track']
@@ -261,10 +267,11 @@ def create_genres(genres):
         try:
             # db.session.begin(nested=True)
             if db.session.query(Genre).filter_by(name=g.name).first() is None:
+                print("Adding genre "+g.name)
                 db.session.add(g)
                 db.session.commit()
-            # else:
-                # print("genre already in db")
+            else:
+                print("\tExists "+g.name)
 
         except BaseException as ie:
             print("skipped")
