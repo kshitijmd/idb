@@ -146,11 +146,15 @@ class SearchCardList extends React.PureComponent {
 			return <ProgressSpinner />;
 		} else if (this.state.data === null) {
 			return <ErrorCard />;
-		} else if (this.state.data === "") {
+		} else if (this.state.data.length === 0) {
 			logger.log("No data");
 			return <EmptySearchCard />;
 		} else {
-			logger.log("ready for render " + this.state.data);
+			{
+				debugger;
+				0;
+			}
+			logger.log("ready for render AHHAH " + this.state.data);
 			return this._renderData();
 		}
 	}
