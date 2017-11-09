@@ -93,6 +93,8 @@ class CardGridList extends React.PureComponent {
 
 	_renderControls = () => {
 		const qs = new URLSearchParams(location.search);
+		const activeOrderBy = qs.get(searchParams.ORDERBY);
+		const currentlyDescending = qs.get(searchParams.DESC) === "true";
 		/* TODO: Add sorting and filtering controls here. */
 		return (
 			<Card>
@@ -103,27 +105,57 @@ class CardGridList extends React.PureComponent {
 						style={styles.button}
 						onClick={() => {
 							qs.set(searchParams.ORDERBY, searchParams.POP);
-							qs.set(searchParams.DESC, true);
+							if (
+								activeOrderBy === searchParams.POP &&
+								currentlyDescending !== null
+							) {
+								qs.set(searchParams.DESC, !currentlyDescending);
+							} else {
+								qs.set(searchParams.DESC, true);
+							}
 							this.props.history.push({
 								pathname: location.pathname,
 								search: qs.toString(),
 							});
 						}}
 					>
-						Popularity
+						{activeOrderBy === searchParams.POP ? (
+							currentlyDescending ? (
+								<div>Popularity &uarr;</div>
+							) : (
+								<div>Popularity &darr;</div>
+							)
+						) : (
+							"Popularity"
+						)}
 					</RaisedButton>
 					<RaisedButton
 						style={styles.button}
 						onClick={() => {
 							qs.set(searchParams.ORDERBY, searchParams.NAME);
-							qs.set(searchParams.DESC, false);
+							if (
+								activeOrderBy === searchParams.NAME &&
+								currentlyDescending !== null
+							) {
+								qs.set(searchParams.DESC, !currentlyDescending);
+							} else {
+								qs.set(searchParams.DESC, false);
+							}
 							this.props.history.push({
 								pathname: location.pathname,
 								search: qs.toString(),
 							});
 						}}
 					>
-						Title
+						{activeOrderBy === searchParams.NAME ? (
+							currentlyDescending ? (
+								<div>Title &uarr;</div>
+							) : (
+								<div>Title &darr;</div>
+							)
+						) : (
+							"Title"
+						)}
 					</RaisedButton>
 				</div>
 
