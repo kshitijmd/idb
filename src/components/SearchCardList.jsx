@@ -147,14 +147,8 @@ class SearchCardList extends React.PureComponent {
 		} else if (this.state.data === null) {
 			return <ErrorCard />;
 		} else if (this.state.data.length === 0) {
-			logger.log("No data");
 			return <EmptySearchCard />;
 		} else {
-			{
-				debugger;
-				0;
-			}
-			logger.log("ready for render AHHAH " + this.state.data);
 			return this._renderData();
 		}
 	}
