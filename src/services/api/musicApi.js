@@ -70,7 +70,11 @@ export function searchModels(query) {
 
 		let searchData = albums.concat(artists, tracks, playlists);
 		return {
-			// pagination stuff will be done later
+			itemsPerPage: response.data.per_page,
+			currentPage: response.data.page,
+			nextPage: response.data.next,
+			prevPage: response.data.prev,
+			totalPages: response.data.pages,
 			data: searchData,
 		};
 	});
