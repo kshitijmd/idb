@@ -116,7 +116,7 @@ class CardGridList extends React.PureComponent {
 						style={styles.button}
 						onClick={() => {
 							qs.set(searchParams.ORDERBY, searchParams.NAME);
-							qs.delete(searchParams.DESC);
+							qs.set(searchParams.DESC, false);
 							this.props.history.push({
 								pathname: location.pathname,
 								search: qs.toString(),
