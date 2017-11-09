@@ -12,7 +12,7 @@ search_blueprint = Blueprint('search', __name__)
 def search():
     page = int(request.args.get('page')) if request.args.get('page') else 1
     per_page = int(request.args.get(
-        'per_page')) if request.args.get('per_page') else 10
+        'per_page')) if request.args.get('per_page') else 2
     query_term = request.args.get('query')
 
     # TODO: use LIMIT and OFFSET to not retrieve every match every time
