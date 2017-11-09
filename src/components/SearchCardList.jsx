@@ -6,6 +6,7 @@ import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
 import * as logger from "../services/logger";
 import * as musicApi from "../services/api/musicApi";
+import PaginationBar from "./PaginationBar";
 
 const styles = {
 	container: {
@@ -42,7 +43,6 @@ class SearchCardList extends React.PureComponent {
 			.searchModels(qp)
 			.then(response => {
 				this.setState({
-					// TODO: implement pagination so these two aren't undefined
 					currentPage: response.currentPage,
 					totalPages: response.totalPages,
 					data: response.data,
@@ -100,12 +100,11 @@ class SearchCardList extends React.PureComponent {
 					))}
 				</div>
 				<div style={styles.footer}>
-					{/*TODO: Add backend pagination. Commented out for safety
 					<PaginationBar
 						currentPage={this.state.currentPage}
 						totalPages={this.state.totalPages}
 						location={this.props.history.location}
-					/>*/}
+					/>
 				</div>
 			</div>
 		</div>
