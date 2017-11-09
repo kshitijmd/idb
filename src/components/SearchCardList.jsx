@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Card, CardText, CardTitle, CardMedia } from "material-ui/Card";
+import { Card, CardText, CardTitle } from "material-ui/Card";
 import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
+import EmptySearchCard from "./EmptySearchCard";
 import * as logger from "../services/logger";
 import * as musicApi from "../services/api/musicApi";
 import PaginationBar from "./PaginationBar";
@@ -18,11 +19,18 @@ const styles = {
 		flexWrap: "wrap",
 		justifyContent: "flex-start",
 	},
+	buttonRow: {
+		display: "flex",
+	},
+	button: {
+		marginLeft: "5px",
+		marginRight: "5px",
+	},
 	hyperlink: {
 		textDecoration: "none",
 	},
 	card: {
-		maxWidth: "400px",
+		maxWidth: "300px",
 		marginBottom: "20px",
 		marginLeft: "20px",
 		marginRight: "20px",
@@ -31,11 +39,25 @@ const styles = {
 		display: "flex",
 		justifyContent: "center",
 	},
+	cardImgContainer: {
+		backgroundColor: "black",
+		width: "100%",
+		height: "300px",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	cardImg: {
+		display: "block",
+		maxWidth: "100%",
+		maxHeight: "100%",
+	},
 };
 
 class SearchCardList extends React.PureComponent {
 	state = {
 		data: undefined,
+		qs: null,
 	};
 
 	_getDataForPage = page => {
@@ -47,6 +69,7 @@ class SearchCardList extends React.PureComponent {
 					currentPage: response.currentPage,
 					totalPages: response.totalPages,
 					data: response.data,
+					qs: qp,
 				});
 			})
 			.catch(err => {
@@ -55,9 +78,9 @@ class SearchCardList extends React.PureComponent {
 					currentPage: null,
 					totalPages: null,
 					data: null,
+					qs: null,
 				});
 			});
-		logger.log("Value " + qp);
 	};
 
 	componentDidMount() {
@@ -69,6 +92,7 @@ class SearchCardList extends React.PureComponent {
 			data: undefined,
 			currentPage: null,
 			totalPages: null,
+			qs: null,
 		});
 		const qs = new URLSearchParams(location.search);
 		const page = qs.get(searchParams.PAGE) ? qs.get(searchParams.PAGE) : 1;
@@ -82,10 +106,13 @@ class SearchCardList extends React.PureComponent {
 					{this.state.data.map(item => (
 						<Link key={item.id} to={`${item.url}/${item.id}`} style={styles.hyperlink}>
 							<Card style={styles.card}>
-								<CardMedia>
-									<img src={item.imageUrl} />
-								</CardMedia>
-								<CardTitle title={item.title} subtitle={item.subtitle} />
+								<div style={styles.cardImgContainer}>
+									{<img src={item.imageUrl} style={styles.cardImg} />}
+								</div>
+								<CardTitle
+									title={this.highlightText(item.title, this.state.qs)}
+									subtitle={item.subtitle}
+								/>
 								{/*<CardTitle title={<div style={{backgroundColor: "green"}}>{item.title}</div>} subtitle={item.subtitle} />*/}
 								<CardText>
 									<ol>
@@ -109,11 +136,18 @@ class SearchCardList extends React.PureComponent {
 		</div>
 	);
 
+	highlightText(text, qs) {
+		logger.log("QS is " + qs);
+		return <div style={{ backgroundColor: "green" }}>{text}</div>;
+	}
+
 	render() {
 		if (this.state.data === undefined) {
 			return <ProgressSpinner />;
 		} else if (this.state.data === null) {
 			return <ErrorCard />;
+		} else if (this.state.data.length === 0) {
+			return <EmptySearchCard />;
 		} else {
 			return this._renderData();
 		}
