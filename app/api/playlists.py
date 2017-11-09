@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Playlist
-from .util import serialize, all_response
+from .util import serialize, all_response, single_response
 
 playlists_blueprint = Blueprint('playlists', __name__)
 
@@ -16,4 +16,4 @@ def get_playlists():
 
 @playlists_blueprint.route('/<playlist_id>')
 def get_playlist(playlist_id):
-    return jsonify(serialize(Playlist.query.filter_by(id=playlist_id).first()))
+    return single_response(Playlist, playlist_id)

@@ -3,8 +3,10 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Card, CardText, CardTitle } from "material-ui/Card";
 import RaisedButton from "material-ui/RaisedButton";
+import FlatButton from "material-ui/FlatButton";
 import ProgressSpinner from "./ProgressSpinner";
 import ErrorCard from "./ErrorCard";
+import EmptySearchCard from "./EmptySearchCard";
 import PaginationBar from "./PaginationBar";
 import * as logger from "../services/logger";
 import * as searchParams from "../constants/searchParams";
@@ -55,6 +57,15 @@ const styles = {
 		marginLeft: "16px",
 		marginBottom: "16px",
 	},
+	exclusionContainer: {
+		marginLeft: "16px",
+		marginBottom: "16px",
+		display: "flex",
+		alignItems: "center",
+	},
+	deleteExclusion: {
+		color: "red",
+	},
 };
 
 class CardGridList extends React.PureComponent {
@@ -99,7 +110,9 @@ class CardGridList extends React.PureComponent {
 		const qs = new URLSearchParams(location.search);
 		const activeOrderBy = qs.get(searchParams.ORDERBY);
 		const currentlyDescending = qs.get(searchParams.DESC) === "true";
-		const excludeVal = qs.get(searchParams.EXCLUDE) ? qs.get(searchParams.EXCLUDE) : "";
+		const excludeVals = qs.get(searchParams.EXCLUDE)
+			? qs.get(searchParams.EXCLUDE).split(",")
+			: [];
 		return (
 			<Card>
 				<CardTitle>Sort</CardTitle>
@@ -162,20 +175,40 @@ class CardGridList extends React.PureComponent {
 					</RaisedButton>
 				</div>
 
-				{/* TODO: Debounce the filtering requests */}
 				<CardTitle>Exclude</CardTitle>
 				<input
 					style={styles.formInput}
-					value={excludeVal}
-					onChange={update => {
-						qs.set(searchParams.FILTERBY, searchParams.NAME);
-						qs.set(searchParams.EXCLUDE, update.target.value);
-						this.props.history.push({
-							pathname: location.pathname,
-							search: qs.toString(),
-						});
+					onKeyPress={update => {
+						if (update.key === "Enter") {
+							qs.set(searchParams.FILTERBY, searchParams.NAME);
+							excludeVals.push(update.target.value);
+							qs.set(searchParams.EXCLUDE, excludeVals);
+							this.props.history.push({
+								pathname: location.pathname,
+								search: qs.toString(),
+							});
+							update.target.value = "";
+						}
 					}}
 				/>
+				{excludeVals.map(exclusion => (
+					<div style={styles.exclusionContainer} key={exclusion}>
+						<div>{exclusion}</div>
+						<FlatButton
+							style={styles.deleteExclusion}
+							onClick={() => {
+								const newExcludeVals = excludeVals.filter(ex => ex !== exclusion);
+								qs.set(searchParams.EXCLUDE, newExcludeVals);
+								this.props.history.push({
+									pathname: location.pathname,
+									search: qs.toString(),
+								});
+							}}
+						>
+							x
+						</FlatButton>
+					</div>
+				))}
 			</Card>
 		);
 	};
@@ -225,6 +258,13 @@ class CardGridList extends React.PureComponent {
 			);
 		} else if (this.state.data === null) {
 			return <ErrorCard />;
+		} else if (this.state.data.length === 0) {
+			return (
+				<div style={styles.container}>
+					{this._renderControls()}
+					<EmptySearchCard />
+				</div>
+			);
 		} else {
 			return (
 				<div style={styles.container}>

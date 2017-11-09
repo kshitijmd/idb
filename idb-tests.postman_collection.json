@@ -1,0 +1,368 @@
+{
+	"info": {
+		"name": "idb-tests",
+		"_postman_id": "68d63e2f-e875-011c-ac02-25013f93b4d9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Albums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.albums.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(20);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/albums/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"albums",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "All Artists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.artists.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(20);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/artists/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"artists",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "All Tracks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tracks.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(20);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/tracks/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tracks",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "All Playlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.playlists.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(20);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/playlists/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"playlists",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.albums.length).to.eql(0);",
+							"    pm.expect(jsonData.artists.length).to.eql(0);",
+							"    pm.expect(jsonData.tracks.length).to.eql(0);",
+							"    pm.expect(jsonData.playlists.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(2);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/search/?query=vampire",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "vampire",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Album Specific",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.albums.length).to.eql(0);",
+							"    pm.expect(jsonData.next).to.eql(null);",
+							"    pm.expect(jsonData.prev).to.eql(null);",
+							"    pm.expect(jsonData.per_page).to.eql(20);",
+							"    pm.expect(jsonData.pages).to.eql(0);",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/albums/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"albums",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Artist Specific",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.response.to.have.status(404);",
+							"    pm.expect(jsonData.message).to.eql(\"Item not found.\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/artists/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"artists",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Playlist Specific",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Playlists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.response.to.have.status(404);",
+							"    pm.expect(jsonData.message).to.eql(\"Item not found.\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/playlists/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"playlists",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Track Specific",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Albums\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.response.to.have.status(404);",
+							"    pm.expect(jsonData.message).to.eql(\"Item not found.\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/tracks/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"tracks",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
