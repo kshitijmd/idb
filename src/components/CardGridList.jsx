@@ -51,6 +51,10 @@ const styles = {
 		maxWidth: "100%",
 		maxHeight: "100%",
 	},
+	formInput: {
+		marginLeft: "16px",
+		marginBottom: "16px",
+	},
 };
 
 class CardGridList extends React.PureComponent {
@@ -95,12 +99,11 @@ class CardGridList extends React.PureComponent {
 		const qs = new URLSearchParams(location.search);
 		const activeOrderBy = qs.get(searchParams.ORDERBY);
 		const currentlyDescending = qs.get(searchParams.DESC) === "true";
-		/* TODO: Add sorting and filtering controls here. */
+		const excludeVal = qs.get(searchParams.EXCLUDE) ? qs.get(searchParams.EXCLUDE) : "";
 		return (
 			<Card>
 				<CardTitle>Sort</CardTitle>
 				<div style={styles.buttonRow}>
-					{/* TODO: Support toggling asc / desc */}
 					<RaisedButton
 						style={styles.button}
 						onClick={() => {
@@ -159,57 +162,76 @@ class CardGridList extends React.PureComponent {
 					</RaisedButton>
 				</div>
 
-				<CardTitle>Filter out</CardTitle>
-				{/* TODO: Add text entry and work with query params here */}
+				{/* TODO: Debounce the filtering requests */}
+				<CardTitle>Exclude</CardTitle>
+				<input
+					style={styles.formInput}
+					value={excludeVal}
+					onChange={update => {
+						qs.set(searchParams.FILTERBY, searchParams.NAME);
+						qs.set(searchParams.EXCLUDE, update.target.value);
+						this.props.history.push({
+							pathname: location.pathname,
+							search: qs.toString(),
+						});
+					}}
+				/>
 			</Card>
 		);
 	};
 
 	_renderData = () => (
-		<div style={styles.container}>
-			{this._renderControls()}
-			<div>
-				<div style={styles.cardsContainer}>
-					{this.state.data.map(item => (
-						<Link
-							key={item.id}
-							to={`${this.props.match.url}/${item.id}`}
-							style={styles.hyperlink}
-						>
-							<Card style={styles.card}>
-								<div style={styles.cardImgContainer}>
-									{<img src={item.imageUrl} style={styles.cardImg} />}
-								</div>
-								<CardTitle title={item.title} subtitle={item.subtitle} />
-								<CardText>
-									<ol>
-										<li>{item.bonusInfo1}</li>
-										<li>{item.bonusInfo2}</li>
-										<li>{item.bonusInfo3}</li>
-									</ol>
-								</CardText>
-							</Card>
-						</Link>
-					))}
-				</div>
-				<div style={styles.footer}>
-					<PaginationBar
-						currentPage={this.state.currentPage}
-						totalPages={this.state.totalPages}
-						location={this.props.history.location}
-					/>
-				</div>
+		<div>
+			<div style={styles.cardsContainer}>
+				{this.state.data.map(item => (
+					<Link
+						key={item.id}
+						to={`${this.props.match.url}/${item.id}`}
+						style={styles.hyperlink}
+					>
+						<Card style={styles.card}>
+							<div style={styles.cardImgContainer}>
+								{<img src={item.imageUrl} style={styles.cardImg} />}
+							</div>
+							<CardTitle title={item.title} subtitle={item.subtitle} />
+							<CardText>
+								<ol>
+									<li>{item.bonusInfo1}</li>
+									<li>{item.bonusInfo2}</li>
+									<li>{item.bonusInfo3}</li>
+								</ol>
+							</CardText>
+						</Card>
+					</Link>
+				))}
+			</div>
+			<div style={styles.footer}>
+				<PaginationBar
+					currentPage={this.state.currentPage}
+					totalPages={this.state.totalPages}
+					location={this.props.history.location}
+				/>
 			</div>
 		</div>
 	);
 
 	render() {
 		if (this.state.data === undefined) {
-			return <ProgressSpinner />;
+			return (
+				<div style={styles.container}>
+					{this._renderControls()}
+					<ProgressSpinner />
+				</div>
+			);
 		} else if (this.state.data === null) {
 			return <ErrorCard />;
 		} else {
-			return this._renderData();
+			return (
+				<div style={styles.container}>
+					{this._renderControls()}
+					{this._renderData()}
+				</div>
+			);
 		}
 	}
 }
