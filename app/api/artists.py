@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Artist
-from .util import serialize, all_response
+from .util import serialize, all_response, single_response
 
 # probably going to need to import from our models here
 
@@ -18,4 +18,4 @@ def get_artists():
 
 @artists_blueprint.route('/<artist_id>')
 def get_artist(artist_id):
-    return jsonify(serialize(Artist.query.filter(Artist.id == artist_id).first()))
+    return single_response(Artist, artist_id)

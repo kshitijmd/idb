@@ -28,6 +28,15 @@ def all_response(model, data_name='data'):
     })
 
 
+def single_response(model, id):
+    result = model.query.filter(model.id == id).first()
+    if not result:
+        response = jsonify({"message": "Item not found."})
+        response.status_code = 400
+        return response
+    return jsonify(serialize(result))
+
+
 def filter_query(query, model):
     filter_by = request.args.get('filter_by')
     if not filter_by:
@@ -39,25 +48,29 @@ def filter_query(query, model):
     if include:
         include = include.split(',')
         for item in include:
-            query = query.filter(func.lower(getattr(model, filter_by)) == func.lower(item))
+            query = query.filter(func.lower(
+                getattr(model, filter_by)) == func.lower(item))
 
     exclude = request.args.get('exclude')
     if exclude:
         exclude = exclude.split(',')
         for item in exclude:
-            query = query.filter(func.lower(getattr(model, filter_by)) != func.lower(item))
+            query = query.filter(func.lower(
+                getattr(model, filter_by)) != func.lower(item))
 
     like = request.args.get('like')
     if like:
         like = like.split(',')
         for item in like:
-            query = query.filter(getattr(model, filter_by).ilike('%' + item + '%'))
+            query = query.filter(
+                getattr(model, filter_by).ilike('%' + item + '%'))
 
     notlike = request.args.get('notlike')
     if notlike:
         notlike = notlike.split(',')
         for item in notlike:
-            query = query.filter(~getattr(model, filter_by).ilike('%' + item + '%'))
+            query = query.filter(
+                ~getattr(model, filter_by).ilike('%' + item + '%'))
 
     return query
 
