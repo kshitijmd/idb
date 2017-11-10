@@ -9,6 +9,7 @@ import * as logger from "../services/logger";
 import * as musicApi from "../services/api/musicApi";
 import PaginationBar from "./PaginationBar";
 import * as searchParams from "../constants/searchParams";
+import Highlight from "react-highlight-words";
 
 const styles = {
 	container: {
@@ -99,6 +100,15 @@ class SearchCardList extends React.PureComponent {
 		this._getDataForPage(page);
 	}
 
+	_highlightText = text => {
+		return (
+			<Highlight
+				searchWords={[new URLSearchParams(location.search).get("query")]}
+				textToHighlight={text}
+			/>
+		);
+	};
+
 	_renderData = () => (
 		<div style={styles.container}>
 			<div>
@@ -110,15 +120,15 @@ class SearchCardList extends React.PureComponent {
 									{<img src={item.imageUrl} style={styles.cardImg} />}
 								</div>
 								<CardTitle
-									title={this.highlightText(item.title, this.state.qs)}
-									subtitle={item.subtitle}
+									title={this._highlightText(item.title)}
+									subtitle={this._highlightText(item.subtitle)}
 								/>
 								{/*<CardTitle title={<div style={{backgroundColor: "green"}}>{item.title}</div>} subtitle={item.subtitle} />*/}
 								<CardText>
 									<ol>
-										<li>{item.bonusInfo1}</li>
-										<li>{item.bonusInfo2}</li>
-										<li>{item.bonusInfo3}</li>
+										<li>{this._highlightText(item.bonusInfo1)}</li>
+										<li>{this._highlightText(item.bonusInfo2)}</li>
+										<li>{this._highlightText(item.bonusInfo3)}</li>
 									</ol>
 								</CardText>
 							</Card>
