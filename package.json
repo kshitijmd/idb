@@ -8,8 +8,7 @@
 		"build": "webpack --progress --colors",
 		"dev": "webpack --progress --colors --watch",
 		"test": "echo \"No tests added.\"",
-		"lint":
-			"eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
+		"lint": "eslint --print-config .eslintrc.json | eslint-config-prettier-check; eslint --rule 'prettier/prettier: error' 'src/**'"
 	},
 	"repository": {
 		"type": "git",
@@ -47,6 +46,7 @@
 		"eslint-config-prettier": "^2.6.0",
 		"eslint-plugin-prettier": "^2.3.1",
 		"eslint-plugin-react": "^7.4.0",
+		"json-loader": "^0.5.7",
 		"material-ui": "latest",
 		"material-ui-search-bar": "^0.4.0",
 		"prettier": "^1.7.0",
