@@ -67,8 +67,8 @@ export default class Graph extends React.Component {
 				.attr("height", 1)
 				.append("svg:image")
 				.attr("xlink:href", d.url)
-				.attr("width", Math.max(d.count, 40))
-				.attr("height", Math.max(d.count, 40))
+				.attr("width", Math.max(d.count * 2, 40))
+				.attr("height", Math.max(d.count * 2, 40))
 				.attr("x", 0)
 				.attr("y", 0);
 		});
@@ -80,7 +80,7 @@ export default class Graph extends React.Component {
 			.data(data.nodes)
 			.enter()
 			.append("circle")
-			.attr("r", 20)
+			.attr("r", d => Math.max(d.count, 20))
 			// .style("pointer-events", "all")
 			// .style("stroke", "none")
 			// .style("stroke-width", "40px")
