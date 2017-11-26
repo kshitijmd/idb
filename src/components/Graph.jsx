@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import * as d3 from "d3";
+import PropTypes from "prop-types";
 import data from "../../loldata.json";
 
 const removeChars = str => str.replace(/[\s']|\(Quick Charge\)|\(Trinket\)/g, "");
@@ -45,9 +45,7 @@ export default class Graph extends React.Component {
 
 	_createGraph = () => {
 		const graph = this.graph;
-		const svg = d3.select(graph),
-			width = +svg.attr("width"),
-			height = +svg.attr("height");
+		const svg = d3.select(graph);
 
 		const link = svg
 			.append("g")
@@ -124,7 +122,9 @@ export default class Graph extends React.Component {
 	};
 
 	_dragStarted = d => {
-		if (!d3.event.active) this.simulation.alphaTarget(0.3).restart();
+		if (!d3.event.active) {
+			this.simulation.alphaTarget(0.3).restart();
+		}
 		d.fx = d.x;
 		d.fy = d.y;
 	};
@@ -135,7 +135,9 @@ export default class Graph extends React.Component {
 	};
 
 	_dragEnded = d => {
-		if (!d3.event.active) this.simulation.alphaTarget(0);
+		if (!d3.event.active) {
+			this.simulation.alphaTarget(0);
+		}
 		d.fx = null;
 		d.fy = null;
 	};
@@ -144,4 +146,9 @@ export default class Graph extends React.Component {
 Graph.defaultProps = {
 	width: 1500,
 	height: 800,
+};
+
+Graph.propTypes = {
+	width: PropTypes.int,
+	height: PropTypes.int,
 };
