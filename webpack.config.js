@@ -25,5 +25,11 @@ module.exports = {
 		],
 	},
 	plugins: [],
-   devtool: "source-map",
+	devtool: "source-map",
+
+	externals: [
+		{
+			xmlhttprequest: "{XMLHttpRequest:XMLHttpRequest}",
+		},
+	],
 };
