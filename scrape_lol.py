@@ -21,13 +21,16 @@ from itertools import combinations
 
 
 API_HOST = 'http://loldbapi.appspot.com/api/'
-REMOVED_ITEMS = ['Health Potion', 'Boot of Speed',
-                 'Ruby Crystal', 'Sapphire Crystal']
-#    'Health Potion', 'Ruby Crystal', 'Sapphire Crystal',
-#    'Cloth Armor', 'Long Sword', 'Warding Totem (Trinket)',
-#    'Corrupting Potion', "Doran's Ring", "Doran's Blade",
-#    "Doran's Shield", 'Boots of Speed', "Sorcerer's Shoes",
-#    'Ninja Tabi']
+REMOVED_ITEMS = ['Health Potion', 'Boots of Speed',
+                 'Ruby Crystal', 'Sapphire Crystal',
+                 "Doran's Ring", "Doran's Blade", "Doran's Shield",
+                 "Sorcerer's Shoes",
+                 'Boots of Swiftness',
+                 'Ninja Tabi',
+                 "Mercury's Treads",
+                 "Berserker's Greaves",
+                 'Boots of Mobility',
+                 'Ionian Boots of Lucidity']
 
 print('Getting champs...')
 champs = json.loads(requests.get(API_HOST + 'champs').content)['result']
@@ -39,7 +42,10 @@ item_map = {
     i['id']: {
         'image': i['image'],
         'name': i['name']
-    } for i in items if 'name' in i and d['name'] not in REMOVED_ITEMS
+    } for i in items
+    if 'name' in i
+    and i['name'] not in REMOVED_ITEMS
+    and '(Quick Charge)' not in i['name']
 }
 
 print('Building champion items map...')

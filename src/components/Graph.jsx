@@ -18,7 +18,7 @@ export default class Graph extends React.Component {
 					.id(function(d) {
 						return d.id;
 					})
-					.distance(400)
+					.distance(350)
 			)
 			.force("charge", d3.forceManyBody())
 			.force("center", d3.forceCenter(props.width / 2, props.height / 2))
@@ -35,11 +35,7 @@ export default class Graph extends React.Component {
 
 	render() {
 		return (
-			<svg
-				width={this.props.width}
-				height={this.props.height}
-				ref={graph => (this.graph = graph)}
-			/>
+			<svg style={{ width: "100%", height: "100%" }} ref={graph => (this.graph = graph)} />
 		);
 	}
 
