@@ -129,6 +129,7 @@ const links = {
 	apiary: "http://docs.kshitijmd.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
 	report: "https://nginth.gitbooks.io/hackappellas/content/documentation.html",
+	gitpitch: "https://gitpitch.com/kshitijmd/idb",
 };
 
 const styles = {
@@ -236,7 +237,10 @@ export default class About extends React.Component {
 									<a href={links.trello}>Trello</a>
 								</div>
 								<div>
-									<a href={links.report}>Report.pdf</a>
+									<a href={links.report}>Gitbook report</a>
+								</div>
+								<div>
+									<a href={links.gitpitch}>Gitpitch presentation</a>
 								</div>
 							</CardText>
 						</Tab>
