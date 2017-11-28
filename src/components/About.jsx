@@ -128,7 +128,6 @@ const links = {
 	github: "https://github.com/mbowen13/idb",
 	apiary: "http://docs.kshitijmd.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
-	uml: "https://utexas.app.box.com/s/nohry3xvi3u13xyahfkf8mfevcdbm06w",
 	report: "https://nginth.gitbooks.io/hackappellas/content/documentation.html",
 };
 
@@ -235,9 +234,6 @@ export default class About extends React.Component {
 								</div>
 								<div>
 									<a href={links.trello}>Trello</a>
-								</div>
-								<div>
-									<a href={links.uml}>UML Diagram</a>
 								</div>
 								<div>
 									<a href={links.report}>Report.pdf</a>
