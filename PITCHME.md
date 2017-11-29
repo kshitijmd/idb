@@ -24,7 +24,12 @@
 @title[What we did well]
 
 #### What did we do well?
-#### Here will be a list of some things we did well
+<br>
+- Organized team by strengths
+- Code quality is clean and robust
+- Website looks appealing
+- Cached data the spotify API wouldn't hold onto
+- Speed and responsiveness
 
 ---
 
@@ -58,19 +63,29 @@ Done!
 
 ### What puzzles us?
 <br>
-![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
+- Spotify API has outdated documentation and strange object models
+- Playlist image URL expire after 24 hours
 
 ---
 
 @title[What they did well]
 
 ### What they did well
+<br>
+- Website design is beautiful
+- Navigation is simple and intuitive
+- Filters are specific and provide many options
+- Information doesn't overwhelm the user
 
 ---
 
 @title[What we learned from them]
 
 ### What we learned from loldb
+<br>
+- Model pages demonstrate use of many graphics without cluttering
+- Carousels for models enhance the experience
+- Twitter feed provides extra information
 
 ---
 
@@ -78,13 +93,16 @@ Done!
 
 ### What they can do better
 <br>
-[Click here to learn more @fa[external-link fa-pad-left]](https://github.com/gitpitch/gitpitch/wiki)
+- Search keywords are listed at the end of the result, rather than highlighted where it appears
 
 ---
 
 @title[What puzzles us about them]
 
 #### What puzzles us about their site?
+<br>
+- https:// must be included or model pages won't load
+- Champion items are served using ids, but API calls for items require a name
 
 ---
 
