@@ -1,11 +1,15 @@
 @title[Introduction]
 
-# Hackappellas<span class="gold"> Presents</span>
+# Hackappellas<span class="gold"> Present</span>
 
-#### Playlistr
+## Playlistr
 <br>
 <br>
-<span class="byline">[ Taylor Kline, Nick Ginther, Kshitij Delvadiya, Scott Jackson, David Letourneau ]</span>
+<span class="byline">[ , , , ,  ]</span>
+# Meet the Team
+|  *Taylor Kline*  |   *Nick Ginther*  | *Scott Jackson* |
+|:---------------:|:------------------:|:---------------:|
+| *David Letourneau* | *Kshitij Delvadiya* |
 
 ---
 
