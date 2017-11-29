@@ -53,7 +53,7 @@ const memberInfo = {
 				"https://cs373fall2017davidletourneau.files.wordpress.com/2017/09/cropped-davidletourneau-e1504464848243.jpg",
 			bio:
 				"David is a graduating senior from Pflugerville, Tx. When he's not writing code, he can be found running around Austin, watching old movies, or arguing about the best flavor of icecream.",
-			responsibilities: "API design and documentation",
+			responsibilities: "API design and documentation, front-end, unit testing",
 			commits: 44,
 			issues: 10,
 			unit_tests: 7,
@@ -128,8 +128,8 @@ const links = {
 	github: "https://github.com/mbowen13/idb",
 	apiary: "http://docs.kshitijmd.apiary.io/",
 	trello: "https://trello.com/b/cU5nD0hW/swe",
-	uml: "https://utexas.app.box.com/s/nohry3xvi3u13xyahfkf8mfevcdbm06w",
-	report: "https://utexas.box.com/s/s5zhzivo18jxchrczzeyi3czq7ajpjla",
+	report: "https://nginth.gitbooks.io/hackappellas/content/documentation.html",
+	gitpitch: "https://gitpitch.com/kshitijmd/idb",
 };
 
 const styles = {
@@ -237,10 +237,10 @@ export default class About extends React.Component {
 									<a href={links.trello}>Trello</a>
 								</div>
 								<div>
-									<a href={links.uml}>UML Diagram</a>
+									<a href={links.report}>Gitbook report</a>
 								</div>
 								<div>
-									<a href={links.report}>Report.pdf</a>
+									<a href={links.gitpitch}>Gitpitch presentation</a>
 								</div>
 							</CardText>
 						</Tab>

@@ -22,8 +22,15 @@ module.exports = {
 				},
 				exclude: /node_modules/,
 			},
+			{ test: /\.json$/, loader: "json" },
 		],
 	},
 	plugins: [],
-   devtool: "source-map",
+	devtool: "source-map",
+
+	externals: [
+		{
+			xmlhttprequest: "{XMLHttpRequest:XMLHttpRequest}",
+		},
+	],
 };

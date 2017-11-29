@@ -1,33 +1,43 @@
 sep=;
-Story Title;Estimate;Vote Started;Voting Duration;Avg Voting Time;Fastest;Slowest;Actual
-As a visitor to the website, I would like to see a more useable and intuitive layout for detail pages.;5;31/10/2017 21:14:36;00:00:32;00:00:08;scott;scott jackson;5
-As a visitor to the site, I would like to be able to sort my filtered results.;2;31/10/2017 21:12:50;00:01:42;00:01:24;scott;scott jackson;2
-As a mobile visitor, I would like the results to fit on my device without needing to scroll.;5;31/10/2017 21:12:16;00:00:29;00:00:09;scott;scott jackson;7
-As a developer, I would like a create a robust script that scrapes Spotify to augment our existing data.;8;31/10/2017 21:11:36;00:00:21;00:00:09;scott;scott jackson;13
-As a visitor to the site, I would like to see a responsive About page that does not require me to click through various tabs.;3;31/10/2017 21:09:20;00:02:14;00:00:26;scott;scott jackson;3
-As a visitor to the site, I would like to move through many results rather than having thousands of results all presented on a single page.;5;31/10/2017 21:08:59;00:00:19;00:00:11;scott;scott jackson;2
-As an API user, I want to get a list of all the tracks in a paginated response.;5;31/10/2017 21:07:51;00:01:06;00:00:24;scott;scott jackson;4
-As someone who searches the site, I would like the keyword I searched for to be highlighted in the results.;5;31/10/2017 21:06:13;00:01:35;00:00:36;scott;scott jackson;3
-As a visitor to the site, I would like to get search results of all matches for a given search.;13;31/10/2017 21:05:18;00:00:49;00:00:24;scott;scott jackson;13
-As a visitor to the site, I would like to be able to enter some text in a box on a results page and reduce the number of results to those that match my text, e.g. entering 'Shak' should include Shakira results.;5;31/10/2017 21:03:51;00:01:10;00:00:22;scott;scott jackson;5
-As a visitor to the site, I would like to be able to sort the results based on the main "title" of the data, such as the song name on the songs page.;5;31/10/2017 21:02:45;00:01:01;00:00:17;scott;scott jackson;5
-As a developer, I want to have a reproducible build environment that everyone on the team uses.;3;20/10/2017 17:41:51;00:00:15;00:00:10;scott;scott jackson;3
-As a visitor to the site, I should be able to use the navbar or sidebar to navigate to other pages from within any specific page.;2;20/10/2017 17:41:18;00:00:31;00:00:12;scott;scott jackson;2
-As a back-end developer, I would like for a push to the GitHub repo to trigger an automatic deployment of the site in production.;3;20/10/2017 17:40:53;00:00:22;00:00:10;scott;scott jackson;2
-As a consumer of the API, I should be able to understand how to access and consume the API.;3;20/10/2017 17:40:37;00:00:14;00:00:08;scott;scott jackson;2
-As a back-end developer, I want to be able to push my changes and have automatic feedback that my code passes tests.;5;20/10/2017 17:40:23;00:00:10;00:00:06;scott;scott jackson;2
-As a front-end developer, I want to be able to push the site and see my changes in under 1 minute.;5;20/10/2017 17:40:05;00:00:15;00:00:08;scott;scott jackson;5
-As an API developer, the models should be designed such that I am able to create an API around them;5;20/10/2017 17:38:20;00:00:37;00:00:10;scott;scott jackson;5
-As a visitor to the site, I would like to search through all songs, artists, albums, and playlists.;13;20/10/2017 17:39:00;00:01:00;00:00:08;scott;scott jackson;8
-As a visitor to the site, I should be able to see at least 3 playlists and 5 of their attributes in a grid on a "Playlists" page.;3;20/10/2017 17:38:09;00:00:10;00:00:03;scott;scott jackson;3
-As a visitor to the site, I should be able to see at least 3 albums and 5 of their attributes in a grid on a "Albums" page.;3;20/10/2017 17:37:59;00:00:08;00:00:03;scott;scott jackson;2
-As a visitor to the site, I should be able to see at least 3 artists and 5 of their attributes in a grid on a "Artists" page.;3;20/10/2017 17:37:49;00:00:08;00:00:04;scott;scott jackson2;
-As a visitor to the site, I should be able to see at least 3 tracks and 5 of their attributes in a grid on a "Tracks" page.;3;20/10/2017 17:37:25;00:00:22;00:00:12;scott;scott jackson;3
-As a consumer of the API, I should be able to query available artists;3;20/10/2017 17:37:13;00:00:11;00:00:06;scott;scott jackson;3
-As a vistor to the site I should be able to visit an "About" page to see more information about the authors, technology, and purpose of the site.;2;20/10/2017 17:36:47;00:00:24;00:00:14;scott;scott jackson;2
-As a consumer of the API, I would like to get a list of the albums for a specific artist.;3;20/10/2017 17:33:11;00:00:34;00:00:17;scott;scott jackson;3
-As an initial visitor to the site, I would like a splash page of the data on the site to understand the purpose of the website.;2;20/10/2017 17:35:59;00:00:46;00:00:26;scott;scott jackson;2
-As a visitor to the site, I should be able to navigate the site through a navbar or sidebar on mobile;5;20/10/2017 17:34:57;00:00:57;00:00:15;scott;scott jackson;3
-As a frontend developer, I should be able to see a static hello world homepage to ensure that the backend and frontend stacks are working on a basic level.;5;20/10/2017 17:44:05;00:00:16;00:00:07;scott;scott jackson;5
-As backend developer, A database should be set up such that I can store data in it;5;20/10/2017 17:31:22;00:00:38;00:00:13;scott;scott jackson;3
-As a consumer of the API, I want to get a list of songs authored by any artist;3;20/10/2017 17:32:14;00:00:46;00:00:23;scott;scott jackson;5
+Story Title;Estimate;Vote Started;Voting Duration;Avg Voting Time;Fastest;Slowest;
+I would like the React components to be refactored to be more modular.;3;28/11/2017 21:23:45;00:00:24;00:00:08;scott;scott jackson;
+We would like consistently formatted code with good documentation.;3;28/11/2017 21:22:44;00:00:17;00:00:10;scott;scott jackson;
+As a visitor to the site, I want the music data to be reliable (free of duplicates, accurate playlist track counts, etc);5;28/11/2017 21:22:06;00:00:25;00:00:09;scott;scott jackson;
+As a mobile user, I want the text and card layouts to look refined.;5;28/11/2017 21:21:39;00:00:24;00:00:10;scott;scott jackson;
+As a developer, I would like to transfer our UML diagram to GitBook so it isn't tied to a specific utbox account.;2;28/11/2017 21:21:13;00:00:24;00:00:09;scott;scott jackson;
+As a visitor to the site, I want to see the title of the site on the tab in my browser.;1;28/11/2017 21:20:57;00:00:13;00:00:05;scott;scott jackson;
+We want our visualization to be available on our site at the path /visualization;1;28/11/2017 21:20:15;00:00:38;00:00:12;scott;scott jackson;
+As a developer, I would like to transfer our API documentation to GitBook so it can be collaboratively worked on in real time.;3;28/11/2017 21:19:51;00:00:21;00:00:08;scott;scott jackson;
+We want a presentation we can display in class hosted on GitPitch.;3;28/11/2017 21:19:26;00:00:22;00:00:08;scott;scott jackson;
+As a developer, I want to know our code works by using tests through selenium;3;28/11/2017 21:16:54;00:02:29;00:00:45;scott;scott jackson;
+As a visitor to the website, I would like to see a more useable and intuitive layout for detail pages.;5;31/10/2017 21:14:36;00:00:32;00:00:08;scott;scott jackson;
+As a visitor to the site, I would like to be able to sort my filtered results.;2;31/10/2017 21:12:50;00:01:42;00:01:24;scott;scott jackson;
+As a mobile visitor, I would like the results to fit on my device without needing to scroll.;5;31/10/2017 21:12:16;00:00:29;00:00:09;scott;scott jackson;
+As a developer, I would like a create a robust script that scrapes Spotify to augment our existing data.;8;31/10/2017 21:11:36;00:00:21;00:00:09;scott;scott jackson;
+As a visitor to the site, I would like to see a responsive About page that does not require me to click through various tabs.;3;31/10/2017 21:09:20;00:02:14;00:00:26;scott;scott jackson;
+As a visitor to the site, I would like to move through many results rather than having thousands of results all presented on a single page.;5;31/10/2017 21:08:59;00:00:19;00:00:11;scott;scott jackson;
+As an API user, I want to get a list of all the tracks in a paginated response.;5;31/10/2017 21:07:51;00:01:06;00:00:24;scott;scott jackson;
+As someone who searches the site, I would like the keyword I searched for to be highlighted in the results.;5;31/10/2017 21:06:13;00:01:35;00:00:36;scott;scott jackson;
+As a visitor to the site, I would like to get search results of all matches for a given search.;13;31/10/2017 21:05:18;00:00:49;00:00:24;scott;scott jackson;
+As a visitor to the site, I would like to be able to enter some text in a box on a results page and reduce the number of results to those that match my text, e.g. entering 'Shak' should include Shakira results.;5;31/10/2017 21:03:51;00:01:10;00:00:22;scott;scott jackson;
+As a visitor to the site, I would like to be able to sort the results based on the main "title" of the data, such as the song name on the songs page.;5;31/10/2017 21:02:45;00:01:01;00:00:17;scott;scott jackson;
+As a developer, I want to have a reproducible build environment that everyone on the team uses.;3;20/10/2017 17:41:51;00:00:15;00:00:10;scott;scott jackson;
+As a visitor to the site, I should be able to use the navbar or sidebar to navigate to other pages from within any specific page.;2;20/10/2017 17:41:18;00:00:31;00:00:12;scott;scott jackson;
+As a back-end developer, I would like for a push to the GitHub repo to trigger an automatic deployment of the site in production.;3;20/10/2017 17:40:53;00:00:22;00:00:10;scott;scott jackson;
+As a consumer of the API, I should be able to understand how to access and consume the API.;3;20/10/2017 17:40:37;00:00:14;00:00:08;scott;scott jackson;
+As a back-end developer, I want to be able to push my changes and have automatic feedback that my code passes tests.;5;20/10/2017 17:40:23;00:00:10;00:00:06;scott;scott jackson;
+As a front-end developer, I want to be able to push the site and see my changes in under 1 minute.;5;20/10/2017 17:40:05;00:00:15;00:00:08;scott;scott jackson;
+As an API developer, the models should be designed such that I am able to create an API around them;5;20/10/2017 17:38:20;00:00:37;00:00:10;scott;scott jackson;
+As a visitor to the site, I would like to search through all songs, artists, albums, and playlists.;13;20/10/2017 17:39:00;00:01:00;00:00:08;scott;scott jackson;
+As a visitor to the site, I should be able to see at least 3 playlists and 5 of their attributes in a grid on a "Playlists" page.;3;20/10/2017 17:38:09;00:00:10;00:00:03;scott;scott jackson;
+As a visitor to the site, I should be able to see at least 3 albums and 5 of their attributes in a grid on a "Albums" page.;3;20/10/2017 17:37:59;00:00:08;00:00:03;scott;scott jackson;
+As a visitor to the site, I should be able to see at least 3 artists and 5 of their attributes in a grid on a "Artists" page.;3;20/10/2017 17:37:49;00:00:08;00:00:04;scott;scott jackson;
+As a visitor to the site, I should be able to see at least 3 tracks and 5 of their attributes in a grid on a "Tracks" page.;3;20/10/2017 17:37:25;00:00:22;00:00:12;scott;scott jackson;
+As a consumer of the API, I should be able to query available artists;3;20/10/2017 17:37:13;00:00:11;00:00:06;scott;scott jackson;
+As a vistor to the site I should be able to visit an "About" page to see more information about the authors, technology, and purpose of the site.;2;20/10/2017 17:36:47;00:00:24;00:00:14;scott;scott jackson;
+As a consumer of the API, I would like to get a list of the albums for a specific artist.;3;20/10/2017 17:33:11;00:00:34;00:00:17;scott;scott jackson;
+As an initial visitor to the site, I would like a splash page of the data on the site to understand the purpose of the website.;2;20/10/2017 17:35:59;00:00:46;00:00:26;scott;scott jackson;
+As a visitor to the site, I should be able to navigate the site through a navbar or sidebar on mobile;5;20/10/2017 17:34:57;00:00:57;00:00:15;scott;scott jackson;
+As a frontend developer, I should be able to see a static hello world homepage to ensure that the backend and frontend stacks are working on a basic level.;5;20/10/2017 17:44:05;00:00:16;00:00:07;scott;scott jackson;
+As backend developer, A database should be set up such that I can store data in it;5;20/10/2017 17:31:22;00:00:38;00:00:13;scott;scott jackson;
+As a consumer of the API, I want to get a list of songs authored by any artist;3;20/10/2017 17:32:14;00:00:46;00:00:23;scott;scott jackson;
