@@ -1,12 +1,9 @@
 @title[Introduction]
 
-# Hackappellas<span class="gold"> Present</span>
+# <span class='gold'> Playlistr </span>
 
-## Playlistr
+## by the Hackappellas
 <br>
-<br>
-<span class="byline">[ , , , ,  ]</span>
-# Meet the Team
 |  *Taylor Kline*  |   *Nick Ginther*  | *Scott Jackson* |
 |:---------------:|:------------------:|:---------------:|
 | *David Letourneau* | *Kshitij Delvadiya* |
