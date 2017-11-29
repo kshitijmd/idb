@@ -1,0 +1,13 @@
+testExclude (__main__.HackappellasTestCase) ... ok
+testExcludePartialMatch (__main__.HackappellasTestCase) ... ok
+testForwardBack (__main__.HackappellasTestCase) ... ok
+testPageTitle (__main__.HackappellasTestCase) ... ok
+testPagination (__main__.HackappellasTestCase) ... ok
+testSearchForAlbum (__main__.HackappellasTestCase) ... ok
+testSearchForArtist (__main__.HackappellasTestCase) ... ok
+testSearchForArtistPartialMatch (__main__.HackappellasTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 35.939s
+
+OK
