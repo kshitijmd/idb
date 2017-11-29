@@ -29,16 +29,13 @@
 
 @title[What we learned]
 
-<br>
-#### Create slideshow content using GitHub Flavored Markdown in your favorite editor.
-
-<span class="aside">It's as easy as README.md with simple slide-delimeters (---)</span>
+#### What we learned
 
 ---
 
 @title[What we can do better]
 
-### <span class="gold">STEP 2. GIT-COMMIT</span>
+### What we can do better
 <br>
 
 ```shell
@@ -58,45 +55,27 @@ Done!
 
 @title[What puzzles us]
 
-### <span class="gold">STEP 3. GET THE WORD OUT!</span>
+### What puzzles us?
 <br>
 ![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
-<br>
-<br>
-#### Instantly use your GitPitch slideshow URL to promote, pitch or present absolutely anything.
 
 ---
 
 @title[What they did well]
 
-### <span class="gold">Slide Rich</span>
-
-#### Code Presenting for Blocks, Files, and GISTs
-#### Image, Video, Chart, and Math Slides
-#### Multiple Themes with Easy Customization
-<br>
-#### <span class="gold">Plus collaboration is built-in...</span>
-#### Your Slideshow is Part of Your Project
-#### Under Git Version Control within Your Git Repo
+### What they did well
 
 ---
 
 @title[What we learned from them]
 
-### <span class="gold">Feature Rich</span>
-
-#### Present Online or Offline
-#### With Speaker Notes Support
-#### Print Presentation as PDF
-#### Auto-Generated Table-of-Contents
-#### Share Presentation on Twitter or LinkedIn
+### What we learned from loldb
 
 ---
 
 @title[What they can do better]
 
-### Go for it.
-### Just add <span class="gold">PITCHME.md</span> ;)
+### What they can do better
 <br>
 [Click here to learn more @fa[external-link fa-pad-left]](https://github.com/gitpitch/gitpitch/wiki)
 
