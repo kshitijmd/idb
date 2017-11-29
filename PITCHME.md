@@ -1,31 +1,33 @@
 @title[Introduction]
 
-# Git<span class="gold">Pitch</span>
+# Hackappellas<span class="gold"> Presents</span>
 
-#### Markdown Presentations For Everyone on Git.*
+#### Playlistr
 <br>
 <br>
-<span class="byline">[ GitHub, GitLab, Bitbucket, GitBucket, Gitea, Gogs ]</span>
+<span class="byline">[ Taylor Kline, Nick Ginther, Kshitij Delvadiya, Scott Jackson, David Letourneau ]</span>
 
 ---
 
-@title[PITCHME.md]
+@title[Demonstration]
 
-#### GitPitch turns <span class="gold">PITCHME.md</span> into
-#### interactive,
-#### online and offline slideshows.
+#### - Website navigation
 <br>
-<span class="aside">Just like this one...</span>
+#### - Search and filter features
+<br> 
+#### - Selenium unit test demonstration
+<br>
 
 ---
 
-#### No more <span class="gray">Keynote</span>.
-#### No more <span class="gray">Powerpoint</span>.
-<br>
-#### Just <span class="gold">Markdown</span>.
-#### Then <span class="gold">Git-Commit</span>.
+@title[What we did well]
 
----?code=assets/md/hello.md&title=Step 1. PITCHME.md
+#### What did we do well?
+#### Here will be a list of some things we did well
+
+---
+
+@title[What we learned]
 
 <br>
 #### Create slideshow content using GitHub Flavored Markdown in your favorite editor.
@@ -34,7 +36,7 @@
 
 ---
 
-@title[Step 2. Git-Commit]
+@title[What we can do better]
 
 ### <span class="gold">STEP 2. GIT-COMMIT</span>
 <br>
@@ -54,7 +56,7 @@ Done!
 
 ---
 
-@title[Step 3. Done!]
+@title[What puzzles us]
 
 ### <span class="gold">STEP 3. GET THE WORD OUT!</span>
 <br>
@@ -65,7 +67,7 @@ Done!
 
 ---
 
-@title[Slide Rich]
+@title[What they did well]
 
 ### <span class="gold">Slide Rich</span>
 
@@ -79,7 +81,7 @@ Done!
 
 ---
 
-@title[Feature Rich]
+@title[What we learned from them]
 
 ### <span class="gold">Feature Rich</span>
 
@@ -91,7 +93,23 @@ Done!
 
 ---
 
+@title[What they can do better]
+
 ### Go for it.
 ### Just add <span class="gold">PITCHME.md</span> ;)
 <br>
 [Click here to learn more @fa[external-link fa-pad-left]](https://github.com/gitpitch/gitpitch/wiki)
+
+---
+
+@title[What puzzles us about them]
+
+#### What puzzles us about their site?
+
+---
+
+@title[Visualization]
+
+#### Visualization demonstration
+
+---
