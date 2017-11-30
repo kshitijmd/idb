@@ -12,12 +12,7 @@
 
 @title[Demonstration]
 
-#### - Website navigation
-<br>
-#### - Search and filter features
-<br> 
-#### - Selenium unit test demonstration
-<br>
+[Website demonstration @fa[external-link fa-pad-left]](http://hackappellas.me/)
 
 ---
 
