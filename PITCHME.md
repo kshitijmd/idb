@@ -102,4 +102,4 @@
 
 @title[Visualization]
 
-#### Visualization demonstration
+[Visualization demonstration @fa[external-link fa-pad-left]](http://hackappellas.me/visualization)
