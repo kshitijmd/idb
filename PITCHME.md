@@ -23,7 +23,7 @@
 
 @title[What we did well]
 
-#### What did we do well?
+### What did we do well?
 
 - Organized team by strengths
 - Code quality is clean and robust
@@ -35,7 +35,7 @@
 
 @title[What we learned]
 
-#### What we learned
+### What we learned
 
 - JavaScript ES6 (`let` and `const`, object destructuring, etc.)
 - Automated scaling (Kubernetes) & automated deployment (Travis)
