@@ -84,6 +84,8 @@
 
 - Search keywords are listed at the end of the result, rather than highlighted where it appears
 
+![loldb](pitch/loldb.png)
+
 ---
 
 @title[What puzzles us about them]
