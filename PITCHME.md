@@ -103,5 +103,3 @@
 @title[Visualization]
 
 #### Visualization demonstration
-
----
