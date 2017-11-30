@@ -28,7 +28,7 @@
 - Organized team by strengths
 - Code quality is clean and robust
 - Website looks appealing
-- Cached data the spotify API wouldn't hold onto
+- Proactively cached Spotify API data
 - Speed and responsiveness
 
 ---
@@ -36,6 +36,9 @@
 @title[What we learned]
 
 #### What we learned
+<br>
+- JavaScript ES6 (`let` and `const`, object destructuring, etc.)
+- Automated scaling (Kubernetes) & automated deployment (Travis)
 
 ---
 
@@ -43,28 +46,17 @@
 
 ### What we can do better
 <br>
-
-```shell
-$ git add PITCHME.md
-$ git commit -m "New slideshow content."
-$ git push
-
-Done!
-```
-
-@[1](Add your PITCHME.md slideshow content file.)
-@[2](Commit PITCHME.md to your local repo.)
-@[3](Push PITCHME.md to your public repo and you're done!)
-@[5](Supports GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs.)
-
----
+- Finding better APIs than Spotify & Last.FM
+- Cleaner search results page
 
 @title[What puzzles us]
 
 ### What puzzles us?
 <br>
-- Spotify API has outdated documentation and strange object models
-- Playlist image URL expire after 24 hours
+- Spotify API documentation & models
+- Slack username choices
+
+![slack](pitch/slack.png)
 
 ---
 
