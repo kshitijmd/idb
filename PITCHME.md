@@ -43,8 +43,10 @@
 
 ### What we can do better
 
-- Finding better APIs than Spotify & Last.FM
+- Database sanitization
+- Mobile-responsive design
 - Cleaner search results page
+- Some page designs
 
 ---
 
