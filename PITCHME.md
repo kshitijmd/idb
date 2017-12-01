@@ -25,6 +25,7 @@
 - Organized team by strengths
 - Code quality is clean and robust
 - Website looks appealing
+- Pagination and filtering supported through page reloads
 - Proactively cached Spotify API data
 - Speed and responsiveness
 
