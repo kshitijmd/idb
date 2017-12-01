@@ -6,7 +6,9 @@
 
 |  *Taylor Kline*  |   *Nick Ginther*  | *Scott Jackson* |
 |:---------------:|:------------------:|:---------------:|
+
 | *David Letourneau* | *Kshitij Delvadiya* |
+|:---------------:|:------------------:|
 
 ---
 
