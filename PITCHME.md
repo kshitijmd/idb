@@ -53,6 +53,7 @@
 ### What puzzles us?
 
 - Spotify API documentation & models
+- Pop Christmas?
 - Slack username choices
 
 ![slack](pitch/slack.png)
