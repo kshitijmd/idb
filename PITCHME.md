@@ -1,97 +1,108 @@
 @title[Introduction]
 
-# Git<span class="gold">Pitch</span>
+# <span class='gold'> Playlistr </span>
 
-#### Markdown Presentations For Everyone on Git.*
-<br>
-<br>
-<span class="byline">[ GitHub, GitLab, Bitbucket, GitBucket, Gitea, Gogs ]</span>
+## by the Hackappellas
 
----
+|  *Taylor Kline*  |   *Nick Ginther*  | *Scott Jackson* |
+|:---------------:|:------------------:|:---------------:|
 
-@title[PITCHME.md]
-
-#### GitPitch turns <span class="gold">PITCHME.md</span> into
-#### interactive,
-#### online and offline slideshows.
-<br>
-<span class="aside">Just like this one...</span>
+| *David Letourneau* | *Kshitij Delvadiya* |
+|:---------------:|:------------------:|
 
 ---
 
-#### No more <span class="gray">Keynote</span>.
-#### No more <span class="gray">Powerpoint</span>.
-<br>
-#### Just <span class="gold">Markdown</span>.
-#### Then <span class="gold">Git-Commit</span>.
+@title[Demonstration]
 
----?code=assets/md/hello.md&title=Step 1. PITCHME.md
-
-<br>
-#### Create slideshow content using GitHub Flavored Markdown in your favorite editor.
-
-<span class="aside">It's as easy as README.md with simple slide-delimeters (---)</span>
+[Website demonstration @fa[external-link fa-pad-left]](http://hackappellas.me/)
 
 ---
 
-@title[Step 2. Git-Commit]
+@title[What we did well]
 
-### <span class="gold">STEP 2. GIT-COMMIT</span>
-<br>
+### What did we do well?
 
-```shell
-$ git add PITCHME.md
-$ git commit -m "New slideshow content."
-$ git push
-
-Done!
-```
-
-@[1](Add your PITCHME.md slideshow content file.)
-@[2](Commit PITCHME.md to your local repo.)
-@[3](Push PITCHME.md to your public repo and you're done!)
-@[5](Supports GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs.)
+- Organized team by strengths
+- Code quality is clean and robust
+- Website looks appealing
+- Pagination and filtering supported through page reloads
+- Proactively cached Spotify API data
+- Speed and responsiveness
 
 ---
 
-@title[Step 3. Done!]
+@title[What we learned]
 
-### <span class="gold">STEP 3. GET THE WORD OUT!</span>
-<br>
-![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
-<br>
-<br>
-#### Instantly use your GitPitch slideshow URL to promote, pitch or present absolutely anything.
+### What we learned
+
+- JavaScript ES6 (`let` and `const`, object destructuring, etc.)
+- Automated scaling (Kubernetes) & automated deployment (Travis)
 
 ---
 
-@title[Slide Rich]
+@title[What we can do better]
 
-### <span class="gold">Slide Rich</span>
+### What we can do better
 
-#### Code Presenting for Blocks, Files, and GISTs
-#### Image, Video, Chart, and Math Slides
-#### Multiple Themes with Easy Customization
-<br>
-#### <span class="gold">Plus collaboration is built-in...</span>
-#### Your Slideshow is Part of Your Project
-#### Under Git Version Control within Your Git Repo
+- Database sanitization
+- Mobile-responsive design
+- Cleaner search results page
+- Some page designs
 
 ---
 
-@title[Feature Rich]
+@title[What puzzles us]
 
-### <span class="gold">Feature Rich</span>
+### What puzzles us?
 
-#### Present Online or Offline
-#### With Speaker Notes Support
-#### Print Presentation as PDF
-#### Auto-Generated Table-of-Contents
-#### Share Presentation on Twitter or LinkedIn
+- Spotify API documentation & models
+- Pop Christmas?
+- Slack username choices
+
+![slack](pitch/slack.png)
 
 ---
 
-### Go for it.
-### Just add <span class="gold">PITCHME.md</span> ;)
-<br>
-[Click here to learn more @fa[external-link fa-pad-left]](https://github.com/gitpitch/gitpitch/wiki)
+@title[What they did well]
+
+### What they did well
+
+- Website design is beautiful
+- Navigation is simple and intuitive
+- Filters are specific and provide many options
+- Information doesn't overwhelm the user
+
+---
+
+@title[What we learned from them]
+
+### What we learned from loldb
+
+- Model pages demonstrate use of many graphics without cluttering
+- Carousels for models enhance the experience
+- Twitter feed provides extra information
+
+---
+
+@title[What they can do better]
+
+### What they can do better
+
+- Search keywords are listed at the end of the result, rather than highlighted where it appears
+
+![loldb](pitch/loldb.PNG)
+
+---
+
+@title[What puzzles us about them]
+
+#### What puzzles us about their site?
+
+- https:// must be included or model pages won't load
+- Champion items are served using ids, but API calls for items require a name
+
+---
+
+@title[Visualization]
+
+[Visualization demonstration @fa[external-link fa-pad-left]](http://hackappellas.me/visualization)
